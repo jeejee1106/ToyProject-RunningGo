@@ -1,0 +1,174 @@
+/* -----------------------------------------------------------------------------
+
+# Login Styles
+
+----------------------------------------------------------------------------- */
+.login-wrap{
+    width: 600px;
+    margin: 0 auto 40px auto;
+    padding: 60px;
+}
+.login-box{
+    border: solid 1px #dcdcdc;
+    width: 485px;
+    margin-top: 30px;
+    padding: 40px;
+}
+.login-box-title{
+    padding: 30px 0 0;
+}
+.login-box-content {
+    overflow: hidden;
+    display: flex;
+}
+.login-box-content input{
+    display: block;
+    width: 220px;
+    height: 36px;
+    margin: 15px 0 10px 0;
+    padding: 0 0 0 8px;
+    border: 1px solid #d0d0d0;
+    color: #979d9d;
+}
+
+.login-box-content button{
+    width: 158px;
+    height: 87px;
+    margin: 15px 0 0 20px;
+    border: 1px solid #2146d0;
+    background: #2146d0;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.sns-login-box{
+    margin-top: 15px;
+}
+
+.login-sub-box-list li{
+    display: inline;
+    list-style: none;
+}
+
+.login-sub-box-list li button{
+    width: 131px;
+    height: 40px;
+    font-size: 14px;
+    border: 1px solid #d0d0d0;
+    background: #ffffff;
+}
+
+.btn-login-sub-box .login-sub-box-list{
+    padding-left:0px;
+}
+
+.login-sub-box-list li button:hover{
+    border: 1px solid #2146d0;
+    background: #2146d0;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* -----------------------------------------------------------------------------
+
+# Join Styles
+
+----------------------------------------------------------------------------- */
+.join-wrap{
+    width: 1000px;
+    margin: 0 auto 40px auto;
+    padding: 60px;
+}
+
+.join-box{
+    width: 877px;
+    margin-top: 30px;
+    padding: 40px;
+}
+
+.join-sub-title{
+    display: inline-block;
+}
+
+.imp-tit{
+    margin-left: 20px;
+}
+
+.important{
+    margin-right: 5px;
+    color: #AB3E55;
+}
+
+#top-th, #top-td{
+    border-top: solid 1px #434343;
+}
+
+#bottom-th, #bottom-td{
+    border-bottom: solid 1px #434343;
+}
+
+.join-table-box table th {
+    border-bottom: solid 1px #dcdcdc;
+    text-align: left;
+    background: #fbfbfb;
+    padding-left: 40px;
+}
+
+.join-table-box table td {
+    border-bottom: solid 1px #dcdcdc;
+    padding: 17px 0 17px 15px;
+}
+
+.join-table-box table input{
+    width: 300px;
+    height: 33px;
+    border: solid 1px #dcdcdc;
+    padding-left: 10px;
+}
+
+input::placeholder {
+    font-size: 8pt;
+}
+
+.idCheck-box{
+    display: flex;
+}
+
+.idCheck-btn{
+    margin-left: 10px;
+}
+
+.idCheck-msg{
+    margin-top: 5px;
+    font-size: 10pt;
+}
+
+.email-option, .area-option{
+    width: 120px;
+    height: 33px;
+    border: solid 1px #dcdcdc;
+}
+
+
+.join-btn-box{
+    text-align: center;
+    margin-top: 30px;
+}
+
+.join-btn-box button{
+    width: 130px;
+    height: 50px;
+    background: #ffffff;
+    font-size: 12pt;
+    border: solid 1px #d0d0d0;
+}
+
+.join-btn-box .btn-join{
+    margin-left: 20px;
+    color: #ffffff;
+    background: #2146d0;
+    font-weight: bold;
+}

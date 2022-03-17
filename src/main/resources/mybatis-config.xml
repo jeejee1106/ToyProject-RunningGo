@@ -4,6 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-<!--        <typeAlias alias="BoardDto" type="com.runninggo.toy.domain.BoardDto"/>-->
+        <typeAlias alias="MemberDto" type="com.runninggo.toy.domain.MemberDto"/>
     </typeAliases>
 </configuration>
