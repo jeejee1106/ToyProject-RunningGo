@@ -2,17 +2,24 @@ package com.runninggo.toy.controller;
 
 import com.runninggo.toy.domain.MemberDto;
 import com.runninggo.toy.service.MemberService;
+import com.runninggo.toy.validator.MemberValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/login")
 public class MemberController {
+
+    @InitBinder
+    public void validator(WebDataBinder binder) {
+        binder.setValidator(new MemberValidator()); //MemberValidator를 WebDataBinder의 로컬 validator로 등록
+    }
 
     @Autowired
     MemberService memberService;
@@ -20,16 +27,29 @@ public class MemberController {
     @GetMapping("/login")
     public String login(Model m) {
         m.addAttribute("data", "로그인하실건가요?");
-        return "/member/login";
+        return "/member/loginForm";
     }
 
     @GetMapping("/join")
     public String join() {
-        return "/member/join";
+        return "/member/joinForm";
     }
 
     @PostMapping("/joinCheck")
-    public String joinCheck(MemberDto memberDto) {
+    public String joinCheck(@Valid MemberDto memberDto, Errors errors, Model model) {
+
+        System.out.println("errors = " + errors);
+
+        //만약 회원가입에 실패한다면
+        if (errors.hasErrors()) {
+            //작성한 정보를 유지한다.
+            model.addAttribute("memberDto", memberDto);
+
+            //유효성 검사에 실패하면 작성중이던 폼 그대로 유지
+            return "/member/joinForm";
+        }
+
+        //유효성 검사를 통과하면 insert 후 페이지 이동
         memberService.insertMember(memberDto);
         return "redirect:/";
     }

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <script type="text/javascript">
     <%--$(document).ready(function (){--%>
     <%--    $("#listBtn").on("click", function (){--%>
@@ -25,21 +26,23 @@
                     $(".idCheck-msg").html("중복된 아이디입니다.").css({'color' : 'red'});
                     $("#id").val("").focus();
                     $(".idCheck-btn").attr('value', 'N');
-                } else if (data == 0) {
-                    if(id.length == 0){
-                        $(".idCheck-msg").html("아이디를 입력해주세요.").css({'color' : 'red'});
-                        $("#id").val("").focus();
-                        $(".idCheck-btn").attr('value', 'N');
-                    }else if(!idRegExp.test(id)){
-                        $(".idCheck-msg").html("5~20자의 영문 소문자, 숫자로 작성해주세요").css({'color' : 'red'});
-                        $("#id").val("").focus();
-                        $(".idCheck-btn").attr('value', 'N');
-                    }else{
-                        $("#id").val(id);
-                        $(".idCheck-msg").html("사용가능한 아이디입니다.").css({'color' : 'black'});
-                        $(".idCheck-btn").attr('value', 'Y');
-                    }
                 }
+                // else if (data == 0) {
+                //     if(id.length == 0){
+                //         $(".idCheck-msg").html("아이디를 입력해주세요.").css({'color' : 'red'});
+                //         $("#id").val("").focus();
+                //         $(".idCheck-btn").attr('value', 'N');
+                //     }
+                //     else if(!idRegExp.test(id)){
+                //         $(".idCheck-msg").html("5~20자의 영문 소문자, 숫자로 작성해주세요").css({'color' : 'red'});
+                //         $("#id").val("").focus();
+                //         $(".idCheck-btn").attr('value', 'N');
+                //     }else{
+                //         $("#id").val(id);
+                //         $(".idCheck-msg").html("사용가능한 아이디입니다.").css({'color' : 'black'});
+                //         $(".idCheck-btn").attr('value', 'Y');
+                //     }
+                // }
             },
             error:function(request,status,error){
                 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -49,15 +52,15 @@
         })
     }
 
-    function lastCheck(f){
-        var check1 = $(".idCheck-btn").attr('value');
-
-        if(check1 == "N"){
-            alert("아이디 중복체크를 해주세요");
-            return false;
-        }
-        return true;
-    }
+    // function lastCheck(f){
+    //     var check1 = $(".idCheck-btn").attr('value');
+    //
+    //     if(check1 == "N"){
+    //         alert("아이디 중복체크를 해주세요");
+    //         return false;
+    //     }
+    //     return true;
+    // }
 </script>
 <div class="container">
     <div class="container-margin">
@@ -70,7 +73,8 @@
                 <h4 class="join-sub-title">기본정보</h4>
                 <span class="important imp-tit">*필수입력 사항</span>
                 <div class="join-table-box">
-                    <form action="/login/joinCheck" method="post" onsubmit="return lastCheck(this)">
+<%--                    <form:form modelAttribute="memberDto" action="/login/joinCheck" method="post" onsubmit="return lastCheck(this)">--%>
+                    <form:form modelAttribute="memberDto" action="/login/joinCheck" method="post">
                         <table>
                             <colgroup>
                                 <col width="250px;">
@@ -83,10 +87,10 @@
                                 </th>
                                 <td id="top-td">
                                     <div class="idCheck-box">
-                                        <input type="text" id="id" name="id" required="required" placeholder="5~20자의 영문 소문자, 숫자로 작성해주세요">
+                                        <input type="text" id="id" name="id" value="${memberDto.id}" placeholder="5~20자의 영문 소문자, 숫자로 작성해주세요">
                                         <button type="button" class="idCheck-btn" value="N" onclick="fn_idCheck()">중복확인</button>
                                     </div>
-                                    <div class="idCheck-msg"></div>
+                                    <div class="idCheck-msg"><form:errors path="id"/></div>
                                 </td>
                             </tr>
                             <tr>
@@ -95,8 +99,10 @@
                                 </th>
                                 <td>
                                     <div>
-                                        <input type="password" name="pass" required="required">
+                                        <input type="password" name="pass" value="${memberDto.pass}">
                                     </div>
+                                    <div>${valid_pass}</div>
+                                    <div><form:errors path="pass"/></div>
                                 </td>
                             </tr>
                             <tr>
@@ -105,8 +111,9 @@
                                 </th>
                                 <td>
                                     <div>
-                                        <input type="password" required="required">
+                                        <input type="password" name="passCheck" value="${memberDto.passCheck}">
                                     </div>
+                                    <div><form:errors path="passCheck"/></div>
                                 </td>
                             </tr>
                             <tr>
@@ -115,8 +122,9 @@
                                 </th>
                                 <td>
                                     <div>
-                                        <input type="text" name="name" required="required">
+                                        <input type="text" name="name" value="${memberDto.name}">
                                     </div>
+                                    <div><form:errors path="name"/></div>
                                 </td>
                             </tr>
                             <tr>
@@ -125,7 +133,7 @@
                                 </th>
                                 <td>
                                     <div>
-                                        <input type="email" name="email" required="required">
+                                        <input type="text" name="email" value="${memberDto.email}">
                                         <select class="email-option">
                                             <option value="self">직접입력</option>
                                             <option value="naver.com">naver.com</option>
@@ -135,6 +143,7 @@
                                             <option value="nate.com">nate.com</option>
                                         </select>
                                     </div>
+                                    <div><form:errors path="email"/></div>
                                 </td>
                             </tr>
                             <tr>
@@ -143,8 +152,9 @@
                                 </th>
                                 <td>
                                     <div>
-                                        <input type="tel" name="hp" required="required" placeholder="- 없이 입력하세요">
+                                        <input type="tel" name="hp" placeholder="- 없이 입력하세요" value="${memberDto.hp}">
                                     </div>
+                                    <div><form:errors path="hp"/></div>
                                 </td>
                             </tr>
                             <tr>
@@ -154,8 +164,8 @@
                                 <td>
                                     <div>
                                         <span>서울시</span>
-                                        <select class="area-option" name="area" required="required">
-                                            <option value="self">직접입력</option>
+                                        <select class="area-option" name="area" value="${memberDto.area}">
+                                            <option value="none">선택안함</option>
                                             <option value="강남구">강남구</option>
                                             <option value="강동구">강동구</option>
                                             <option value="강북구">강북구</option>
@@ -174,7 +184,7 @@
                             <button type="button">취소</button>
                             <button type="submit" class="btn-join">회원가입</button>
                         </div>
-                    </form>
+                    </form:form>
                 </div>
             </div>
         </div>
