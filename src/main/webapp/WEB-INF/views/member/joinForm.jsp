@@ -90,7 +90,7 @@
                                         <input type="text" id="id" name="id" value="${memberDto.id}" placeholder="5~20자의 영문 소문자, 숫자로 작성해주세요">
                                         <button type="button" class="idCheck-btn" value="N" onclick="fn_idCheck()">중복확인</button>
                                     </div>
-                                    <div class="idCheck-msg"><form:errors path="id"/></div>
+                                    <div class="idCheck-msg"><form:errors path="id" /></div>
                                 </td>
                             </tr>
                             <tr>
@@ -101,7 +101,6 @@
                                     <div>
                                         <input type="password" name="pass" value="${memberDto.pass}">
                                     </div>
-                                    <div>${valid_pass}</div>
                                     <div><form:errors path="pass"/></div>
                                 </td>
                             </tr>
@@ -159,7 +158,7 @@
                             </tr>
                             <tr>
                                 <th>
-                                    <span class="important">*</span>활동지역
+                                    <span class="important">&nbsp;&nbsp;</span>활동지역
                                 </th>
                                 <td>
                                     <div>

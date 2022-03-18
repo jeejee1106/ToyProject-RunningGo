@@ -12,24 +12,27 @@ import java.util.Date;
 @Setter
 public class MemberDto {
 
-    @NotBlank
-    @Pattern(regexp = "^[a-z0-9]{4,20}$", message = "5~20자의 영문 소문자, 숫자로 작성해주세요")
+    @Pattern(regexp = "^[a-z0-9]{5,20}$", message = "5~20자의 영문 소문자, 숫자로 작성해주세요.")
+    @NotBlank(message = "필수입력 항목입니다.")
     private String id;
 
-    @NotBlank
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,20}$", message = "8~20자의 영문 대소문자+숫자+특수문자 조합으로 설정해주세요.")
+    @NotBlank(message = "필수입력 항목입니다.")
     private String pass;
 
-    @NotBlank
+//    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,20}$", message = "비밀번호가 일치하지 않습니다.")
+    @NotBlank(message = "필수입력 항목입니다.")
     private String passCheck;
 
-    @NotBlank
+    @Pattern(regexp = "^[가-힣]{2,}$", message = "이름은 한글만 입력 가능합니다.")
+    @NotBlank(message = "필수입력 항목입니다.")
     private String name;
 
-    @NotBlank
-    @Email
+    @Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-].+.[A-Za-z]{2,6}$", message = "이메일 형식이 올바르지 않습니다.")
+    @NotBlank(message = "필수입력 항목입니다.")
     private String email;
 
-    @NotBlank
+    @NotBlank(message = "필수입력 항목입니다.")
     private String hp;
 
     private String area;
