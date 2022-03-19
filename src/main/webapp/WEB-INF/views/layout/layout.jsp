@@ -33,6 +33,8 @@
 <script src="/js/jquery-migrate-1.2.1.min.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/templatemo.js"></script>
+
+<script src="/js/member.js"></script>
 <!-- End Script -->
 </body>
 </html>
