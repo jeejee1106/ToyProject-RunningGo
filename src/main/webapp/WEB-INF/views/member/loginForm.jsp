@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<link rel="stylesheet" href="/css/member.css">
+
 <div class="container">
     <div class="container-margin">
         <div class="login-wrap">
