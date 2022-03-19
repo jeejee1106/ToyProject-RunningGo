@@ -8,6 +8,7 @@ import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 @Getter
+@Setter //없으면 NullPointException 터짐
 public class MemberDto {
 
     @Pattern(regexp = "^[a-z0-9]{5,20}$", message = "5~20자의 영문 소문자, 숫자로 작성해주세요.")

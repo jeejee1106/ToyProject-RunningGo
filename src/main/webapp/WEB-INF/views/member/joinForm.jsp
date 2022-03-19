@@ -23,26 +23,26 @@
             data: {"id": id},
             success: function (data) {
                 if (data == 1) {
-                    $(".idCheck-msg").html("중복된 아이디입니다.").css({'color' : 'red'});
+                    $("#idCheck-msg").html("중복된 아이디입니다.").css({'color' : 'red'});
                     $("#id").val("").focus();
                     $(".idCheck-btn").attr('value', 'N');
                 }
-                // else if (data == 0) {
-                //     if(id.length == 0){
-                //         $(".idCheck-msg").html("아이디를 입력해주세요.").css({'color' : 'red'});
-                //         $("#id").val("").focus();
-                //         $(".idCheck-btn").attr('value', 'N');
-                //     }
-                //     else if(!idRegExp.test(id)){
-                //         $(".idCheck-msg").html("5~20자의 영문 소문자, 숫자로 작성해주세요").css({'color' : 'red'});
-                //         $("#id").val("").focus();
-                //         $(".idCheck-btn").attr('value', 'N');
-                //     }else{
-                //         $("#id").val(id);
-                //         $(".idCheck-msg").html("사용가능한 아이디입니다.").css({'color' : 'black'});
-                //         $(".idCheck-btn").attr('value', 'Y');
-                //     }
-                // }
+                else if (data == 0) {
+                    if(id.length == 0){
+                        $("#idCheck-msg").html("아이디를 입력해주세요.").css({'color' : 'red'});
+                        $("#id").val("").focus();
+                        $(".idCheck-btn").attr('value', 'N');
+                    }
+                    else if(!idRegExp.test(id)){
+                        $("#idCheck-msg").html("5~20자의 영문 소문자, 숫자로 작성해주세요.").css({'color' : 'red'});
+                        $("#id").val("").focus();
+                        $(".idCheck-btn").attr('value', 'N');
+                    }else{
+                        $("#id").val(id);
+                        $("#idCheck-msg").html("사용가능한 아이디입니다.").css({'color' : 'black'});
+                        $(".idCheck-btn").attr('value', 'Y');
+                    }
+                }
             },
             error:function(request,status,error){
                 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -90,7 +90,7 @@
                                         <input type="text" id="id" name="id" value="${memberDto.id}" placeholder="5~20자의 영문 소문자, 숫자로 작성해주세요">
                                         <button type="button" class="idCheck-btn" value="N" onclick="fn_idCheck()">중복확인</button>
                                     </div>
-                                    <div class="idCheck-msg"><form:errors path="id" /></div>
+                                    <div id="idCheck-msg" class="valid-msg"><form:errors path="id" /></div>
                                 </td>
                             </tr>
                             <tr>
@@ -101,7 +101,7 @@
                                     <div>
                                         <input type="password" name="pass" value="${memberDto.pass}">
                                     </div>
-                                    <div><form:errors path="pass"/></div>
+                                    <div class="valid-msg"><form:errors path="pass"/></div>
                                 </td>
                             </tr>
                             <tr>
@@ -112,7 +112,7 @@
                                     <div>
                                         <input type="password" name="passCheck" value="${memberDto.passCheck}">
                                     </div>
-                                    <div><form:errors path="passCheck"/></div>
+                                    <div class="valid-msg"><form:errors path="passCheck"/></div>
                                 </td>
                             </tr>
                             <tr>
@@ -123,7 +123,7 @@
                                     <div>
                                         <input type="text" name="name" value="${memberDto.name}">
                                     </div>
-                                    <div><form:errors path="name"/></div>
+                                    <div class="valid-msg"><form:errors path="name"/></div>
                                 </td>
                             </tr>
                             <tr>
@@ -142,7 +142,7 @@
                                             <option value="nate.com">nate.com</option>
                                         </select>
                                     </div>
-                                    <div><form:errors path="email"/></div>
+                                    <div class="valid-msg"><form:errors path="email"/></div>
                                 </td>
                             </tr>
                             <tr>
@@ -153,7 +153,7 @@
                                     <div>
                                         <input type="tel" name="hp" placeholder="- 없이 입력하세요" value="${memberDto.hp}">
                                     </div>
-                                    <div><form:errors path="hp"/></div>
+                                    <div class="valid-msg"><form:errors path="hp"/></div>
                                 </td>
                             </tr>
                             <tr>

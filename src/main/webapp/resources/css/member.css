@@ -135,18 +135,28 @@ input::placeholder {
     font-size: 8pt;
 }
 
+.valid-msg{
+    font-size: 10pt;
+    color: red;
+}
+
 .idCheck-box{
     display: flex;
 }
 
 .idCheck-btn{
     margin-left: 10px;
+    width: 80px;
+    color: #ffffff;
+    background: #2146d0;
+    font-size: 10pt;
+    border: solid 1px #d0d0d0;
 }
 
-.idCheck-msg{
-    margin-top: 5px;
-    font-size: 10pt;
-}
+/*#idCheck-msg{*/
+/*    margin-top: 5px;*/
+/*    font-size: 10pt;*/
+/*}*/
 
 .email-option, .area-option{
     width: 120px;

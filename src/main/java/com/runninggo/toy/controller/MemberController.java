@@ -25,7 +25,6 @@ public class MemberController {
     @InitBinder
     public void validator(WebDataBinder binder) {
         binder.addValidators(pwValidator);
-//        binder.setValidator(new MemberValidator()); //MemberValidator를 WebDataBinder의 로컬 validator로 등록
     }
 
 
@@ -50,6 +49,7 @@ public class MemberController {
             //작성한 정보를 유지한다.
             model.addAttribute("memberDto", memberDto);
 
+            //에러를 찾아서 model로 전송
             Map<String, String> validatorResult = memberService.validateHandling(errors);
             for (String key : validatorResult.keySet()) {
                 model.addAttribute(key, validatorResult.get(key));

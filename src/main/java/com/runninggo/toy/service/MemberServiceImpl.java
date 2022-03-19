@@ -21,6 +21,7 @@ public class MemberServiceImpl implements MemberService{
         return memberDao.insertMember(memberDto);
     }
 
+    @Override
     public Map<String, String> validateHandling(Errors errors) {
         Map<String, String> validatorResult = new HashMap<>();
         for (FieldError error : errors.getFieldErrors()) {
