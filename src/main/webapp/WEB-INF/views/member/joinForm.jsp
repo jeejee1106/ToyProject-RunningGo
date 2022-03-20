@@ -14,8 +14,7 @@
                 <h4 class="join-sub-title">기본정보</h4>
                 <span class="important imp-tit">*필수입력 사항</span>
                 <div class="join-table-box">
-                    <form:form modelAttribute="memberDto" action="/login/joinCheck" method="post" onsubmit="return lastCheck(this)">
-<%--                    <form:form modelAttribute="memberDto" action="/login/joinCheck" method="post">--%>
+                    <form:form modelAttribute="memberDto" action="/login/joinCheck" method="post" onsubmit="return fn_lastCheck(this)">
                         <table>
                             <colgroup>
                                 <col width="250px;">
@@ -122,7 +121,7 @@
                             </tbody>
                         </table>
                         <div class="join-btn-box">
-                            <button type="button">취소</button>
+                            <button type="button" onclick=fn_cancel()>취소</button>
                             <button type="submit" class="btn-join">회원가입</button>
                         </div>
                     </form:form>

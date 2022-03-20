@@ -17,16 +17,13 @@
                     </div>
                     <div class="col-lg-6 mb-0 d-flex align-items-center">
                         <div class="text-align-left align-self-center">
-                            <h1 class="h1 text-success"><b>Zayㅇㅇㅇㅇㅇㅇㅇ</b> eCommerce</h1>
+                            <h1 class="h1 text-success"><b>나만의 러닝 장소를 추천해주세요!</b> 흠냐</h1>
                             <h1>제발</h1>
                             <img src="/img/15.png" alt="">
                             <h3 class="h2">Tiny and Perfect eCommerce Template</h3>
                             <p>
-                                Zay Shop is an eCommerce HTML5 CSS template with latest version of Bootstrap 5 (beta 1).
-                                This template is 100% free provided by <a rel="sponsored" class="text-success" href="https://templatemo.com" target="_blank">TemplateMo</a> website.
-                                Image credits go to <a rel="sponsored" class="text-success" href="https://stories.freepik.com/" target="_blank">Freepik Stories</a>,
-                                <a rel="sponsored" class="text-success" href="https://unsplash.com/" target="_blank">Unsplash</a> and
-                                <a rel="sponsored" class="text-success" href="https://icons8.com/" target="_blank">Icons 8</a>.
+                                서울의 아름다운 거리를 달리는 러너여러분!
+                                러닝고가 찾아왔습니다!
                             </p>
                         </div>
                     </div>

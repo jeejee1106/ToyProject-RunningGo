@@ -3,7 +3,12 @@
     margin: 50px 0 20px 0;
 }
 
+.nav-link{
+    font-size: 13.5pt;
+    font-weight: bold;
+}
+
 .login-join-link{
-    font-size: 8pt;
+    font-size: 9pt;
     text-decoration: none;
 }
