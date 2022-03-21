@@ -5,7 +5,7 @@
 ----------------------------------------------------------------------------- */
 .login-wrap{
     width: 600px;
-    margin: 0 auto 40px auto;
+    margin: -50px auto 40px auto;
     padding: 60px;
 }
 .login-box{
@@ -79,7 +79,7 @@
 ----------------------------------------------------------------------------- */
 .join-wrap{
     width: 1000px;
-    margin: 0 auto 40px auto;
+    margin: -50px auto 40px auto;
     padding: 60px;
 }
 
@@ -165,12 +165,12 @@ input::placeholder {
 }
 
 
-.join-btn-box{
+.join-btn-box, .joinSuccess-btn-box{
     text-align: center;
     margin-top: 30px;
 }
 
-.join-btn-box button{
+.join-btn-box button, .joinSuccess-btn-box button{
     width: 130px;
     height: 50px;
     background: #ffffff;
@@ -178,9 +178,31 @@ input::placeholder {
     border: solid 1px #d0d0d0;
 }
 
-.join-btn-box .btn-join{
+.join-btn-box .btn-join, .joinSuccess-btn-box .btn-login{
     margin-left: 20px;
     color: #ffffff;
     background: #2146d0;
     font-weight: bold;
+}
+
+/* -----------------------------------------------------------------------------
+
+# JoinSuccess Styles
+
+----------------------------------------------------------------------------- */
+.joinSuccess-wrap{
+    width: 634px;
+    margin: -50px auto 40px auto;
+    padding: 60px;
+}
+
+.i-fa-check{
+    text-align: center;
+    font-size: 80pt;
+    color: #2146d0;
+}
+
+.joinSuccess-content{
+    text-align: center;
+    margin-top: 50px;
 }

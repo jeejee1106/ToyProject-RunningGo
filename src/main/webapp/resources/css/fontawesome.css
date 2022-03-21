@@ -6,8 +6,7 @@
 .fas,
 .far,
 .fal,
-.fad,
-.fab {
+.fad {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   display: inline-block;
@@ -89,15 +88,13 @@
 .fa.fa-pull-left,
 .fas.fa-pull-left,
 .far.fa-pull-left,
-.fal.fa-pull-left,
-.fab.fa-pull-left {
+.fal.fa-pull-left{
   margin-right: .3em; }
 
 .fa.fa-pull-right,
 .fas.fa-pull-right,
 .far.fa-pull-right,
-.fal.fa-pull-right,
-.fab.fa-pull-right {
+.fal.fa-pull-right {
   margin-left: .3em; }
 
 .fa-spin {
@@ -4566,16 +4563,6 @@ readers do not read off random characters that represent icons */
 .fa-zhihu:before {
   content: "\f63f"; }
 
-.sr-only {
-  border: 0;
-  clip: rect(0, 0, 0, 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px; }
-
 .sr-only-focusable:active, .sr-only-focusable:focus {
   clip: auto;
   height: auto;
@@ -4591,9 +4578,6 @@ readers do not read off random characters that represent icons */
   src: url("../webfonts/fa-brands-400.eot");
   src: url("../webfonts/fa-brands-400.eot?#iefix") format("embedded-opentype"), url("../webfonts/fa-brands-400.woff2") format("woff2"), url("../webfonts/fa-brands-400.woff") format("woff"), url("../webfonts/fa-brands-400.ttf") format("truetype"), url("../webfonts/fa-brands-400.svg#fontawesome") format("svg"); }
 
-.fab {
-  font-family: 'Font Awesome 5 Brands';
-  font-weight: 400; }
 @font-face {
   font-family: 'Font Awesome 5 Free';
   font-style: normal;

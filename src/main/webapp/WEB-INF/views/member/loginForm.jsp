@@ -59,7 +59,5 @@
                 </div>
             </div>
         </div>
-    로그인.jsp 입니다.
-    ${data}
     </div>
 </div>

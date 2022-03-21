@@ -27,10 +27,8 @@ public class MemberController {
         binder.addValidators(pwValidator);
     }
 
-
     @GetMapping("/login")
     public String login(Model m) {
-        m.addAttribute("data", "로그인하실건가요?");
         return "/member/loginForm";
     }
 
@@ -44,10 +42,11 @@ public class MemberController {
 
         System.out.println("errors = " + errors);
 
+        //작성한 정보를 유지하고, joinSuccessForm에 name전송하기 위함.
+        model.addAttribute("memberDto", memberDto);
+
         //만약 회원가입에 실패한다면
         if (errors.hasErrors()) {
-            //작성한 정보를 유지한다.
-            model.addAttribute("memberDto", memberDto);
 
             //에러를 찾아서 model로 전송
             Map<String, String> validatorResult = memberService.validateHandling(errors);
@@ -61,7 +60,7 @@ public class MemberController {
 
         //유효성 검사를 통과하면 insert 후 페이지 이동
         memberService.insertMember(memberDto);
-        return "redirect:/";
+        return "/member/joinSuccessForm";
     }
 
     //id 중복 체크
