@@ -135,11 +135,9 @@ $(function () {
         }
     });
 
-
-    //취소버튼 이벤트
-
 });
 
+//유효성 최종 체크
 function fn_lastCheck(f){
     let check1 = $("#idCheck-msg").attr("value");
     let check2 = $("#passCheck-msg").attr("value");
@@ -167,6 +165,7 @@ function fn_lastCheck(f){
     return true;
 }
 
+//취소버튼 이벤트
 function fn_cancel(){
     let check = confirm("작성한 정보는 저장되지 않습니다. \n 홈 화면으로 이동하시겠습니까?")
     if(!check){
