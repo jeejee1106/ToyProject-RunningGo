@@ -21,4 +21,10 @@ public class MemberDaoImpl implements MemberDao{
     public int idCheck(String id) {
         return session.selectOne(namespace + "idCheck", id);
     }
+
+    @Override
+    public int login(MemberDto memberDto) {
+        System.out.println("dao memberDto = " + memberDto.getId());
+        return session.selectOne(namespace + "login", memberDto);
+    }
 }

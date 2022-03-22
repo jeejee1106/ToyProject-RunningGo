@@ -30,13 +30,13 @@ public class MemberController {
         binder.addValidators(idCheckValidator);
     }
 
-    @GetMapping("/login")
-    public String login(Model m) {
+    @GetMapping("/loginForm")
+    public String loginForm() {
         return "/member/loginForm";
     }
 
-    @GetMapping("/join")
-    public String join() {
+    @GetMapping("/joinForm")
+    public String joinForm() {
         return "/member/joinForm";
     }
 
@@ -57,6 +57,21 @@ public class MemberController {
         //유효성 검사를 통과하면 insert 후 페이지 이동
         memberService.insertMember(memberDto);
         return "/member/joinSuccessForm";
+    }
+
+    @PostMapping("/login")
+    public String login(String id, String pass) {
+        MemberDto memberDto = new MemberDto();
+
+        memberDto.setId(id);
+        memberDto.setPass(pass);
+
+        int result = memberService.login(memberDto);
+
+        if(result != 1){
+            return "/member/loginForm";
+        }
+        return "redirect:/";
     }
 
     //id 중복 체크

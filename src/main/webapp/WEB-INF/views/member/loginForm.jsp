@@ -12,28 +12,31 @@
                 <div class="login-box-title">
                     <h5>회원 로그인</h5>
                 </div>
-                <div class="login-box-content">
-                    <div>
-                        <input type="text" class="user-id" placeholder="아이디">
-                        <input type="password" class="user-pass" placeholder="비밀번호">
+                <form action="/login/login" method="post">
+                    <div class="login-box-content">
+                        <div>
+                            <input type="text" class="user-id" name="id" placeholder="아이디">
+                            <input type="password" class="user-pass" name="pass" placeholder="비밀번호">
+                        </div>
+                        <div class="btn-login">
+                            <button type="submit">로그인</button>
+                        </div>
                     </div>
-                    <div class="btn-login">
-                        <button type="button">로그인</button>
+
+                    <div class="id-save-check">
+                        <span>
+                            <label>
+                                <input type="checkbox">아이디 저장
+                            </label>
+                        </span>
                     </div>
-                </div>
-                <div class="id-save-check">
-					<span>
-						<label>
-							<input type="checkbox">아이디 저장
-						</label>
-					</span>
-                </div>
+                </form>
                 <hr>
                 <!-- 여기서부터 회원가입, 비번찾기 버튼 -->
                 <div class="btn-login-sub-box">
                     <ul class="login-sub-box-list">
                         <li>
-                            <button class="btn-member-join" onclick="location.href='/login/join'">
+                            <button class="btn-member-join" onclick="location.href='/login/joinForm'">
                                 회원가입
                             </button>
                         </li>

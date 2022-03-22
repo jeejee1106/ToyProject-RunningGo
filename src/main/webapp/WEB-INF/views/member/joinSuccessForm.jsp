@@ -14,8 +14,8 @@
                 나만의 러닝장소를 추천하고, 개성있는 크루들과 소통하세요!
             </p>
             <div class="joinSuccess-btn-box">
-                <button type="button">홈</button>
-                <button type="button" class="btn-login">로그인</button>
+                <button type="button" onclick="location.href='/'">홈</button>
+                <button type="button" class="btn-login" onclick="location.href='/login/loginForm'">로그인</button>
             </div>
         </div>
     </div>

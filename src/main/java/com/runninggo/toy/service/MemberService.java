@@ -5,4 +5,5 @@ import com.runninggo.toy.domain.MemberDto;
 public interface MemberService {
     int insertMember(MemberDto memberDto);
     int idCheck(String id);
+    int login(MemberDto memberDto);
 }

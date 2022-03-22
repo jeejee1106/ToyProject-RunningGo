@@ -26,7 +26,7 @@
                 </ul>
             </div>
             <div class="navbar align-self-center d-flex">
-                <a class="nav-icon" href="/login/login">
+                <a class="nav-icon" href="/login/loginForm">
                     <i class="fa fa-fw fa-user text-dark"></i>
                     <span class="login-join-link">로그인/회원가입</span>
                 </a>

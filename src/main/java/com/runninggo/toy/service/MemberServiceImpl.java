@@ -20,4 +20,10 @@ public class MemberServiceImpl implements MemberService{
     public int idCheck(String id) {
         return memberDao.idCheck(id);
     }
+
+    @Override
+    public int login(MemberDto memberDto) {
+        System.out.println("service memberDto = " + memberDto.getId());
+        return memberDao.login(memberDto);
+    }
 }

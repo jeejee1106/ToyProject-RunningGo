@@ -8,15 +8,16 @@
         select count(*) from member where id = #{id}
     </select>
 
-<!--    <select id="existsById" parameterType="String" resultType="boolean">-->
-<!--        select if(count(*) > 0, 'true', 'false') from member where id = #{id, jdbcType=VARCHAR}-->
-<!--    </select>-->
-
     <!-- member테이블에 insert하기 -->
     <insert id="insertMember" parameterType="MemberDto">
         insert into member(id, pass, name, email, hp, area, join_date)
         values(#{id}, #{pass}, #{name}, #{email}, #{hp}, #{area}, now())
     </insert>
+
+    <!-- 로그인 시 id, pass 체크 -->
+    <select id="login" parameterType="MemberDto" resultType="int">
+        select count(*) from member where id=#{id} and pass=#{pass};
+    </select>
 
 
 </mapper>
