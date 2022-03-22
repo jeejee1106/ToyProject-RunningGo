@@ -53,7 +53,7 @@ body, ul, li, p, a, label, input, div {
 .text-warning {  color: #ede861 !important;}
 .text-muted { color: #bcbcbc !important;}
 .text-success { color: #2146d0 !important;}
-.bg-dark { background-color: #212934 !important;}
+.bg-dark { background-color: #1d242d !important;}
 .bg-light { background-color: #e9eef5 !important;}
 .bg-black { background-color: #1d242d !important;}
 .bg-success { background-color: #59ab6e !important;}
@@ -132,6 +132,10 @@ body, ul, li, p, a, label, input, div {
 .services-icon-wap:hover {background: #69bb7e;}
 /* Contact map */
 .leaflet-control a, .leaflet-control { font-size: 10px !important;}
+
+#runninggo_footer{
+  height: 150px;
+}
 
 /*
 // Extra small devices (portrait phones, less than 576px)

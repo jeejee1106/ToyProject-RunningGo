@@ -191,18 +191,18 @@ input::placeholder {
 
 ----------------------------------------------------------------------------- */
 .joinSuccess-wrap{
-    width: 634px;
-    margin: -50px auto 40px auto;
+    width: 900px;
+    height: 550px;
+    margin: 50px auto 50px auto;
     padding: 60px;
+    text-align: center;
 }
 
 .i-fa-check{
-    text-align: center;
     font-size: 80pt;
     color: #2146d0;
 }
 
 .joinSuccess-content{
-    text-align: center;
     margin-top: 50px;
 }
