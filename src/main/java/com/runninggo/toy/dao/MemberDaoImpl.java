@@ -24,7 +24,6 @@ public class MemberDaoImpl implements MemberDao{
 
     @Override
     public int login(MemberDto memberDto) {
-        System.out.println("dao memberDto = " + memberDto.getId());
         return session.selectOne(namespace + "login", memberDto);
     }
 }

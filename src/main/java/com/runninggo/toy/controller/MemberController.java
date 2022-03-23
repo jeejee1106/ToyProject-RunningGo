@@ -11,6 +11,8 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @Controller
@@ -43,8 +45,6 @@ public class MemberController {
     @PostMapping("/joinCheck")
     public String joinCheck(@Valid MemberDto memberDto, Errors errors, Model model) {
 
-        System.out.println("errors = " + errors);
-
         //작성한 정보를 유지하고, joinSuccessForm에 name전송하기 위함.
         model.addAttribute("memberDto", memberDto);
 
@@ -60,7 +60,7 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public String login(String id, String pass) {
+    public String login(String id, String pass, boolean saveId, HttpServletResponse response) {
         MemberDto memberDto = new MemberDto();
 
         memberDto.setId(id);
@@ -71,7 +71,17 @@ public class MemberController {
         if(result != 1){
             return "/member/loginForm";
         }
-        return "redirect:/";
+
+        //result가 1이면(id, pass가 일치하면) saveId값을 체크해서 쿠키를 만들거나 삭제한다.
+        if (saveId){
+            Cookie cookie = new Cookie("id", id); //1. 쿠키생성
+            response.addCookie(cookie); //2. 응답에 저장
+        } else {
+            Cookie cookie = new Cookie("id", id);
+            cookie.setMaxAge(0);
+            response.addCookie(cookie);
+        }
+        return "redirect:/"; //3. 홈으로 이동
     }
 
     //id 중복 체크

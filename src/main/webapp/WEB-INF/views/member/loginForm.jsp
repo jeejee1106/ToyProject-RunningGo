@@ -15,7 +15,7 @@
                 <form action="/login/login" method="post">
                     <div class="login-box-content">
                         <div>
-                            <input type="text" class="user-id" name="id" placeholder="아이디">
+                            <input type="text" class="user-id" name="id" value="${cookie.id.value}" placeholder="아이디">
                             <input type="password" class="user-pass" name="pass" placeholder="비밀번호">
                         </div>
                         <div class="btn-login">
@@ -26,7 +26,7 @@
                     <div class="id-save-check">
                         <span>
                             <label>
-                                <input type="checkbox">아이디 저장
+                                <label><input type="checkbox" name="saveId" ${empty cookie.id.value ? "" : "checked"}>아이디 저장</label>
                             </label>
                         </span>
                     </div>

@@ -23,7 +23,6 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public int login(MemberDto memberDto) {
-        System.out.println("service memberDto = " + memberDto.getId());
         return memberDao.login(memberDto);
     }
 }
