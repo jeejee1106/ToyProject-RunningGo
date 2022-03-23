@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- Header -->
 <nav class="navbar navbar-expand-lg navbar-light shadow">
@@ -26,10 +27,19 @@
                 </ul>
             </div>
             <div class="navbar align-self-center d-flex">
-                <a class="nav-icon" href="/login/loginForm">
-                    <i class="fa fa-fw fa-user text-dark"></i>
-                    <span class="login-join-link">로그인/회원가입</span>
-                </a>
+                <c:if test="${sessionScope.loginOK == null}">
+                    <a class="nav-icon" href="/login/loginForm">
+                        <i class="fa fa-fw fa-user text-dark"></i>
+                        <span class="login-join-link">로그인/회원가입</span>
+                    </a>
+                </c:if>
+                <c:if test="${sessionScope.loginOK != null}">
+                    <span><b>${sessionScope.id}님</b></span>
+                    <a class="nav-icon" href="/login/logout">
+                        <i class="fa fa-fw fa-sign-out text-dark"></i>
+                        <span class="login-join-link">로그아웃</span>
+                    </a>
+                </c:if>
             </div>
         </div>
     </div>

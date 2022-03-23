@@ -12,7 +12,9 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -60,7 +62,9 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public String login(String id, String pass, boolean saveId, HttpServletResponse response) {
+    public String login(String id, String pass, boolean saveId,
+                        HttpServletResponse response, HttpSession session) {
+
         MemberDto memberDto = new MemberDto();
 
         memberDto.setId(id);
@@ -73,6 +77,9 @@ public class MemberController {
         }
 
         //result가 1이면(id, pass가 일치하면) saveId값을 체크해서 쿠키를 만들거나 삭제한다.
+        session.setAttribute("id", id);
+        session.setAttribute("loginOK", "yes");
+
         if (saveId){
             Cookie cookie = new Cookie("id", id); //1. 쿠키생성
             response.addCookie(cookie); //2. 응답에 저장
@@ -82,6 +89,12 @@ public class MemberController {
             response.addCookie(cookie);
         }
         return "redirect:/"; //3. 홈으로 이동
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate(); //세션 종료
+        return "redirect:/";
     }
 
     //id 중복 체크
