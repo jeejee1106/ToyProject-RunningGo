@@ -15,11 +15,11 @@
                 <form action="/login/login" method="post">
                     <div class="login-box-content">
                         <div>
-                            <input type="text" class="user-id" name="id" value="${cookie.id.value}" placeholder="아이디">
-                            <input type="password" class="user-pass" name="pass" placeholder="비밀번호">
+                            <input type="text" id="id" name="id" value="${cookie.id.value}" autofocus placeholder="아이디">
+                            <input type="password" id="pass" name="pass" placeholder="비밀번호">
                         </div>
                         <div class="btn-login">
-                            <button type="submit">로그인</button>
+                            <button type="submit" id="login-btn">로그인</button>
                         </div>
                     </div>
 
@@ -31,6 +31,9 @@
                         </span>
                     </div>
                 </form>
+                <div id="loginCheck-msg">
+                    ${loginFailMsg}
+                </div>
                 <hr>
                 <!-- 여기서부터 회원가입, 비번찾기 버튼 -->
                 <div class="btn-login-sub-box">

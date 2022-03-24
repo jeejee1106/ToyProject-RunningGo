@@ -28,19 +28,25 @@
     margin: 15px 0 10px 0;
     padding: 0 0 0 8px;
     border: 1px solid #d0d0d0;
-    color: #979d9d;
+    color: black;
 }
 
 .login-box-content button{
     width: 158px;
     height: 87px;
     margin: 15px 0 0 20px;
-    border: 1px solid #2146d0;
+    border: none;
     background: #2146d0;
     color: #ffffff;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
+}
+
+#loginCheck-msg{
+    margin-top: 5px;
+    font-size: 10pt;
+    color: red;
 }
 
 .sns-login-box{
@@ -136,6 +142,7 @@ input::placeholder {
 }
 
 .valid-msg{
+    margin-top: 5px;
     font-size: 10pt;
     color: red;
 }
@@ -153,17 +160,11 @@ input::placeholder {
     border: solid 1px #d0d0d0;
 }
 
-/*#idCheck-msg{*/
-/*    margin-top: 5px;*/
-/*    font-size: 10pt;*/
-/*}*/
-
 .email-option, .area-option{
     width: 120px;
     height: 33px;
     border: solid 1px #dcdcdc;
 }
-
 
 .join-btn-box, .joinSuccess-btn-box{
     text-align: center;

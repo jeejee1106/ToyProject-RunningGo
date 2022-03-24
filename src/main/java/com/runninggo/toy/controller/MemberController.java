@@ -63,7 +63,7 @@ public class MemberController {
 
     @PostMapping("/login")
     public String login(String id, String pass, boolean saveId,
-                        HttpServletResponse response, HttpSession session) {
+                        HttpServletResponse response, HttpSession session, Model model) {
 
         MemberDto memberDto = new MemberDto();
 
@@ -73,6 +73,7 @@ public class MemberController {
         int result = memberService.login(memberDto);
 
         if(result != 1){
+            model.addAttribute("loginFailMsg", "아이디 또는 비밀번호가 올바르지 않습니다.");
             return "/member/loginForm";
         }
 
@@ -95,6 +96,14 @@ public class MemberController {
     public String logout(HttpSession session) {
         session.invalidate(); //세션 종료
         return "redirect:/";
+    }
+
+    //login id, pass check
+    @ResponseBody
+    @PostMapping("/loginCheck")
+    public int loginCheck(MemberDto memberDto, Model model) {
+        model.addAttribute("msg", "ajaxfail");
+        return memberService.login(memberDto);
     }
 
     //id 중복 체크

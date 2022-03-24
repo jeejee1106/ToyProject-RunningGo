@@ -1,5 +1,24 @@
 $(function () {
 
+    /**
+     * 로그인 js
+     */
+    //로그인버튼 비활성화
+    $("#login-btn").css({"pointer-events" : "none", "backgroundColor" : "#cbcbcb"});
+    //아이디, 비밀번호 입력하면 버튼 활성화
+    $("#id, #pass").on("keyup",function(){
+        let login_id = $("#id").val().trim();
+        let login_pass = $("#pass").val().trim();
+        if(login_id.length != 0 && login_pass.length != 0){
+            $("#login-btn").css({"pointer-events" : "", "backgroundColor" : "#2146d0"});
+        } else{
+            $("#login-btn").css({"pointer-events" : "none", "backgroundColor" : "#cbcbcb"});
+        }
+    });
+
+    /**
+    * 회원가입 js
+    * */
     //아이디 유효성 검사
     $(".idCheck-btn").click(function () {
         let idRegExp = /^[a-z0-9]{5,20}$/;
