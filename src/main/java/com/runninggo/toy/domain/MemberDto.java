@@ -37,4 +37,6 @@ public class MemberDto {
     private String area;
 
     private Date join_date;
+
+    private String mail_key;
 }

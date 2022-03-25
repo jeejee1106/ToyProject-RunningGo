@@ -16,8 +16,22 @@
 
     <!-- 로그인 시 id, pass 체크 -->
     <select id="login" parameterType="MemberDto" resultType="int">
-        select count(*) from member where id=#{id} and pass=#{pass};
+        select count(*) from member where id=#{id} and pass=#{pass}
     </select>
 
+    <!-- 메일주소와 인증키를 저장 -->
+<!--    <insert id="createAuthKey">-->
+<!--        insert into mail_check values (#{member_mail}, #{auth_key})-->
+<!--    </insert>-->
+
+    <!-- 회원가입 시 이메일 인증을 위한 랜덤번호 생성 -->
+    <update id="updateMailKey" parameterType="MemberDto">
+        update member set mail_key = #{mail_key} where email = #{email}
+    </update>
+
+    <!-- 메일인증을 하면 mail_auth 컬럼을 기본값0에서 1로 바꿔, 로그인을 허용 -->
+    <update id="updateMailAuth" parameterType="String">
+	    update member set mail_auth = 1 where email = #{email}
+    </update>
 
 </mapper>

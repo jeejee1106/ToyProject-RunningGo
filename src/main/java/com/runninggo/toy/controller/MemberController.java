@@ -45,7 +45,7 @@ public class MemberController {
     }
 
     @PostMapping("/joinCheck")
-    public String joinCheck(@Valid MemberDto memberDto, Errors errors, Model model) {
+    public String joinCheck(@Valid MemberDto memberDto, Errors errors, Model model) throws Exception{
 
         //작성한 정보를 유지하고, joinSuccessForm에 name전송하기 위함.
         model.addAttribute("memberDto", memberDto);
@@ -58,6 +58,14 @@ public class MemberController {
 
         //유효성 검사를 통과하면 insert 후 페이지 이동
         memberService.insertMember(memberDto);
+        return "/member/joinSuccessForm";
+    }
+
+    @GetMapping("/registerEmail")
+    public String emailConfirm(String email,Model model)throws Exception{
+        memberService.updateMailAuth(email);
+        model.addAttribute("member_mail", email);
+
         return "/member/joinSuccessForm";
     }
 
