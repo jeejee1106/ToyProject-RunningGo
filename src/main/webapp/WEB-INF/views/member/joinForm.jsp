@@ -14,7 +14,7 @@
                 <h4 class="join-sub-title">기본정보</h4>
                 <span class="important imp-tit">*필수입력 사항</span>
                 <div class="join-table-box">
-                    <form:form modelAttribute="memberDto" action="/login/joinCheck" method="post" onsubmit="return fn_lastCheck(this)">
+                    <form:form modelAttribute="memberDto" action="/join/joinCheck" method="post" onsubmit="return fn_lastCheck(this)">
                         <table>
                             <colgroup>
                                 <col width="250px;">

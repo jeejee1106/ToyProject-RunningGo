@@ -22,7 +22,6 @@ public class MailHandler {
     }
 
     public void setSubject(String subject) throws MessagingException {
-        System.out.println("subject = " + subject);
         messageHelper.setSubject(subject);
     }
 

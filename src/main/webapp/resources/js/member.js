@@ -25,7 +25,7 @@ $(function () {
         let id = $("#id-form").val().trim();
 
         $.ajax({
-            url: "/login/idCheck",
+            url: "/join/idCheck",
             type: "post",
             dataType: "json",
             data: {"id": id},

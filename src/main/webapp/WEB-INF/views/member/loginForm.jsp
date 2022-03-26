@@ -39,7 +39,7 @@
                 <div class="btn-login-sub-box">
                     <ul class="login-sub-box-list">
                         <li>
-                            <button class="btn-member-join" onclick="location.href='/login/joinForm'">
+                            <button class="btn-member-join" onclick="location.href='/join/joinForm'">
                                 회원가입
                             </button>
                         </li>
