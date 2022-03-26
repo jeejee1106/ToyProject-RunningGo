@@ -156,5 +156,5 @@ buildNumber.properties
 .classpath
 
 # my-info
-#MailConfig.java
+MailConfig.java
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij,maven
