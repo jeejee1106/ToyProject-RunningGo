@@ -12,7 +12,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -61,7 +60,7 @@ public class MemberController {
         return "/member/joinSuccessForm";
     }
 
-    @GetMapping("/registerEmail")
+    @PostMapping("/registerEmail")
     public String emailConfirm(String email,Model model)throws Exception{
         memberService.updateMailAuth(email);
         model.addAttribute("member_mail", email);
@@ -71,21 +70,25 @@ public class MemberController {
 
     @PostMapping("/login")
     public String login(String id, String pass, boolean saveId,
-                        HttpServletResponse response, HttpSession session, Model model) {
+                        HttpServletResponse response, HttpSession session, Model model) throws Exception {
 
         MemberDto memberDto = new MemberDto();
 
         memberDto.setId(id);
         memberDto.setPass(pass);
 
-        int result = memberService.login(memberDto);
-
-        if(result != 1){
+        //로그인 시 아이디, 비밀번호 일치여부 확인
+        if(memberService.login(memberDto) != 1){
             model.addAttribute("loginFailMsg", "아이디 또는 비밀번호가 올바르지 않습니다.");
             return "/member/loginForm";
         }
 
-        //result가 1이면(id, pass가 일치하면) saveId값을 체크해서 쿠키를 만들거나 삭제한다.
+        //이메일 인증 했는지 확인
+        if (memberService.emailAuthFail(id) != 1) {
+            return "/member/emailAuthFail";
+        }
+
+        //id, pass가 일치하고, 이메일 인증 했으면 saveId값을 체크해서 쿠키를 만들거나 삭제한다.
         session.setAttribute("id", id);
         session.setAttribute("loginOK", "yes");
 
@@ -107,12 +110,12 @@ public class MemberController {
     }
 
     //login id, pass check
-    @ResponseBody
-    @PostMapping("/loginCheck")
-    public int loginCheck(MemberDto memberDto, Model model) {
-        model.addAttribute("msg", "ajaxfail");
-        return memberService.login(memberDto);
-    }
+//    @ResponseBody
+//    @PostMapping("/loginCheck")
+//    public int loginCheck(MemberDto memberDto, Model model) {
+//        model.addAttribute("msg", "ajaxfail");
+//        return memberService.login(memberDto);
+//    }
 
     //id 중복 체크
     @ResponseBody

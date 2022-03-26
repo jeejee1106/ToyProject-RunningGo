@@ -5,9 +5,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @Repository
 public class MemberDaoImpl implements MemberDao{
 
@@ -40,18 +37,9 @@ public class MemberDaoImpl implements MemberDao{
         return session.update(namespace + "updateMailAuth", email);
     }
 
-//    @Override
-//    public void createAuthKey(String member_mail, String auth_key) throws Exception {
-//        Map<String, Object> map = new HashMap<>();
-//
-//        map.put("member_mail", member_mail);
-//        map.put("auth_key", auth_key);
-//
-//        session.selectOne(namespace + "createAuthKey", map);
-//    }
+    @Override
+    public int emailAuthFail(String id) throws Exception {
+        return session.selectOne(namespace + "emailAuthFail", id);
+    }
 
-//    @Override
-//    public void memberAuth(String member_mail) throws Exception {
-//        session.update(namespace + "memberAuth", member_mail);
-//    }
 }

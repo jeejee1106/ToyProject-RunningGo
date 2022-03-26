@@ -8,4 +8,5 @@ public interface MemberService {
     int login(MemberDto memberDto);
     int updateMailKey(MemberDto memberDto) throws Exception;
     int updateMailAuth(String email) throws Exception;
+    int emailAuthFail(String id) throws Exception;
 }
