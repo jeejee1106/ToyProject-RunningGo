@@ -5,7 +5,6 @@ import com.runninggo.toy.domain.MemberDto;
 import com.runninggo.toy.mail.MailHandler;
 import com.runninggo.toy.mail.TempKey;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +29,7 @@ public class MemberServiceImpl implements MemberService{
                 "<h1>RunninGo 메일인증</h1>" +
                         "<br>RunninGo에 오신것을 환영합니다!"+
                         "<br>아래 [이메일 인증 확인]을 눌러주세요."+
-                        "<br><a href='http://localhost:8080/login/registerEmail' target='_blenk'>이메일 인증 확인</a>");
+                        "<br><a href='http://localhost:8080/login/registerEmail' target='_blank'>이메일 인증 확인</a>");
         sendMail.setFrom("running.Go77@gmail.com", "러닝고");
         sendMail.setTo(memberDto.getEmail());
         sendMail.send();

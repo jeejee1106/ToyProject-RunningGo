@@ -60,12 +60,12 @@ public class MemberController {
         return "/member/joinSuccessForm";
     }
 
-    @PostMapping("/registerEmail")
+    @GetMapping("/registerEmail")
     public String emailConfirm(String email,Model model)throws Exception{
         memberService.updateMailAuth(email);
         model.addAttribute("member_mail", email);
 
-        return "/member/joinSuccessForm";
+        return "/member/emailAuthSuccess";
     }
 
     @PostMapping("/login")
