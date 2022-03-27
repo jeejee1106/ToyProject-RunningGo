@@ -5,6 +5,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class MemberDaoImpl implements MemberDao{
 
@@ -40,6 +42,11 @@ public class MemberDaoImpl implements MemberDao{
     @Override
     public int emailAuthFail(String id) throws Exception {
         return session.selectOne(namespace + "emailAuthFail", id);
+    }
+
+    @Override
+    public List<MemberDto> findId(MemberDto memberDto) throws Exception {
+        return session.selectList(namespace + "findId", memberDto);
     }
 
 }

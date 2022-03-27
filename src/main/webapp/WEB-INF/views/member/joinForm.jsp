@@ -1,8 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<link rel="stylesheet" href="/css/member.css">
-
 <div class="container">
     <div class="container-margin">
         <div class="join-wrap">
@@ -29,7 +27,6 @@
                                     <div class="idCheck-box">
                                         <input type="text" id="id-form" name="id" value="${memberDto.id}" placeholder="5~20자의 영문 소문자, 숫자만 사용 가능합니다." required>
                                         <button type="button" class="idCheck-btn">중복확인</button>
-                                        <div id="test"></div>
                                     </div>
                                     <div id="idCheck-msg" class="valid-msg" value="N"><form:errors path="id" /></div>
                                 </td>

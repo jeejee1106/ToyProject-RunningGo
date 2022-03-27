@@ -1,7 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<link rel="stylesheet" href="/css/member.css">
-
 <div class="container">
     <div class="container-margin">
         <div class="login-wrap">
@@ -44,12 +42,12 @@
                             </button>
                         </li>
                         <li>
-                            <button class="btn-find-id" onclick="">
+                            <button class="btn-find-id" onclick="location.href='/login/findIdForm'">
                                 아이디 찾기
                             </button>
                         </li>
                         <li>
-                            <button class="btn-find-pass" onclick="">
+                            <button class="btn-find-pass" onclick="location.href='/login/findPassForm'">
                                 비밀번호 찾기
                             </button>
                         </li>

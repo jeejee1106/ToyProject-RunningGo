@@ -33,4 +33,13 @@
     <select id="emailAuthFail" parameterType="String" resultType="int">
         select count(*) from member where id = #{id} and mail_auth=1
     </select>
+
+    <!-- 아이디 찾기 -->
+    <select id="findId" parameterType="MemberDto" resultType="MemberDto">
+        select id from member where name=#{name} and email=#{email} and hp=#{hp}
+    </select>
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
 </mapper>

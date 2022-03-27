@@ -3,24 +3,28 @@
 # Login Styles
 
 ----------------------------------------------------------------------------- */
-.login-wrap{
+.login-wrap, .findId-wrap{
     width: 600px;
     margin: -50px auto 40px auto;
     padding: 60px;
 }
+
 .login-box{
     border: solid 1px #dcdcdc;
     width: 485px;
     margin-top: 30px;
     padding: 40px;
 }
+
 .login-box-title{
     padding: 30px 0 0;
 }
+
 .login-box-content {
     overflow: hidden;
     display: flex;
 }
+
 .login-box-content input{
     display: block;
     width: 220px;
@@ -206,4 +210,67 @@ input::placeholder {
 
 .joinSuccess-content{
     margin-top: 50px;
+}
+
+/* -----------------------------------------------------------------------------
+
+# findId Styles
+
+----------------------------------------------------------------------------- */
+.findId-wrap{
+    width: 600px;
+    margin: -50px auto 40px auto;
+    padding: 60px;
+}
+
+.findId-box{
+    border: solid 1px #dcdcdc;
+    width: 478px;
+    margin-top: 30px;
+    padding: 40px;
+}
+
+.findId-notice{
+    font-size: 10pt;
+    margin-bottom: 15px;
+}
+
+.findId-table-box table th {
+    width: 120px;
+    border-bottom: solid 1px #dcdcdc;
+    font-size: 10.5pt;
+    text-align: center;
+    background: #fbfbfb;
+}
+
+.findId-table-box table td {
+    border-bottom: solid 1px #dcdcdc;
+    padding: 10px 0 10px 15px;
+}
+
+.findId-table-box table input{
+    width: 250px;
+    height: 33px;
+    border: solid 1px #dcdcdc;
+    padding-left: 10px;
+}
+
+.findId-btn-box{
+    text-align: center;
+    margin-top: 15px;
+}
+
+.findId-btn-box button{
+    border: solid 1px #2146d0;
+    width: 80px;
+    height: 40px;
+    background: #2146d0;
+    font-size: 12pt;
+    color: #ffffff;
+}
+
+#findIdCheck-msg{
+    margin-top: 10px;
+    font-size: 10pt;
+    color: red;
 }
