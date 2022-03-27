@@ -11,7 +11,7 @@
                     * 가입 시 등록하신 이름, 이메일, 휴대폰 번호를 입력해주세요.
                 </div>
                 <div class="findId-table-box">
-                    <form action="/login/findId" method="post">
+                    <form action="/login/findId" method="post" onsubmit="return fn_findId_check()">
                         <table>
                             <tbody>
                             <tr>
@@ -20,7 +20,7 @@
                                 </th>
                                 <td>
                                     <div>
-                                        <input type="text" name="name" required>
+                                        <input type="text" id="findId-name" name="name" placeholder="2자 이상의 한글만 입력해주세요." required>
                                     </div>
                                 </td>
                             </tr>
@@ -30,7 +30,7 @@
                                 </th>
                                 <td>
                                     <div>
-                                        <input type="text" name="email" required>
+                                        <input type="text" id="findId-email" name="email" placeholder="이메일 형식으로 입력해주세요." required>
                                     </div>
                                 </td>
                             </tr>
@@ -40,17 +40,14 @@
                                 </th>
                                 <td>
                                     <div>
-                                        <input type="text" name="hp" placeholder="- 없이 입력하세요" required>
+                                        <input type="text" id="findId-hp" name="hp" placeholder="- 없이 입력하세요." required>
                                     </div>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
-                        <div id="findIdCheck-msg">
-                            회원 정보가 일치하지 않습니다. 다시 시도해주세요.
-                        </div>
                         <div class="findId-btn-box">
-                            <button type="submit">다음</button>
+                            <button type="submit" id="findId-next-btn">다음</button>
                         </div>
                     </form>
                 </div>

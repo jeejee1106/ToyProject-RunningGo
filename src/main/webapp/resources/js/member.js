@@ -154,10 +154,41 @@ $(function () {
         }
     });
 
+    /**
+     * 아이디찾기 js
+     * */
+    $("#findId-hp").on("keyup",function(){
+        //자동하이픈 + 숫자가 아니면 입력 불가
+        $(this).val($(this).val()
+            .replace(/[^0-9]/g, "")
+            .replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3")
+            .replace("--", "-"));
+    });
+
+    $("#findId-next-btn").click(function (){
+        // let nameRegExp = /^[가-힣]{2,}$/;
+        // let emailRegExp = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+[.][A-Za-z]{2,6}$/;
+        // let hpRegExp = /^01(?:0|1|[6-9])(-)(\d{3}|\d{4})(-)(\d{4})$/;
+        //
+        // let name = $("#findId-name").val().trim();
+        // let email = $("#findId-email").val().trim();
+        // let hp = $("#findId-hp").val().trim();
+        //
+        // if(!nameRegExp.test(name) && name <= 0){
+        //     alert("이름을 다시 확인해주세요");
+        // } else if (!emailRegExp.test(email) && email.length <= 0) {
+        //     alert("이메일 형식이 올바르지 않습니다.");
+        // } else if (!hpRegExp.test(hp) && hp.length <= 0) {
+        //     alert("휴대폰 번호 형식이 올바르지 않습니다.");
+        // }
+
+    });
+
+
 });
 
-//유효성 최종 체크
-function fn_lastCheck(f){
+//회원 가입 시 유효성 최종 체크
+function fn_lastCheck(){
     let check1 = $("#idCheck-msg").attr("value");
     let check2 = $("#passCheck-msg").attr("value");
     let check3 = $("#passCheck-msg2").attr("value");
@@ -184,11 +215,34 @@ function fn_lastCheck(f){
     return true;
 }
 
-//취소버튼 이벤트
+//회원가입 폼 취소버튼 이벤트
 function fn_cancel(){
     let check = confirm("작성한 정보는 저장되지 않습니다. \n 홈 화면으로 이동하시겠습니까?")
     if(!check){
         return false;
     }
     return location.href="/";
+}
+
+function fn_findId_check() {
+    let nameRegExp = /^[가-힣]{2,}$/;
+    let emailRegExp = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+[.][A-Za-z]{2,6}$/;
+    let hpRegExp = /^01(?:0|1|[6-9])(-)(\d{3}|\d{4})(-)(\d{4})$/;
+
+    let name = $("#findId-name").val().trim();
+    let email = $("#findId-email").val().trim();
+    let hp = $("#findId-hp").val().trim();
+
+    if(!nameRegExp.test(name) || name.length == 0){
+        alert("이름을 다시 확인해주세요");
+        return false;
+    } else if (!emailRegExp.test(email) || email.length == 0) {
+        alert("이메일 형식이 올바르지 않습니다.");
+        return false;
+    } else if (!hpRegExp.test(hp) || hp.length == 0) {
+        alert("휴대폰 번호 형식이 올바르지 않습니다.");
+        return false;
+    }
+
+    return true;
 }

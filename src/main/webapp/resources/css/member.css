@@ -269,8 +269,40 @@ input::placeholder {
     color: #ffffff;
 }
 
-#findIdCheck-msg{
-    margin-top: 10px;
-    font-size: 10pt;
-    color: red;
+/* -----------------------------------------------------------------------------
+
+# findId-Result Styles
+
+----------------------------------------------------------------------------- */
+
+.findId-result-wrap{
+    width: 600px;
+    height: 457px;
+    margin: 50px auto 40px auto;
+    padding: 108px;
+    text-align: center;
+    border: solid 1px #dcdcdc;
+}
+
+#find-id-title{
+    margin-bottom: 50px;
+}
+
+.findId-result-btn-box{
+    margin-top: 50px;
+}
+
+.findId-result-btn-box button{
+    width: 130px;
+    height: 50px;
+    background: #ffffff;
+    font-size: 12pt;
+    border: solid 1px #d0d0d0;
+}
+
+.findId-result-btn-box .findId-result-btn-login{
+    margin-left: 20px;
+    color: #ffffff;
+    background: #2146d0;
+    font-weight: bold;
 }

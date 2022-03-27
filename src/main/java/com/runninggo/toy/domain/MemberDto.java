@@ -2,6 +2,7 @@ package com.runninggo.toy.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -36,6 +37,7 @@ public class MemberDto {
 
     private String area;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date join_date;
 
     private String mail_key;

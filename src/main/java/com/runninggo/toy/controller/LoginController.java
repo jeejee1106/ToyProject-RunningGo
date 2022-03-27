@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -74,7 +73,7 @@ public class LoginController {
     public String findId(MemberDto memberDto, Model model) throws Exception{
         List<MemberDto> idList = memberService.findId(memberDto);
         model.addAttribute("idList", idList);
-        return "/member/findIdList";
+        return "/member/findIdResult";
     }
 
     @GetMapping("/findPassForm")

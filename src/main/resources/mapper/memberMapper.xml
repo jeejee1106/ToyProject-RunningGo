@@ -36,7 +36,7 @@
 
     <!-- 아이디 찾기 -->
     <select id="findId" parameterType="MemberDto" resultType="MemberDto">
-        select id from member where name=#{name} and email=#{email} and hp=#{hp}
+        select id, join_date from member where name=#{name} and email=#{email} and hp=#{hp}
     </select>
     <!--  -->
     <!--  -->
