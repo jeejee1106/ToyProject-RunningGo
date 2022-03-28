@@ -20,7 +20,7 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public void insertMember(MemberDto memberDto) throws Exception {
-        String mail_key = new TempKey().getKey(50,false);
+        String mail_key = new TempKey().getKey(30,false);
         memberDto.setMail_key(mail_key);
         memberDao.insertMember(memberDto);
         memberDao.updateMailKey(memberDto);
@@ -65,6 +65,35 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public List<MemberDto> findId(MemberDto memberDto) throws Exception {
         return memberDao.findId(memberDto);
+    }
+
+    @Override
+    public int findPass(MemberDto memberDto) throws Exception {
+        int result = memberDao.findPass(memberDto);
+
+        if (result == 1) {
+            String pass = new TempKey().getKey(15,false);
+
+            memberDto.setPass(pass);
+            memberDao.updateRandomPass(memberDto);
+
+            MailHandler sendMail = new MailHandler(mailSender);
+            sendMail.setSubject("[RunninGo 임시비밀번호 입니다.]"); //메일제목
+            sendMail.setText(
+                    "<h1>RunninGo 임시비밀번호</h1>" +
+                            "<br>회원님의 임시비밀번호입니다."+
+                            "<br><b>" + pass + "</b>"+
+                            "<br>로그인 후 반드시 비밀번호를 변경해주세요!!");
+            sendMail.setFrom("running.Go77@gmail.com", "러닝고");
+            sendMail.setTo(memberDto.getEmail());
+            sendMail.send();
+        }
+        return result;
+    }
+
+    @Override
+    public int updateRandomPass(MemberDto memberDto) throws Exception {
+        return memberDao.updateRandomPass(memberDto);
     }
 
 }

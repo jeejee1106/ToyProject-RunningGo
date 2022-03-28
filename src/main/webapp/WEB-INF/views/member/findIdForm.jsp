@@ -2,15 +2,15 @@
 
 <div class="container">
     <div class="container-margin">
-        <div class="findId-wrap">
-            <div class="findId-title">
+        <div class="find-wrap">
+            <div class="find-title">
                 <h3>아이디 찾기</h3>
             </div>
-            <div class="findId-box">
-                <div class="findId-notice">
+            <div class="find-box">
+                <div class="find-notice">
                     * 가입 시 등록하신 이름, 이메일, 휴대폰 번호를 입력해주세요.
                 </div>
-                <div class="findId-table-box">
+                <div class="find-table-box">
                     <form action="/login/findId" method="post" onsubmit="return fn_findId_check()">
                         <table>
                             <tbody>
@@ -46,7 +46,7 @@
                             </tr>
                             </tbody>
                         </table>
-                        <div class="findId-btn-box">
+                        <div class="find-btn-box">
                             <button type="submit" id="findId-next-btn">다음</button>
                         </div>
                     </form>

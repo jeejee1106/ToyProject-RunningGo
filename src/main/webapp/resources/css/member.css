@@ -214,28 +214,29 @@ input::placeholder {
 
 /* -----------------------------------------------------------------------------
 
-# findId Styles
+# find*Form Styles
 
 ----------------------------------------------------------------------------- */
-.findId-wrap{
+.find-wrap{
     width: 600px;
-    margin: -50px auto 40px auto;
+    height: 550px;
+    margin: 0px auto 40px auto;
     padding: 60px;
 }
 
-.findId-box{
+.find-box{
     border: solid 1px #dcdcdc;
     width: 478px;
     margin-top: 30px;
     padding: 40px;
 }
 
-.findId-notice{
+.find-notice{
     font-size: 10pt;
     margin-bottom: 15px;
 }
 
-.findId-table-box table th {
+.find-table-box table th {
     width: 120px;
     border-bottom: solid 1px #dcdcdc;
     font-size: 10.5pt;
@@ -243,25 +244,26 @@ input::placeholder {
     background: #fbfbfb;
 }
 
-.findId-table-box table td {
+.find-table-box table td {
     border-bottom: solid 1px #dcdcdc;
     padding: 10px 0 10px 15px;
 }
 
-.findId-table-box table input{
+.find-table-box table input{
     width: 250px;
     height: 33px;
     border: solid 1px #dcdcdc;
     padding-left: 10px;
 }
 
-.findId-btn-box{
+.find-btn-box{
     text-align: center;
     margin-top: 15px;
 }
 
-.findId-btn-box button{
+.find-btn-box button{
     border: solid 1px #2146d0;
+    margin-top: 20px;
     width: 80px;
     height: 40px;
     background: #2146d0;
@@ -271,12 +273,12 @@ input::placeholder {
 
 /* -----------------------------------------------------------------------------
 
-# findId-Result Styles
+# find*-Result Styles
 
 ----------------------------------------------------------------------------- */
 
-.findId-result-wrap{
-    width: 600px;
+.find-result-wrap{
+    width: 670px;
     height: 457px;
     margin: 50px auto 40px auto;
     padding: 108px;
@@ -284,15 +286,15 @@ input::placeholder {
     border: solid 1px #dcdcdc;
 }
 
-#find-id-title{
+.find-title{
     margin-bottom: 50px;
 }
 
-.findId-result-btn-box{
+.find-result-btn-box{
     margin-top: 50px;
 }
 
-.findId-result-btn-box button{
+.find-result-btn-box button{
     width: 130px;
     height: 50px;
     background: #ffffff;
@@ -300,7 +302,7 @@ input::placeholder {
     border: solid 1px #d0d0d0;
 }
 
-.findId-result-btn-box .findId-result-btn-login{
+.find-result-btn-box .find-result-btn-login{
     margin-left: 20px;
     color: #ffffff;
     background: #2146d0;

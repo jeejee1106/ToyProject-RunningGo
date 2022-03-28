@@ -12,4 +12,6 @@ public interface MemberDao {
     int updateMailAuth(String email) throws Exception;
     int emailAuthFail(String id) throws Exception;
     List<MemberDto> findId(MemberDto memberDto) throws Exception;
+    int findPass(MemberDto memberDto) throws Exception;
+    int updateRandomPass(MemberDto memberDto) throws Exception;
 }

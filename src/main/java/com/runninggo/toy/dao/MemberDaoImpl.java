@@ -49,4 +49,14 @@ public class MemberDaoImpl implements MemberDao{
         return session.selectList(namespace + "findId", memberDto);
     }
 
+    @Override
+    public int findPass(MemberDto memberDto) throws Exception {
+        return session.selectOne(namespace + "findPass", memberDto);
+    }
+
+    @Override
+    public int updateRandomPass(MemberDto memberDto) throws Exception {
+        return session.update(namespace + "updateRandomPass", memberDto);
+    }
+
 }

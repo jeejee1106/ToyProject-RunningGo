@@ -165,26 +165,6 @@ $(function () {
             .replace("--", "-"));
     });
 
-    $("#findId-next-btn").click(function (){
-        // let nameRegExp = /^[가-힣]{2,}$/;
-        // let emailRegExp = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+[.][A-Za-z]{2,6}$/;
-        // let hpRegExp = /^01(?:0|1|[6-9])(-)(\d{3}|\d{4})(-)(\d{4})$/;
-        //
-        // let name = $("#findId-name").val().trim();
-        // let email = $("#findId-email").val().trim();
-        // let hp = $("#findId-hp").val().trim();
-        //
-        // if(!nameRegExp.test(name) && name <= 0){
-        //     alert("이름을 다시 확인해주세요");
-        // } else if (!emailRegExp.test(email) && email.length <= 0) {
-        //     alert("이메일 형식이 올바르지 않습니다.");
-        // } else if (!hpRegExp.test(hp) && hp.length <= 0) {
-        //     alert("휴대폰 번호 형식이 올바르지 않습니다.");
-        // }
-
-    });
-
-
 });
 
 //회원 가입 시 유효성 최종 체크
@@ -224,6 +204,7 @@ function fn_cancel(){
     return location.href="/";
 }
 
+//아이디찾기 체크
 function fn_findId_check() {
     let nameRegExp = /^[가-힣]{2,}$/;
     let emailRegExp = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+[.][A-Za-z]{2,6}$/;
@@ -243,6 +224,23 @@ function fn_findId_check() {
         alert("휴대폰 번호 형식이 올바르지 않습니다.");
         return false;
     }
+    return true;
+}
 
+//비밀번호찾기 체크
+function fn_findPass_check() {
+    let idRegExp = /^[a-z0-9]{5,20}$/;
+    let emailRegExp = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+[.][A-Za-z]{2,6}$/;
+
+    let id = $("#findPass-id").val().trim();
+    let email = $("#findPass-email").val().trim();
+
+    if(!idRegExp.test(id) || id.length == 0){
+        alert("아이디를 다시 확인해주세요.");
+        return false;
+    } else if (!emailRegExp.test(email) || email.length == 0) {
+        alert("이메일 형식이 올바르지 않습니다.");
+        return false;
+    }
     return true;
 }
