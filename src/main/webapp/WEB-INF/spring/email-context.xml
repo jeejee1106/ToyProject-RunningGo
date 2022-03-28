@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- email 인증 관련   -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com" />
+        <property name="port" value="587" />
+        <property name="username" value="running.Go77@gmail.com"/>
+        <property name="password" value="runninggo77!" />
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+                <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+                <prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+            </props>
+        </property>
+    </bean>
+</beans>
+
+        <!--    <beans:bean id="mailSender"	class="org.springframework.mail.javamail.JavaMailSenderImpl">-->
+        <!--        <beans:property name="host" value="smtp.gmail.com" />-->
+        <!--        <beans:property name="port" value="587" />&lt;!&ndash; 465 or 25 587&ndash;&gt;-->
+        <!--        <beans:property name="username" value="running.Go77@gmail.com" />-->
+        <!--        <beans:property name="password" value="runninggo77!" />-->
+        <!--        <beans:property name="defaultEncoding" value="utf-8" />-->
+        <!--        <beans:property name="javaMailProperties">-->
+        <!--            <beans:props>-->
+        <!--                <beans:prop key="mail.transport.protocol">smtp</beans:prop>-->
+        <!--                <beans:prop key="mail.smtp.auth">true</beans:prop>-->
+        <!--                <beans:prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</beans:prop>-->
+        <!--                <beans:prop key="mail.smtp.starttls.enable">true</beans:prop>-->
+        <!--                <beans:prop key="mail.debug">true</beans:prop>-->
+        <!--            </beans:props>-->
+        <!--        </beans:property>-->
+        <!--    </beans:bean>-->
