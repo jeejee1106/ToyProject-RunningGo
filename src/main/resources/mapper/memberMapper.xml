@@ -49,7 +49,11 @@
         update member set pass=#{pass} where id=#{id};
     </update>
 
-    <!--  -->
+    <!-- 암호화된 비밀번호 가져오기 -->
+    <select id="getEncPass" parameterType="String" resultType="String">
+        select pass from member where id=#{id}
+    </select>
+
     <!--  -->
     <!--  -->
 </mapper>

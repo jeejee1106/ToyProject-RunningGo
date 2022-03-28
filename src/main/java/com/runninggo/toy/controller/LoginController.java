@@ -84,7 +84,6 @@ public class LoginController {
     @PostMapping("/findPass")
     public String findPass(MemberDto memberDto, Model model) throws Exception {
         int count = memberService.findPass(memberDto);
-        System.out.println("count = " + count);
         model.addAttribute("count", count);
         return "/member/findPassResult";
     }

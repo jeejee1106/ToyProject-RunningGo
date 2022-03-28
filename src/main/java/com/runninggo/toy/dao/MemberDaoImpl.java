@@ -25,7 +25,7 @@ public class MemberDaoImpl implements MemberDao{
     }
 
     @Override
-    public int login(MemberDto memberDto) {
+    public int login(MemberDto memberDto) throws Exception{
         return session.selectOne(namespace + "login", memberDto);
     }
 
@@ -57,6 +57,11 @@ public class MemberDaoImpl implements MemberDao{
     @Override
     public int updateRandomPass(MemberDto memberDto) throws Exception {
         return session.update(namespace + "updateRandomPass", memberDto);
+    }
+
+    @Override
+    public String getEncPass(String id) throws Exception {
+        return session.selectOne(namespace + "getEncPass", id);
     }
 
 }

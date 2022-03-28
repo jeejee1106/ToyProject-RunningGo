@@ -6,6 +6,7 @@ import com.runninggo.toy.mail.MailHandler;
 import com.runninggo.toy.mail.TempKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,14 +18,24 @@ public class MemberServiceImpl implements MemberService{
     MemberDao memberDao;
     @Autowired
     JavaMailSender mailSender;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Override
     public void insertMember(MemberDto memberDto) throws Exception {
+        //랜덤 문자열을 생성해서 mail_key 컬럼에 넣어주기
         String mail_key = new TempKey().getKey(30,false);
         memberDto.setMail_key(mail_key);
-        memberDao.insertMember(memberDto);
         memberDao.updateMailKey(memberDto);
 
+        //비밀번호를 암호화해서 넣어주기
+        String encPassword = passwordEncoder.encode(memberDto.getPass());
+        memberDto.setPass(encPassword);
+
+        //회원가입
+        memberDao.insertMember(memberDto);
+
+        //회원가입 완료하면 인증을 위한 이메일 발송
         MailHandler sendMail = new MailHandler(mailSender);
         sendMail.setSubject("[RunninGo 이메일 인증메일 입니다.]"); //메일제목
         sendMail.setText(
@@ -43,8 +54,20 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public int login(MemberDto memberDto) {
-        return memberDao.login(memberDto);
+    public int login(MemberDto memberDto) throws Exception{
+
+        //입력받은 비밀번호와 암호화된 비밀번호를 비교(matches)해서 같지 않으면 0반환
+        if(!passwordEncoder.matches(memberDto.getPass(), memberDao.getEncPass(memberDto.getId()))) {
+            System.out.println("비밀번호가 일치하지 않습니다.");
+            System.out.println("xxx갯수????" + memberDao.login(memberDto));
+            return 0;
+        } else{
+            //같으면 memberDto.setPass()에 암호화된 비밀번호 넣어주어 입력한 비밀번호가 암호화된 비번과 같게 처리.
+            System.out.println("비밀번호가 일치합니다.");
+            memberDto.setPass(memberDao.getEncPass(memberDto.getId()));
+            System.out.println("yyyy갯수????" + memberDao.login(memberDto));
+            return memberDao.login(memberDto);
+        }
     }
 
     @Override
@@ -94,6 +117,11 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public int updateRandomPass(MemberDto memberDto) throws Exception {
         return memberDao.updateRandomPass(memberDto);
+    }
+
+    @Override
+    public String getEncPass(String id) throws Exception {
+        return memberDao.getEncPass(id);
     }
 
 }
