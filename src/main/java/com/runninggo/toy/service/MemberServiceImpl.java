@@ -95,9 +95,13 @@ public class MemberServiceImpl implements MemberService{
         int result = memberDao.findPass(memberDto);
 
         if (result == 1) {
+            //랜덤문자열 생성
             String pass = new TempKey().getKey(15,false);
 
-            memberDto.setPass(pass);
+            //위 문자열(비밀번호)을 암호화해서 넣어주기
+            String encPassword = passwordEncoder.encode(pass);
+
+            memberDto.setPass(encPassword);
             memberDao.updateRandomPass(memberDto);
 
             MailHandler sendMail = new MailHandler(mailSender);
