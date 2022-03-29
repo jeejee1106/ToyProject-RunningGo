@@ -1,7 +1,5 @@
 package com.runninggo.toy.mail;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
@@ -44,5 +42,4 @@ public class MailHandler {
     public void send() {
         mailSender.send(message);
     }
-
 }

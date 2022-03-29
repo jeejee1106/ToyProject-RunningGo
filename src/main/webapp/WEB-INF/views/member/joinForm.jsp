@@ -80,6 +80,7 @@
                                             <option value="@nate.com">nate.com</option>
                                         </select>
                                     </div>
+                                    <div class="find-check-msg">이메일 인증, 비밀번호 찾기 등에 사용됩니다. 정확하게 입력해주세요.</div>
                                     <div id="emailCheck-msg" class="valid-msg" value="N"><form:errors path="email"/></div>
                                 </td>
                             </tr>
@@ -91,6 +92,7 @@
                                     <div>
                                         <input type="tel" id="hp-form" name="hp" placeholder="- 없이 입력하세요" value="${memberDto.hp}" required>
                                     </div>
+                                    <div class="find-check-msg">비밀번호 찾기 등에 사용됩니다. 정확하게 입력해주세요.</div>
                                     <div id="hpCheck-msg" class="valid-msg" value="N"><form:errors path="hp"/></div>
                                 </td>
                             </tr>

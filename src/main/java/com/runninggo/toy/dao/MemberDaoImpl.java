@@ -35,8 +35,8 @@ public class MemberDaoImpl implements MemberDao{
     }
 
     @Override
-    public int updateMailAuth(String email) throws Exception {
-        return session.update(namespace + "updateMailAuth", email);
+    public int updateMailAuth(MemberDto memberDto) throws Exception {
+        return session.update(namespace + "updateMailAuth", memberDto);
     }
 
     @Override

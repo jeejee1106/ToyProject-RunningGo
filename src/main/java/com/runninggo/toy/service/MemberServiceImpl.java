@@ -26,7 +26,6 @@ public class MemberServiceImpl implements MemberService{
         //랜덤 문자열을 생성해서 mail_key 컬럼에 넣어주기
         String mail_key = new TempKey().getKey(30,false);
         memberDto.setMail_key(mail_key);
-        memberDao.updateMailKey(memberDto);
 
         //비밀번호를 암호화해서 넣어주기
         String encPassword = passwordEncoder.encode(memberDto.getPass());
@@ -34,15 +33,18 @@ public class MemberServiceImpl implements MemberService{
 
         //회원가입
         memberDao.insertMember(memberDto);
+        memberDao.updateMailKey(memberDto);
 
         //회원가입 완료하면 인증을 위한 이메일 발송
         MailHandler sendMail = new MailHandler(mailSender);
         sendMail.setSubject("[RunninGo 이메일 인증메일 입니다.]"); //메일제목
         sendMail.setText(
                 "<h1>RunninGo 메일인증</h1>" +
-                        "<br>RunninGo에 오신것을 환영합니다!"+
-                        "<br>아래 [이메일 인증 확인]을 눌러주세요."+
-                        "<br><a href='http://localhost:8080/join/registerEmail?email=" + memberDto.getEmail() +  "' target='_blank'>이메일 인증 확인</a>");
+                "<br>RunninGo에 오신것을 환영합니다!" +
+                "<br>아래 [이메일 인증 확인]을 눌러주세요." +
+                "<br><a href='http://localhost:8080/join/registerEmail?email=" + memberDto.getEmail() +
+                "&mail_key=" + mail_key +
+                "' target='_blank'>이메일 인증 확인</a>");
         sendMail.setFrom("running.Go77@gmail.com", "러닝고");
         sendMail.setTo(memberDto.getEmail());
         sendMail.send();
@@ -76,8 +78,8 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public int updateMailAuth(String email) throws Exception {
-        return memberDao.updateMailAuth(email);
+    public int updateMailAuth(MemberDto memberDto) throws Exception {
+        return memberDao.updateMailAuth(memberDto);
     }
 
     @Override

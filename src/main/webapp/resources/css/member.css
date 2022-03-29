@@ -125,6 +125,7 @@
 .join-table-box table th {
     border-bottom: solid 1px #dcdcdc;
     text-align: left;
+    font-size: 11pt;
     background: #fbfbfb;
     padding-left: 40px;
 }
@@ -188,6 +189,11 @@ input::placeholder {
     color: #ffffff;
     background: #2146d0;
     font-weight: bold;
+}
+
+.find-check-msg{
+    margin-top: 3px;
+    font-size: 8pt;
 }
 
 /* -----------------------------------------------------------------------------

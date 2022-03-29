@@ -53,9 +53,9 @@ public class JoinController {
     }
 
     @GetMapping("/registerEmail")
-    public String emailConfirm(String email,Model model)throws Exception{
-        memberService.updateMailAuth(email);
-        model.addAttribute("email", email);
+    public String emailConfirm(MemberDto memberDto)throws Exception{
+
+        memberService.updateMailAuth(memberDto);
 
         return "/member/emailAuthSuccess";
     }

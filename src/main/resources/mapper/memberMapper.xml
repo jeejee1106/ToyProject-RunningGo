@@ -21,12 +21,12 @@
 
     <!-- 회원가입 시 이메일 인증을 위한 랜덤번호 저장 -->
     <update id="updateMailKey" parameterType="MemberDto">
-        update member set mail_key=#{mail_key} where email=#{email}
+        update member set mail_key=#{mail_key} where email=#{email} and id=#{id}
     </update>
 
     <!-- 메일인증을 하면 mail_auth 컬럼을 기본값0에서 1로 바꿔 로그인을 허용 -->
-    <update id="updateMailAuth" parameterType="String">
-	    update member set mail_auth=1 where email=#{email}
+    <update id="updateMailAuth" parameterType="MemberDto">
+	    update member set mail_auth=1 where email=#{email} and mail_key=#{mail_key}
     </update>
 
     <!-- 이메일 인증을 안했으면 0을 반환, 로그인 시 인증 했나 안했나 체크하기 위함 -->
