@@ -24,6 +24,11 @@
             <param-name>contextConfigLocation</param-name>
             <param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
         </init-param>
+        <!-- 404에러처리 -->
+        <init-param>
+            <param-name>throwExceptionIfNoHandlerFound</param-name>
+            <param-value>true</param-value>
+        </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
@@ -52,9 +57,4 @@
     </filter-mapping>
     <!-- 한글 변환 필터 끝 -->
 
-    <!-- 에러코드와 페이지 지정 -->
-    <error-page>
-        <error-code>404</error-code>
-        <location>/WEB-INF/views/error/404.jsp</location>
-    </error-page>
 </web-app>

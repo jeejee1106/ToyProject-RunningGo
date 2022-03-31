@@ -1,0 +1,26 @@
+.error404-wrap{
+    height: 477px;
+    margin-top: 120px;
+    text-align: center;
+}
+
+.error404-title{
+    margin-top: 30px;
+}
+
+.error404-btn{
+    width: 100px;
+    height: 50px;
+    background: #ffffff;
+    font-size: 12pt;
+    border: solid 1px #d0d0d0;
+    margin-top: 30px;
+}
+
+.error404-btn:hover{
+    border: 1px solid #2146d0;
+    background: #2146d0;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+}
