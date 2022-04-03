@@ -25,13 +25,11 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login(String id, String pass, boolean saveId,
+    public String login(String id, MemberDto memberDto, boolean saveId,
                         HttpServletResponse response, HttpSession session, Model model) throws Exception {
 
-        MemberDto memberDto = new MemberDto();
-
-        memberDto.setId(id);
-        memberDto.setPass(pass);
+        System.out.println(memberDto.getPass());
+        System.out.println(memberDto.getId());
         //로그인 시 아이디, 비밀번호 일치여부 확인
         if(memberService.login(memberDto) != 1){
             model.addAttribute("loginFailMsg", "아이디 또는 비밀번호가 올바르지 않습니다.");
@@ -43,7 +41,7 @@ public class LoginController {
             return "/member/emailAuthFail";
         }
 
-        //id, pass가 일치하고, 이메일 인증 했으면 saveId값을 체크해서 쿠키를 만들거나 삭제한다.
+        //id, pass가 일치하고, 이메일 인증 했으면 세션을 생섬하고, saveId값을 체크해서 쿠키를 만들거나 삭제한다.
         session.setAttribute("id", id);
         session.setAttribute("loginOK", "yes");
 

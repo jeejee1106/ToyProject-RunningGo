@@ -10,18 +10,17 @@ public abstract class AbstractValidator<T> implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return clazz.isAssignableFrom(MemberDto.class);
+        return MemberDto.class.isAssignableFrom(clazz); //clazz가 MemberDto 또는 그 자손인지 확인
     }
 
     @Override
     public void validate(Object target, Errors errors) {
         try {
             doValidate((T) target, errors);
-        } catch (RuntimeException e) {
+        } catch (Exception e) {
             log.error("유효성 검증 에러", e);
-            throw e;
         }
     }
 
-    protected abstract void doValidate(final T dto, final Errors errors);
+    protected abstract void doValidate(final T dto, final Errors errors) throws Exception;
 }

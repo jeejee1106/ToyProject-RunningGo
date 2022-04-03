@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 
 @Component
-public class PwCheckValidator extends AbstractValidator<MemberDto>{
+public class PwMtcCkValidator extends AbstractValidator<MemberDto>{
 
     @Override
     protected void doValidate(MemberDto dto, Errors errors) {

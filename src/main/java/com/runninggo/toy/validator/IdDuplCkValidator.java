@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 
 @Component
-public class IdCheckValidator extends AbstractValidator<MemberDto>{
+public class IdDuplCkValidator extends AbstractValidator<MemberDto>{
 
     @Autowired
     private MemberDao memberDao;
@@ -15,7 +15,7 @@ public class IdCheckValidator extends AbstractValidator<MemberDto>{
     @Override
     protected void doValidate(MemberDto dto, Errors errors) {
         if (memberDao.idCheck(dto.getId()) == 1) {
-            errors.rejectValue("id", "id.duplicate");
+            errors.rejectValue("id", "id.duplicate"); //필드, 에러코드
         }
     }
 }

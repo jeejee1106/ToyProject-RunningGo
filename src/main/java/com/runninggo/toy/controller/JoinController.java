@@ -2,8 +2,8 @@ package com.runninggo.toy.controller;
 
 import com.runninggo.toy.domain.MemberDto;
 import com.runninggo.toy.service.MemberService;
-import com.runninggo.toy.validator.IdCheckValidator;
-import com.runninggo.toy.validator.PwCheckValidator;
+import com.runninggo.toy.validator.IdDuplCkValidator;
+import com.runninggo.toy.validator.PwMtcCkValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,14 +20,14 @@ public class JoinController {
     @Autowired
     MemberService memberService;
     @Autowired
-    PwCheckValidator pwValidator;
+    PwMtcCkValidator pwMtcCkValidator;
     @Autowired
-    IdCheckValidator idCheckValidator;
+    IdDuplCkValidator idDuplCkValidator;
 
     @InitBinder
     public void validator(WebDataBinder binder) {
-        binder.addValidators(pwValidator);
-        binder.addValidators(idCheckValidator);
+        binder.addValidators(pwMtcCkValidator);
+        binder.addValidators(idDuplCkValidator);
     }
 
     @GetMapping("/joinForm")
