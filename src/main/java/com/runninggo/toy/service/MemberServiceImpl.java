@@ -60,14 +60,10 @@ public class MemberServiceImpl implements MemberService{
 
         //입력받은 비밀번호와 암호화된 비밀번호를 비교(matches)해서 같지 않으면 0반환
         if(!passwordEncoder.matches(memberDto.getPass(), memberDao.getEncPass(memberDto.getId()))) {
-            System.out.println("비밀번호가 일치하지 않습니다.");
-            System.out.println("xxx갯수????" + memberDao.login(memberDto));
             return 0;
         } else{
             //같으면 memberDto.setPass()에 암호화된 비밀번호 넣어주어 입력한 비밀번호가 암호화된 비번과 같게 처리.
-            System.out.println("비밀번호가 일치합니다.");
             memberDto.setPass(memberDao.getEncPass(memberDto.getId()));
-            System.out.println("yyyy갯수????" + memberDao.login(memberDto));
             return memberDao.login(memberDto);
         }
     }

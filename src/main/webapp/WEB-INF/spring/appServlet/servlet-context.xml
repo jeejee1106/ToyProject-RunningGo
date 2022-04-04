@@ -16,7 +16,6 @@
         <beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
         <beans:property name="order" value="1" />
     </beans:bean>
-
     <beans:bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
         <beans:property name="definitions" value="/WEB-INF/tiles.xml" />
     </beans:bean>
@@ -55,8 +54,8 @@
 <!--    <beans:bean id="mailSender"	class="org.springframework.mail.javamail.JavaMailSenderImpl">-->
 <!--        <beans:property name="host" value="smtp.gmail.com" />-->
 <!--        <beans:property name="port" value="587" />&lt;!&ndash; 465 or 25 587&ndash;&gt;-->
-<!--        <beans:property name="username" value="running.Go77@gmail.com" />-->
-<!--        <beans:property name="password" value="runninggo77!" />-->
+<!--        <beans:property name="username" value="" />-->
+<!--        <beans:property name="password" value="" />-->
 <!--        <beans:property name="defaultEncoding" value="utf-8" />-->
 <!--        <beans:property name="javaMailProperties">-->
 <!--            <beans:props>-->

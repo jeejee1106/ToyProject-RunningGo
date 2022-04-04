@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <div class="container">
     <div class="container-margin">
@@ -10,7 +11,8 @@
                 <div class="login-box-title">
                     <h5>회원 로그인</h5>
                 </div>
-                <form action="/login/login" method="post">
+                <form:form modelAttribute="memberDto" action="/login/login" method="post">
+<%--                <form action="/login/login" method="post">--%>
                     <div class="login-box-content">
                         <div>
                             <input type="text" id="id" name="id" value="${cookie.id.value}" autofocus placeholder="아이디">
@@ -28,10 +30,12 @@
                             </label>
                         </span>
                     </div>
-                </form>
+<%--                </form>--%>
                 <div id="loginCheck-msg">
-                    ${loginFailMsg}
+<%--                    ${loginFailMsg}--%>
+                        <form:errors/>
                 </div>
+                </form:form>
                 <hr>
                 <!-- 여기서부터 회원가입, 비번찾기 버튼 -->
                 <div class="btn-login-sub-box">
