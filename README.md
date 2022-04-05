@@ -59,19 +59,21 @@
   * JoinController에서는 MemberDto 객체 앞에 @Valid 어노테이션을 적용해주었고, Errors를 통해 유효성 검사 적합 여부를 확인했다.  
   * @Valid가 적용된 MemberDto 객체에서 유효성 검사 중 에러가 발생하면 error.hasErrors()메서드에서는 true값이 반환되고, 조건문을 사용하여 에러가 발생했을 시 메세지를 출력한 후 작성중인 폼이 그대로 유지되는 코드를 작성하였다.  
   * **‼결과‼** 회원가입 시 데이터 형식이 유효하지 않으면 오류 메세지를 출력하고, 작성중인 폼이 그대로 유지되도록 구현할 수 있었다.  
-  * [이미지로 코드 & 결과 확인하기](https://user-images.githubusercontent.com/84839167/161665164-115e5dd8-c215-45f4-86a5-7b84d0f466b2.jpg){:target="_blank"}
-  * [건망증이 심한 엔지니어](https://techstock.biz){:target="_blank"}
-  * <a href="https://www.google.com/" target="_blank">새 탭에서 열기</a>
+  * [이미지로 코드 & 결과 확인하기](https://user-images.githubusercontent.com/84839167/161665164-115e5dd8-c215-45f4-86a5-7b84d0f466b2.jpg)
 
   ##### `2. WebDataBinder를 활용한 유효성 검사`
   * 제약조건 어노테이션으로 할 수 없는 유효성 검사는 WebDataBinder를 활용하였다.
     * 회원가입 시 아이디 중복확인과 비밀번호-비밀번호확인 일치 여부(JoinController)
     * 로그인 시 아이디, 비밀번호의 존재 여부(LoginController)
   * 먼저, 각 Controller의 상단에 @InitBinder 어노테이션을 적용하고, WebDataBinder 객체를 매개변수로 받는 메서드를 만들어주었다.
-  * 나는 각 Controller에서 검증할 내용이 서로 달랐기 떄문에 Validator 인터페이스를 구현한 클래스를 추상클래스로 만들었다.
+  * 나는 각 Controller에서 검증할 내용이 서로 달랐기 때문에 Validator 인터페이스를 구현한 클래스를 추상클래스로 만들었다.
+    * 👉[AbstractValidator 코드확인](https://github.com/jeejee1106/ToyProject-RunningGo/blob/1c6c8384af327871bb1144f4fdbbe8b41836bc88/src/main/java/com/runninggo/toy/validator/AbstractValidator.java#L9)
   * 그리고 그 추상클래스를 다시 상속 받는 두 개의 검증클래스를 만들어 위 메서드에 각각 바인딩 해주었다.
+    * 👉[JoinValidator 코드확인](https://github.com/jeejee1106/ToyProject-RunningGo/blob/1c6c8384af327871bb1144f4fdbbe8b41836bc88/src/main/java/com/runninggo/toy/validator/IdDuplCkValidator.java#L11) 👉[LoginValidator 코드확인](https://github.com/jeejee1106/ToyProject-RunningGo/blob/1c6c8384af327871bb1144f4fdbbe8b41836bc88/src/main/java/com/runninggo/toy/validator/LoginCheckValidator.java#L11)
   * 또한, messageSource를 사용해 에러 발생 시 전달할 메시지도 에러코드에 저장해주었고, 위 1번과 같이 @Valid와 Errors를 활용해 유효성 검사 적합 여부를 확인했다.  
-  * **‼결과‼** 유효하지 않은 값이 들어오면 저장해준 에러코드를 출력하고, 더 이상 회원가입, 로그인이 진행되지 못하도록 구현할 수 있었다.
+  * **‼결과‼** 유효하지 않은 값이 들어오면 저장해준 에러코드를 출력하고, 더 이상 회원가입, 로그인이 진행되지 못하도록 구현할 수 있었다.  
+  * [이미지로 코드 & 결과 확인하기]()
+
 </details>
 <details>
   <summary>트러블 슈팅</summary>
