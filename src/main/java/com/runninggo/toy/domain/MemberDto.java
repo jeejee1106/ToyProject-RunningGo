@@ -15,7 +15,8 @@ public class MemberDto {
     @NotBlank(message = "필수입력 항목입니다.")
     private String id;
 
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,20}$", message = "8~20자의 영문 대소문자+숫자+특수문자를 사용하세요.")
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,20}$",
+            message = "8~20자의 영문 대소문자+숫자+특수문자를 사용하세요.")
     @NotBlank(message = "필수입력 항목입니다.")
     private String pass;
 

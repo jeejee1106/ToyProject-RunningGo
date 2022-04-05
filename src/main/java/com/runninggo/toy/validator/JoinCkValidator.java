@@ -1,6 +1,5 @@
 package com.runninggo.toy.validator;
 
-import com.runninggo.toy.dao.MemberDao;
 import com.runninggo.toy.domain.MemberDto;
 import com.runninggo.toy.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 
 @Component
-public class IdDuplCkValidator extends AbstractValidator<MemberDto>{
+public class JoinCkValidator extends AbstractValidator<MemberDto>{
 
     @Autowired
     private MemberService memberService;

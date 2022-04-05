@@ -41,7 +41,6 @@ public class LoginController {
                         HttpServletResponse response, HttpSession session, Model model) throws Exception {
 
         if (errors.hasErrors()) {
-            System.out.println("errors = " + errors);
             return "/member/loginForm";
         }
 

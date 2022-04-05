@@ -2,7 +2,7 @@ package com.runninggo.toy.controller;
 
 import com.runninggo.toy.domain.MemberDto;
 import com.runninggo.toy.service.MemberService;
-import com.runninggo.toy.validator.IdDuplCkValidator;
+import com.runninggo.toy.validator.JoinCkValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +21,7 @@ public class JoinController {
 //    @Autowired
 //    PwMtcCkValidator pwMtcCkValidator;
     @Autowired
-    IdDuplCkValidator idDuplCkValidator;
+JoinCkValidator idDuplCkValidator;
 
     @InitBinder
     public void validator(WebDataBinder binder) {
