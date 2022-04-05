@@ -50,9 +50,9 @@
 <br>
 
 ## 4. 핵심 기능 설명 & 트러블 슈팅
-#### 📌회원가입, 로그인 시 유효성 검사 Validation
+#### 1. 회원가입, 로그인 시 유효성 검사 Validation
 <details>
-  <summary>핵심 기능 설명</summary>
+  <summary>📌핵심 기능 설명</summary>
 	
   ##### `1. 제약조건 어노테이션을 활용한 데이터 형식 유효성 검사`
   * 먼저, 유효성 검사가 필요한 MemberDto 객체의 각 필드에 제약조건 어노테이션을 적용해주었다.(@NotBlank, @Pattern)  
@@ -76,26 +76,105 @@
 
 </details>
 <details>
-  <summary>트러블 슈팅</summary>
+  <summary>⚽트러블 슈팅 : @InitBinder가 적용된 메서드에 객체를 바인딩을해도 유효성 검사가 실행되지 않음</summary>
+
+<br>
+유효성 검사에 들어가기 전, 구글링을 통해 바인딩 객체가 하나일 땐 setValidator() 메서드를, 하나 이상일 땐 addValidators() 메서드를 사용해야 한다는 것을 공부한 후 코드를 작성했다.
+	
+  ##### `1. 회원가입 시 유효성 검사 미작동`
+  * 첫 번째 시도 : 아이디 중복검사 클래스, 비밀번호 일치검사 클래스를 **addValidators()** 메서드를 사용해 각각 바인딩 -> ⭕정상 작동!  
+  * 두 번째 시도 : 두 클래스를 하나의 클래스로 구현해도 될 것 같다는 생각에 JoinCkValidator클래스를 만들어 코드를 합친 후 <br> 바인딩할 객체가 하나이기 때문에 **setValidator()** 메서드를 사용해 바인딩 -> ❌비정상작동
+  * 세 번째 시도 : 객체가 하나이지만 혹시나 하는 마음에 addValidators() 메서드로 변경 -> ⭕정상 작동!
+<details>
+  <summary>👉코드확인</summary>
+
+  <div markdown="1">    
+
+  ```java
+	  //첫 번째 코드 - 정상작동
+	  @InitBinder
+	  public void validator(WebDataBinder binder) {
+		  binder.addValidators(IdDuplCkValidator);
+	  	  binder.addValidators(passMctCkValidator);
+	  }
+	  
+	  //두 번째 코드 - 비정상작동
+	  @InitBinder
+	  public void validator(WebDataBinder binder) {
+		  binder.addValidators(joinCkValidator);
+	  }
+
+	  //세 번째 코드 - 정상작동
+	  @InitBinder
+	  public void validator(WebDataBinder binder) {
+		  binder.setValidator(joinCkValidator);
+	  }
+  ```
+  </div>
+</details>
+	
+**두 번째 시도에서 바인딩을 통한 유효성 검사는 잘 되었지만, 잘 되던 데이터 형식 유효성 검사가 작동하지 않았다.**
+	
+객체가 하나인데 setValidator() 메서드가 아닌 addValidators() 메서드를 사용했을 때 정상 작동하는 이유가 무엇일까?
+사실 정확한 이유는 찾지 못했지만, 아래 로그인 시 유효성 검사까지 완료해보니 짐작가는 부분이 있긴 하다.  
+	
+  ##### `2. 로그인 시 유효성 검사 미작동`
+  * 첫 번째 시도 : 아이디, 비밀번호 존재 여부를 검사하는 클래스를 만든 후 회원가입과 똑같이 addValidators() 메서드 사용 -> ❌비정상작동
+  * 두 번째 시도 : setValidator() 메서드로 객체 바인딩 -> ⭕정상작동!
+<details>
+  <summary>👉코드확인</summary>
+
+  <div markdown="1">    
+
+  ```java
+	  //첫 번째 코드 - 비정상작동
+	  @InitBinder
+	  public void validator(WebDataBinder binder) {
+		  binder.addValidators(LoginCkValidator);
+	  }
+	  
+	  //두 번째 코드 - 정상작동
+	  @InitBinder
+	  public void validator(WebDataBinder binder) {
+		  binder.setValidator(LoginCkValidator);
+	  }
+  ```
+  </div>
+</details>
+
+**첫 번째 시도에서 바인딩을 통한 유효성 검사는 잘 되었지만, 잘 되던 데이터 형식 유효성 검사가 작동하지 않았다.**
+
+위 두 경우를 보면 회원가입 유효성 검사에서는 addValidators()메서드를, 로그인 유효성 검사에서는 setValidator()메서드를 사용해야 정상작동하는 것을 알 수 있다.
+내가 찾은 답은 `'데이터 유효성 검사 또한 하나의 유효성 검사 객체로 인식한다.'` 이다.
+사실 로그인 유효성 검사에서 회원가입 컨트롤러의 메서드를 복사, 붙여넣기를 했기 때문에 이 오류를 해결할 수 있었다.
+
+로그인 시에는 데이터 형식을 검사할 필요가 없는데 왜 검사를하지? 생각하다가, 아 참! setValidator()를 사용해야하는데?? 라는 생각이 문득 들었다.
+그렇게 setValidator() 메서드로 수정하니, 회원가입 두 번째 시도와 같이 데이터 형식 유효성 검사를 하지 않는다는 것을 알아냈다.
+그렇다면? 회원가입은 데이터 유효성 검사와 커스텀 유효성 검사 두 개가 이루어 지니 addValidators()메서드를, 로그인은 커스텀유효성 검사 하나만 이루어지면 되니 setValidator()메서드를 사용하면 된다는 것이 내가 찾은 결론이다.
+아마 
+	
+</details>
+
+<br>
+
+#### 2. 비밀번호 암호화 PasswordEncoder
+<details>
+  <summary>📌핵심 기능 설명</summary>
+  
+</details>
+<details>
+  <summary>⚽트러블 슈팅</summary>
   
 </details>
 
-#### 📌비밀번호 암호화 PasswordEncoder
-<details>
-  <summary>핵심 기능 설명</summary>
-  
-</details>
-<details>
-  <summary>트러블 슈팅</summary>
-  
-</details>
+<br>
 
-#### 📌예외 처리 ExceptionHandler
+#### 3. 예외 처리 ExceptionHandler
 <details>
-  <summary>핵심 기능 설명</summary>
+  <summary>📌핵심 기능 설명</summary>
   
 </details>
 <details>
-  <summary>트러블 슈팅</summary>
+  <summary>⚽트러블 슈팅</summary>
   
 </details>
