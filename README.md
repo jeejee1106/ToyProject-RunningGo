@@ -118,22 +118,30 @@
 사실 정확한 이유는 찾지 못했지만, 아래 로그인 시 유효성 검사까지 완료해보니 짐작 가는 부분이 생겼다.  
 	
   ##### `2. 로그인 시 유효성 검사 미작동`
-  * 첫 번째 시도 : 아이디, 비밀번호 존재 여부를 검사하는 클래스를 만든 후 회원가입과 똑같이 addValidators() 메서드 사용 -> ❌비정상작동
+  * 첫 번째 시도 : validator가 아닌 Model을 사용해서 아이디, 비밀번호가 존재하지 않으면 메시지를 전송하는 방식을 적용 -> ⭕정상작동!
+  * 두 번째 시도 : 로그인도 validator를 적용해보고 싶다는 생각에 아이디, 비밀번호 존재 여부를 검사하는 클래스를 만든 후 <br>
+	회원가입과 똑같이 addValidators() 메서드 사용 -> ❌비정상작동
     * 회원가입 시에 필요한 MemberDto객체의 데이터 형식 검사를 진행하며 에러 발생
-  * 두 번째 시도 : setValidator() 메서드로 변경 -> ⭕정상작동!
+  * 세 번째 시도 : setValidator() 메서드로 변경 -> ⭕정상작동!
 <details>
   <summary>👉코드확인</summary>
 
   <div markdown="1">    
 
   ```java
-	  //첫 번째 코드 - 비정상작동
+	  //첫 번째 코드 - 정상작동 (login메서드)
+	  if(memberService.login(memberDto) != 1){
+		  model.addAttribute("loginFailMsg", "아이디 또는 비밀번호가 올바르지 않습니다.");
+		  return "/member/loginForm";
+          }
+	  
+	  //두 번째 코드 - 비정상작동
 	  @InitBinder
 	  public void validator(WebDataBinder binder) {
 		  binder.addValidators(LoginCkValidator);
 	  }
 	  
-	  //두 번째 코드 - 정상작동
+	  //세 번째 코드 - 정상작동
 	  @InitBinder
 	  public void validator(WebDataBinder binder) {
 		  binder.setValidator(LoginCkValidator);
@@ -142,7 +150,7 @@
   </div>
 </details>
 
-로그인할 때에는 데이터 형식을 검사하길 원하지 않았는데 첫 번째 시도에선 이 부분으로 인해 에러가 발생했다.  
+로그인할 때에는 데이터 형식을 검사하길 원하지 않았는데 두 번째 시도에선 데이터 형식을 검사하며 에러가 발생했다.  
 문득 setValidator() 메서드가 아닌 addValidators() 메서드를 사용하고 있었다는 사실을 깨닫고, setValidator() 메서드로 수정해주었다.  
 이 과정에서 회원가입 두 번째 시도와 같이 데이터 형식 검사를 하지 않는다는 것을 알아냈고,  힌트를 얻을 수 있었다.
 
@@ -151,9 +159,10 @@
 회원가입도 검사할 객체가 하나인데 왜 addValidators() 메서드만 정상작동하는걸까?  
 내가 찾은 답은 `'어노테이션을 통한 데이터 유효성 검사 또한 하나의 유효성 검사 객체(?)로 인식한다.'` 이다.  
 
-`그렇다면?` 회원가입에서는 데이터 형식 유효성 검사와 커스텀 유효성 검사 두 개가 이루어지니 addValidators()메서드를,  
-로그인은 커스텀 유효성 검사 하나만 이루어지면 되니 setValidator()메서드를 사용하면 된다는 것이 내가 찾은 결론이다.  
-또한 검증하려는 객체가 하나 이상일 땐 어노테이션으로 정의한 데이터 유효성 검사가 우선적으로 이루어진다는 것을 예상할 수 있다.
+`그렇다면?`  
+회원가입에서는 ①데이터 형식 유효성 검사와 ②커스텀 유효성 검사 두 개가 이루어지니 **addValidators()메서드를**,  
+로그인은 ①커스텀 유효성 검사만 하면 되니 **setValidator()메서드를** 사용하면 된다는 것이 내가 찾은 결론이다.  
+또한 검증하려는 객체가 하나 이상일 땐 제약조건 어노테이션으로 정의한 데이터 형식 유효성 검사가 우선적으로 이루어진다는 것을 예상할 수 있다.
 	
 </details>
 
