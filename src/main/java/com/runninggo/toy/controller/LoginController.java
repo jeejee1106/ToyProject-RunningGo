@@ -38,17 +38,11 @@ public class LoginController {
 
     @PostMapping("/login")
     public String login(@Valid MemberDto memberDto, Errors errors, String id,  boolean saveId,
-                        HttpServletResponse response, HttpSession session, Model model) throws Exception {
+                        HttpServletResponse response, HttpSession session) throws Exception {
 
         if (errors.hasErrors()) {
             return "/member/loginForm";
         }
-
-        //로그인 시 아이디, 비밀번호 일치여부 확인 -->>> 포폴에 코드 바꾼거 작성하기
-//        if(memberService.login(memberDto) != 1){
-//            model.addAttribute("loginFailMsg", "아이디 또는 비밀번호가 올바르지 않습니다.");
-//            return "/member/loginForm";
-//        }
 
         //이메일 인증 했는지 확인
         if (memberService.emailAuthFail(id) != 1) {
@@ -63,7 +57,6 @@ public class LoginController {
         if (saveId){
             response.addCookie(cookie); //2. 응답에 저장
         } else {
-//            Cookie cookie = new Cookie("id", id);
             cookie.setMaxAge(0);
             response.addCookie(cookie);
         }

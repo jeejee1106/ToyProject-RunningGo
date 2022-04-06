@@ -18,15 +18,13 @@ public class JoinController {
 
     @Autowired
     MemberService memberService;
-//    @Autowired
-//    PwMtcCkValidator pwMtcCkValidator;
+
     @Autowired
-JoinCkValidator idDuplCkValidator;
+    JoinCkValidator joinCkValidator;
 
     @InitBinder
     public void validator(WebDataBinder binder) {
-//        binder.addValidators(pwMtcCkValidator);
-        binder.addValidators(idDuplCkValidator);
+        binder.setValidator(joinCkValidator);
     }
 
     @GetMapping("/joinForm")

@@ -57,7 +57,6 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public int login(MemberDto memberDto) throws Exception{
-
         //입력받은 비밀번호와 암호화된 비밀번호를 비교(matches)해서 같지 않으면 0반환
         if(!passwordEncoder.matches(memberDto.getPass(), memberDao.getEncPass(memberDto.getId()))) {
             return 0;

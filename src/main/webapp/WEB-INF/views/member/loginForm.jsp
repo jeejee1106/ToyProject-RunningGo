@@ -12,7 +12,6 @@
                     <h5>회원 로그인</h5>
                 </div>
                 <form:form modelAttribute="memberDto" action="/login/login" method="post">
-<%--                <form action="/login/login" method="post">--%>
                     <div class="login-box-content">
                         <div>
                             <input type="text" id="id" name="id" value="${cookie.id.value}" autofocus placeholder="아이디">
@@ -30,11 +29,9 @@
                             </label>
                         </span>
                     </div>
-<%--                </form>--%>
-                <div id="loginCheck-msg">
-<%--                    ${loginFailMsg}--%>
+                    <div id="loginCheck-msg">
                         <form:errors/>
-                </div>
+                    </div>
                 </form:form>
                 <hr>
                 <!-- 여기서부터 회원가입, 비번찾기 버튼 -->

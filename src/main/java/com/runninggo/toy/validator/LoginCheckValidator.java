@@ -18,6 +18,7 @@ public class LoginCheckValidator extends AbstractValidator<MemberDto>{
 
     @Override
     protected void doValidate(MemberDto memberDto, Errors errors) throws Exception {
+        //아이디와 비밀번호가 존재하는지 체크
         if (memberService.login(memberDto) != 1) {
             errors.reject("login.mismatch");
         }
