@@ -6,7 +6,7 @@ import com.runninggo.toy.mail.MailHandler;
 import com.runninggo.toy.mail.TempKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class MemberServiceImpl implements MemberService{
     @Autowired
     JavaMailSender mailSender;
     @Autowired
-    PasswordEncoder passwordEncoder;
+    BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public void insertMember(MemberDto memberDto) throws Exception {
@@ -57,12 +57,16 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public int login(MemberDto memberDto) throws Exception{
+
+        String rawPassword = memberDto.getPass();
+        String encodedPassword = memberDao.getEncPass(memberDto.getId());
+
         //입력받은 비밀번호와 암호화된 비밀번호를 비교(matches)해서 같지 않으면 0반환
-        if(!passwordEncoder.matches(memberDto.getPass(), memberDao.getEncPass(memberDto.getId()))) {
+        if(!passwordEncoder.matches(rawPassword, encodedPassword)) {
             return 0;
         } else{
             //같으면 memberDto.setPass()에 암호화된 비밀번호 넣어주어 입력한 비밀번호가 암호화된 비번과 같게 처리.
-            memberDto.setPass(memberDao.getEncPass(memberDto.getId()));
+            memberDto.setPass(encodedPassword);
             return memberDao.login(memberDto);
         }
     }
