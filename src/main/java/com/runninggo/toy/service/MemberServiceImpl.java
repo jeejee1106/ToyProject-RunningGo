@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,12 +17,13 @@ public class MemberServiceImpl implements MemberService{
 
     @Autowired
     MemberDao memberDao;
-    @Autowired
+//    @Autowired
     JavaMailSender mailSender;
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
 
     @Override
+    @Transactional(readOnly = true, rollbackFor=Exception.class)
     public void insertMember(MemberDto memberDto) throws Exception {
         //랜덤 문자열을 생성해서 mail_key 컬럼에 넣어주기
         String mail_key = new TempKey().getKey(30,false);

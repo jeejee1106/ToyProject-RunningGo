@@ -28,7 +28,6 @@
             <version>2.0.7</version>
         </dependency>
 
-
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -87,7 +86,6 @@
             <artifactId>aspectjweaver</artifactId>
             <version>1.9.7</version>
         </dependency>
-
 
         <!-- Logging -->
         <dependency>
@@ -260,6 +258,13 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
             <version>${org.springframework-version}</version>
         </dependency>
 
