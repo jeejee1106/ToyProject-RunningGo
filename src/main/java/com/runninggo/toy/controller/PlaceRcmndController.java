@@ -12,4 +12,9 @@ public class PlaceRcmndController {
     public String placeRcmndForm() {
         return "/place/recmndForm";
     }
+
+    @GetMapping("/writeForm")
+    public String writeForm() {
+        return "/place/writeForm";
+    }
 }

@@ -285,9 +285,8 @@ input::placeholder {
 
 .find-result-wrap{
     width: 670px;
-    height: 457px;
-    margin: 50px auto 40px auto;
-    padding: 108px;
+    margin: 80px auto 80px auto;
+    padding: 70px;
     text-align: center;
     border: solid 1px #dcdcdc;
 }
@@ -297,7 +296,7 @@ input::placeholder {
 }
 
 .find-result-btn-box{
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .find-result-btn-box button{
