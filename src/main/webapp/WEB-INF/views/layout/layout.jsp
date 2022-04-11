@@ -38,6 +38,7 @@
 <script src="/js/templatemo.js"></script>
 
 <script src="/js/member.js"></script>
+<script src="/js/place.js"></script>
 <!-- End Script -->
 </body>
 </html>

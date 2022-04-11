@@ -39,7 +39,8 @@
                     </td>
                     <th>가까운 지하철 역</th>
                     <td>
-                        지하철 역 API
+                        <input type="text" id="subway">
+                        <button type="button" id="subway-search-btn">검색</button>
                     </td>
                 </tr>
                 <tr>
