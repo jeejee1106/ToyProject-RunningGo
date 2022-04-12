@@ -62,6 +62,7 @@
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-config:5.0.7.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-core:5.0.7.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-web:5.0.7.RELEASE" />
+          <element id="library" level="project" name="Maven: org.json:json:20210307" />
         </element>
       </element>
     </root>

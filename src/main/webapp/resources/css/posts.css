@@ -1,11 +1,11 @@
 .write-wrap{
-    width: 800px;
+    width: 1000px;
     border: black solid 1px;
     margin: auto;
     text-align: center;
 }
 .recmnd-table{
-    width: 800px;
+    width: 1000px;
     text-align: left;
 }
 .recmnd-table, .recmnd-table td, .recmnd-table th{
@@ -13,6 +13,12 @@
 }
 
 .recmnd-content{
-    width: 715px;
+    width: 915px;
     height: 300px;
+}
+
+.lineNum-img{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
 }

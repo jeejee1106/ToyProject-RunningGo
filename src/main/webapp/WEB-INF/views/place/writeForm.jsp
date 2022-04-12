@@ -41,6 +41,10 @@
                     <td>
                         <input type="text" id="subway">
                         <button type="button" id="subway-search-btn">검색</button>
+                        <div id="lineNum-list">
+<%--                            <img id="lineNum" src=""></img>--%>
+                        </div>
+
                     </td>
                 </tr>
                 <tr>
