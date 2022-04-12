@@ -114,13 +114,13 @@
     color: #AB3E55;
 }
 
-#top-th, #top-td{
+.top-th, .top-td{
     border-top: solid 1px #434343;
 }
 
-#bottom-th, #bottom-td{
-    border-bottom: solid 1px #434343;
-}
+/*#bottom-th, #bottom-td{*/
+/*    border-bottom: solid 1px #434343;*/
+/*}*/
 
 .join-table-box table th {
     border-bottom: solid 1px #dcdcdc;

@@ -1,20 +1,119 @@
 .write-wrap{
     width: 1000px;
-    border: black solid 1px;
-    margin: auto;
-    text-align: center;
+    margin: -50px auto 40px auto;
+    padding: 60px;
 }
+
+.write-box{
+    width: 877px;
+    margin-top: 30px;
+    padding: 40px;
+}
+
+.write-sub-title{
+    display: inline-block;
+}
+.write-table-box table th {
+    border-bottom: solid 1px #dcdcdc;
+    text-align: left;
+    font-size: 11pt;
+    background: #fbfbfb;
+    padding-left: 40px;
+}
+
+.write-table-box table td {
+    border-bottom: solid 1px #dcdcdc;
+    padding: 17px 0 17px 15px;
+}
+
+.write-table-box table input{
+    width: 240px;
+    height: 33px;
+    border: solid 1px #dcdcdc;
+    padding-left: 10px;
+    font-size: 10pt;
+}
+
+#write-radio1, #write-radio2{
+    width: 20px;
+    height: 12px;
+    border: solid 1px #dcdcdc;
+    padding-left: 10px;
+}
+
+#write-label1, #write-label2{
+    margin-right: 10px;
+    font-size: 12pt;
+}
+
+#distance{
+    width: 50px;
+    text-align: right;
+    font-size: 13pt;
+}
+
+.write-msg{
+    margin-top: 5px;
+    font-size: 10pt;
+    color: red;
+}
+
+#subway-search-btn{
+    margin-left: 10px;
+    width: 60px;
+    height: 35px;
+    color: #ffffff;
+    background: #2146d0;
+    font-size: 10pt;
+    border: solid 1px #d0d0d0;
+}
+
+.btn-level{
+    width: 60px;
+    height: 35px;
+    background: #ffffff;
+    font-size: 12pt;
+    border: solid 1px #d0d0d0;
+}
+
+.btn-level:hover{
+    color: #ffffff;
+    background: #2146d0;
+}
+
+.storage-place{
+    font-size: 11pt;
+}
+
 .recmnd-table{
     width: 1000px;
     text-align: left;
 }
-.recmnd-table, .recmnd-table td, .recmnd-table th{
-    border : 1px solid black;
-}
 
 .recmnd-content{
-    width: 915px;
-    height: 300px;
+    width: 535px;
+    height: 180px;
+    font-size: 10pt;
+}
+
+.write-btn-box{
+    text-align: center;
+    margin-top: 30px;
+}
+
+.write-btn-box button{
+    width: 130px;
+    height: 50px;
+    background: #ffffff;
+    font-size: 12pt;
+    border: solid 1px #d0d0d0;
+}
+
+.write-btn-box .btn-recmnd{
+    margin-left: 20px;
+    color: #ffffff;
+    background: #2146d0;
+    font-weight: bold;
 }
 
 .lineNum-img{

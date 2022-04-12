@@ -3,6 +3,10 @@ $(function () {
     //지하철 역 검색
     $("#subway-search-btn").click(function (){
         let subwayName = $("#subway").val().trim();
+        if (subwayName.length == 0) {
+            $("#lineNum-list").html("지하철역 명을 입력하세요.").attr("class", "write-msg");
+            return;
+        }
             $.ajax({
                 url: "/place/subway_search",
                 type: "get",
@@ -12,9 +16,8 @@ $(function () {
 
                 success:function(data){
                     if (data == "error") {
-                        alert("역 명을 올바르게 입력하세요")
                         $("#subway").val("").focus();
-                        $("#lineNum-list").empty();
+                        $("#lineNum-list").empty().html("역 명을 올바르게 입력하세요.").attr("class", "write-msg");
                     } else{
                         let aa = data.split("#");
 
@@ -63,16 +66,41 @@ $(function () {
                                 $("#lineNum-list").append("<img class='lineNum-img' src=/img/line13.png/>");
                             } else if(aa[i] == "014호선") {
                                 $("#lineNum-list").append("<img class='lineNum-img' src=/img/line14.png/>");
+                            } else{
+                                $("#lineNum-list").empty().html("서울시를 통과하는 지하철 노선만 검색 가능합니다.").attr("class", "write-msg");
                             }
                         }
                     }
 
                 },
                 error:function(request,status,error){
-                    alert("에러....")
                     alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                 }
-            })
+            });
+    });
+
+    //난이도 클릭 이벤트
+    $(".btn-level").click(function () {
+
+        let level = $(this).val();
+        $("#level-val").attr("value", level);
+
+        $(this).css({"background" : "#2146d0", "color" : "#ffffff"});
+        $(this).siblings().css({"background" : "#ffffff", "color" : "black"});
+
+    });
+
+    //짐 보관 장소 input 숨김
+    $(".storage-place").hide();
+
+    //짐 보관 가능할 시 input태그 show
+    $("input:radio[name=storage]").click(function(){
+
+        if($("input[name=storage]:checked").val() == "Y"){
+            $(".storage-place").show();
+        }else {
+            $(".storage-place").hide();
+        }
     });
 
 });

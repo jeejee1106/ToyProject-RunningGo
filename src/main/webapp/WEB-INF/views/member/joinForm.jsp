@@ -20,10 +20,10 @@
                             </colgroup>
                             <tbody>
                             <tr>
-                                <th id="top-th">
+                                <th class="top-th">
                                     <span class="important">*</span>아이디
                                 </th>
-                                <td id="top-td">
+                                <td class="top-td">
                                     <div class="idCheck-box">
                                         <input type="text" id="id-form" name="id" value="${memberDto.id}" placeholder="5~20자의 영문 소문자, 숫자만 사용 가능합니다." required>
                                         <button type="button" class="idCheck-btn">중복확인</button>
@@ -136,7 +136,7 @@
                             </tr>
                             </tbody>
                         </table>
-                        <div class="join-btn-box">
+                        <div class="write-btn-box">
                             <button type="button" onclick=fn_cancel()>취소</button>
                             <button type="submit" class="btn-join">회원가입</button>
                         </div>
