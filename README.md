@@ -44,8 +44,8 @@
   * 소셜로그인
     * 구현  예정
 
-* #### `공공 API 활용`
-  * 서울 열린 데이터 광장 API를 활용한 지하철역 검색 기능 구현 (진행 중)
+* #### `Open API 활용`
+  * 서울 열린데이터광장 API를 활용한 지하철역 검색 기능 구현
 
 * #### `예외 처리`
   * ExceptionHandler를 이용한 예외 처리 (진행 중)
@@ -202,7 +202,15 @@ matches()는 보안을 위해 복호화 할 수 없는 비밀번호를 다룰 �
 
 <br>
 
-#### 3. 공공 API를 활용한 지하철 역 검색  (진행 중)
+#### 3. 공공 API를 활용한 지하철 역 검색
+<details>
+  <summary>📌핵심 기능 설명</summary>
+  
+</details>
+<details>
+  <summary>⚽트러블 슈팅</summary>
+  
+</details>
 
 #### 4. 예외 처리 ExceptionHandler (진행 중)
 
