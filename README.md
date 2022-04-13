@@ -62,7 +62,7 @@
   * JoinController에서는 MemberDto 객체 앞에 @Valid 어노테이션을 적용해주었고, Errors를 통해 유효성 검사 적합 여부를 확인했다.  
   * @Valid가 적용된 MemberDto 객체에서 유효성 검사 중 에러가 발생하면 error.hasErrors()메서드에서는 true값이 반환되고, 조건문을 사용하여 에러가 발생했을 시 메세지를 출력한 후 작성중인 폼이 그대로 유지되는 코드를 작성하였다.  
   * **‼결과‼** 회원가입 시 데이터 형식이 유효하지 않으면 오류 메세지를 출력하고, 작성중인 폼이 그대로 유지되도록 구현할 수 있었다.  
-  * [이미지로 코드 & 결과 확인하기](https://user-images.githubusercontent.com/84839167/161678010-5aac77c5-1f72-4ae2-a74b-af5bed0deb9f.png)
+  * [이미지로 전체 흐름 확인하기](https://user-images.githubusercontent.com/84839167/161678010-5aac77c5-1f72-4ae2-a74b-af5bed0deb9f.png)
 
   ##### `2. WebDataBinder를 활용한 유효성 검사`
   * 제약조건 어노테이션으로 할 수 없는 유효성 검사는 WebDataBinder를 활용하였다.
@@ -75,7 +75,7 @@
     * 👉[JoinValidator 코드확인](https://github.com/jeejee1106/ToyProject-RunningGo/blob/1c6c8384af327871bb1144f4fdbbe8b41836bc88/src/main/java/com/runninggo/toy/validator/IdDuplCkValidator.java#L11) 👉[LoginValidator 코드확인](https://github.com/jeejee1106/ToyProject-RunningGo/blob/1c6c8384af327871bb1144f4fdbbe8b41836bc88/src/main/java/com/runninggo/toy/validator/LoginCheckValidator.java#L11)
   * 또한, messageSource를 사용해 에러 발생 시 전달할 메시지도 에러코드에 저장해주었고, 위 1번과 같이 @Valid와 Errors를 활용해 유효성 검사 적합 여부를 확인했다.  
   * **‼결과‼** 유효하지 않은 값이 들어오면 저장해준 에러코드를 출력하고, 더 이상 회원가입, 로그인이 진행되지 못하도록 구현할 수 있었다.  
-  * [이미지로 코드 & 결과 확인하기](https://user-images.githubusercontent.com/84839167/161677883-4e4976b7-81ee-480f-98e8-ba1563627b0b.png)
+  * [이미지로 전체 흐름 확인하기](https://user-images.githubusercontent.com/84839167/161677883-4e4976b7-81ee-480f-98e8-ba1563627b0b.png)
 
 </details>
 <details>
@@ -179,13 +179,13 @@
   * 먼저 PasswordEncoder을 주입 받기 위한 Spring Security 설정을 해주었고, Service에서 BCryptPasswordEncoder를 사용했다.
   * 회원가입 시 입력받은 비밀번호를 BCryptPasswordEncoder객체의 encode() 메서드로 암호화 해주었고, 
   * 암호화된 비밀번호를 다시 MemberDto에 넣어주며 회원가입을 완료했다.
-  * [이미지로 코드 & 결과 확인하기](https://user-images.githubusercontent.com/84839167/161939355-cac8c85a-0e30-429c-909a-fde92dd30b57.png)
+  * [이미지로 전체 흐름 확인하기](https://user-images.githubusercontent.com/84839167/161939355-cac8c85a-0e30-429c-909a-fde92dd30b57.png)
   
   ##### `2. 로그인 시 비밀번호 비교`
   * 로그인 시 입력받은 비밀번호와 DB에 저장된 암호화된 비밀번호를 비교하여 일치하면 로그인에 성공하도록 로직을 짰다.
   * 두 값의 비교는 BCryptPasswordEncoder객체의 matches() 메서드를 사용했고, 입력받은 비밀번호와 DB에 저장된 비밀번호가 
   * 일치할 경우 입력받은 비밀번호의 값을 암호화된 비밀번호로 바꾸어 주며 로그인에 성공할 수 있었다.
-  * [이미지로 코드 & 결과 확인하기](https://user-images.githubusercontent.com/84839167/161939367-2daf8776-9865-45d0-94bf-3eb7ba5bf886.png)
+  * [이미지로 전체 흐름 확인하기](https://user-images.githubusercontent.com/84839167/161939367-2daf8776-9865-45d0-94bf-3eb7ba5bf886.png)
 
   ##### `새로 알게된 점`
 Spring Security는 같은 비밀번호로 회원가입을 해도 매번 다른 랜덤키를 부여한다.  
@@ -206,15 +206,18 @@ matches()는 보안을 위해 복호화 할 수 없는 비밀번호를 다룰 �
 <details>
   <summary>📌핵심 기능 설명</summary>
 
-  #### `1. Json 파싱하기`
-  * 먼저 서울 열린데이터광장에서 제공하는 URL로 Json데이터를 받기 위해 URL객체를 생성해 주었는데,
+  #### `1. URL연결해서 JSON 데이터 받아오기`
+  * 먼저 서울 열린데이터광장에서 제공하는 URL로 JSON데이터를 받기 위해 URL객체를 생성해 주었는데,
   * 서울 열린데이터광장에서 받은 고유 key를 넣고, 매개변수로 지하철역 명을 받아 URL을 호출시켰다.
-  * 연결된 URL에서 받은 데이터는 openStream()메서드를 사용해 InputStreamReader에 문자스트림을 보내고,
-  * 다시 BufferedReader로 문자열을 만들어 readLine()메서드로 한 줄씩 읽어 String 타입으로 return시켰다.
-  * 
-
-
-
+  * 연결된 URL에서 받은 데이터는 openStream()메서드를 사용해 InputStreamReader에 문자스트림을 보냈고,
+  * BufferedReader로 문자열을 만들어 readLine()메서드로 한 줄씩 읽어 String 타입으로 result변수에 저장했다.
+  
+  #### `2. JSON 파싱하기`
+  * result변수에 저장된 값을 JSON객체로 변환하고 저장하기 위해 JSONObject클래스를 사용했다.
+  * 그렇게 변환된 JSON객체에서 원하는 value 값을 얻어오기 위해 getJSONObject(), getJSONArray()메서드를 사용하였고,
+  * for문을 사용해 배열로 된 value값을 얻어와 String 타입의 lineNum변수에 구분자 #을 넣어 담아주었다.
+  * 최종적으로 lineNum변수에 담긴 String객체를 return하여 지하철역 명을 검색하면 해당하는 노선을 반환하는 기능을 구현할 수 있었다.
+  * [이미지로 전체 흐름 확인하기](https://user-images.githubusercontent.com/84839167/161939367-2daf8776-9865-45d0-94bf-3eb7ba5bf886.png)
 
 </details>
 <details>
