@@ -23,7 +23,7 @@ $(function () {
 
                         $("#lineNum-list").empty();
 
-                        for (let i = 1; i < aa[i].length; i++) {
+                        for (let i = 1; i <= aa[i].length; i++) {
 
                             if (aa[i] == "경의선") {
                                 aa[i] = aa[i].replace("경의선", "010호선");

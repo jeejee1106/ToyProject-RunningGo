@@ -4,6 +4,7 @@ import com.runninggo.toy.dao.MemberDao;
 import com.runninggo.toy.domain.MemberDto;
 import com.runninggo.toy.mail.MailHandler;
 import com.runninggo.toy.mail.TempKey;
+import com.runninggo.toy.myinfo.MyInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,6 +16,9 @@ import java.util.List;
 @Service
 public class MemberServiceImpl implements MemberService{
 
+    MyInfo myInfo = new MyInfo();
+    final String RUNNINGGO_ID = myInfo.runningGoId;
+
     @Autowired
     MemberDao memberDao;
     @Autowired
@@ -25,6 +29,7 @@ public class MemberServiceImpl implements MemberService{
     @Override
 //    @Transactional(readOnly = true, rollbackFor=Exception.class)
     public void insertMember(MemberDto memberDto) throws Exception {
+
         //랜덤 문자열을 생성해서 mail_key 컬럼에 넣어주기
         String mail_key = new TempKey().getKey(30,false);
         memberDto.setMail_key(mail_key);
@@ -47,7 +52,7 @@ public class MemberServiceImpl implements MemberService{
                 "<br><a href='http://localhost:8080/join/registerEmail?email=" + memberDto.getEmail() +
                 "&mail_key=" + mail_key +
                 "' target='_blank'>이메일 인증 확인</a>");
-        sendMail.setFrom("running.Go77@gmail.com", "러닝고");
+        sendMail.setFrom(RUNNINGGO_ID, "러닝고");
         sendMail.setTo(memberDto.getEmail());
         sendMail.send();
     }
@@ -114,7 +119,7 @@ public class MemberServiceImpl implements MemberService{
                             "<br>회원님의 임시비밀번호입니다."+
                             "<br><b>" + pass + "</b>"+
                             "<br>로그인 후 반드시 비밀번호를 변경해주세요!!");
-            sendMail.setFrom("running.Go77@gmail.com", "러닝고");
+            sendMail.setFrom(RUNNINGGO_ID, "러닝고");
             sendMail.setTo(memberDto.getEmail());
             sendMail.send();
         }
