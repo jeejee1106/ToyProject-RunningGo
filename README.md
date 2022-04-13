@@ -8,7 +8,7 @@
 <br>
 
 ## 1. 제작 기간
-### `2022년 3월 16일 ~ 진행 중`
+#### `2022년 3월 16일 ~ 진행 중`
 
 <br>
 
@@ -69,9 +69,9 @@
     * 회원가입 시 아이디 중복확인과 비밀번호-비밀번호확인 일치 여부(JoinController)
     * 로그인 시 아이디, 비밀번호의 존재 여부(LoginController)
   * 먼저, 각 Controller의 상단에 @InitBinder 어노테이션을 적용하고, WebDataBinder 객체를 매개변수로 받는 메서드를 만들어주었다.
-  * 나는 각 Controller에서 검증할 내용이 서로 달랐기 때문에 Validator 인터페이스를 구현한 클래스를 추상클래스로 만들었다.
+  * 각 Controller에서 검증할 내용이 서로 달랐기 때문에 Validator 인터페이스를 구현한 클래스를 추상클래스로 만들었다.
     * 👉[AbstractValidator.java 코드확인](https://github.com/jeejee1106/ToyProject-RunningGo/blob/1c6c8384af327871bb1144f4fdbbe8b41836bc88/src/main/java/com/runninggo/toy/validator/AbstractValidator.java#L9)
-  * 그리고 그 추상클래스를 다시 상속 받는 두 개의 검증클래스를 만들어 위 메서드에 각각 바인딩 해주었다.
+  * 그리고 그 추상클래스를 상속 받는 두 개의 검증클래스를 만들어 위 메서드에 각각 바인딩 해주었다.
     * 👉[JoinValidator.java 코드확인](https://github.com/jeejee1106/ToyProject-RunningGo/blob/1c6c8384af327871bb1144f4fdbbe8b41836bc88/src/main/java/com/runninggo/toy/validator/IdDuplCkValidator.java#L11) 👉[LoginValidator.java 코드확인](https://github.com/jeejee1106/ToyProject-RunningGo/blob/1c6c8384af327871bb1144f4fdbbe8b41836bc88/src/main/java/com/runninggo/toy/validator/LoginCheckValidator.java#L11)
   * 또한, messageSource를 사용해 에러 발생 시 전달할 메시지도 에러코드에 저장해주었고, 위 1번과 같이 @Valid와 Errors를 활용해 유효성 검사 적합 여부를 확인했다.  
   * **‼결과‼** 유효하지 않은 값이 들어오면 저장해준 에러코드를 출력하고, 더 이상 회원가입, 로그인이 진행되지 못하도록 구현할 수 있었다.  
@@ -85,10 +85,10 @@
 유효성 검사에 들어가기 전, 구글링을 통해 바인딩 객체가 하나일 땐 setValidator() 메서드를, 하나 이상일 땐 addValidators() 메서드를 사용해야 한다는 것을 공부한 후 코드를 작성했다.
 	
   ##### `1. 회원가입 시 유효성 검사 미작동`
-  * 첫 번째 시도 : 아이디 중복 검사 클래스, 비밀번호 일치 검사 클래스를 addValidators() 메서드를 사용해 각각 바인딩 -> ⭕정상 작동!  
+  * 첫 번째 시도 : 아이디 중복 검사 클래스, 비밀번호 일치 검사 클래스를 addValidators() 메서드를 사용해 각각 바인딩 -> ⭕정상작동!  
   * 두 번째 시도 : 두 클래스를 하나의 클래스로 구현해도 될 것 같다는 생각에 JoinCkValidator클래스를 만들어 코드를 합친 후 <br> 바인딩할 객체가 하나이기 때문에 setValidator() 메서드로 변경 -> ❌비정상작동
     * 하고자 했던 바인딩을 통한 유효성 검사는 잘 되었지만, 잘 되던 데이터 형식 유효성 검사가 작동하지 않았다.
-  * 세 번째 시도 : 객체가 하나이지만 혹시나 하는 마음에 addValidators() 메서드로 다시 변경 -> ⭕정상 작동!
+  * 세 번째 시도 : 객체가 하나이지만 혹시나 하는 마음에 addValidators() 메서드로 다시 변경 -> ⭕정상작동!
 <details>
   <summary>👉코드확인</summary>
 
@@ -153,6 +153,8 @@
   </div>
 </details>
 
+<br>
+	
 로그인할 때에는 데이터 형식을 검사하길 원하지 않았는데 두 번째 시도에선 데이터 형식을 검사하며 에러가 발생했다.  
 문득 setValidator() 메서드가 아닌 addValidators() 메서드를 사용하고 있었다는 사실을 깨닫고, setValidator() 메서드로 수정해주었다.  
 이 과정에서 회원가입 두 번째 시도와 같이 데이터 형식 검사를 하지 않는다는 것을 알아냈고,  힌트를 얻을 수 있었다.
@@ -207,13 +209,13 @@ matches()는 보안을 위해 복호화 할 수 없는 비밀번호를 다룰 �
   <summary>📌핵심 기능 설명</summary>
 
   #### `1. URL연결해서 JSON 데이터 받아오기`
-  * 먼저 서울 열린데이터광장에서 제공하는 URL로 JSON데이터를 받기 위해 URL객체를 생성해 주었는데,
-  * 서울 열린데이터광장에서 받은 고유 key를 넣고, 매개변수로 지하철역 명을 받아 URL을 호출시켰다.
+  * 먼저 서울 열린데이터광장에서 제공하는 URL로 JSON데이터를 받기 위해 URL객체를 생성해 주었다.
+  * 생성된 URL객체에 서울 열린데이터광장에서 받은 고유 key를 넣고, 매개변수로 지하철역 명을 받아 URL을 호출시켰다.
   * 연결된 URL에서 받은 데이터는 openStream()메서드를 사용해 InputStreamReader에 문자스트림을 보냈고,
-  * BufferedReader로 문자열을 만들어 readLine()메서드로 한 줄씩 읽어 String 타입으로 result변수에 저장했다.
+  * 문자스트림은 다시 BufferedReader를 사용해 문자열로 만들어 String 타입으로 result변수에 저장했다.
   
   #### `2. JSON 파싱하기`
-  * result변수에 저장된 값을 JSON객체로 변환하고 저장하기 위해 JSONObject클래스를 사용했다.
+  * 위에서 result변수에 저장된 값을 JSON객체로 변환하고 저장하기 위해 JSONObject클래스를 사용했다.
   * 그렇게 변환된 JSON객체에서 원하는 value 값을 얻어오기 위해 getJSONObject(), getJSONArray()메서드를 사용하였고,
   * for문을 사용해 배열로 된 value값을 얻어와 String 타입의 lineNum변수에 구분자 #을 넣어 담아주었다.
   * 최종적으로 lineNum변수에 담긴 String객체를 return하여 지하철역 명을 검색하면 해당하는 노선을 반환하는 기능을 구현할 수 있었다.
@@ -231,7 +233,7 @@ matches()는 보안을 위해 복호화 할 수 없는 비밀번호를 다룰 �
 서울 열린데이터광장에서 제공한 샘플 URL을 통해 브라우저에서 호출했을 땐 올바른 데이터가 반환되었지만,  
 매개변수로 받은 지하철역 명을 URL에 넣어 호출하니 원하는 대로 동작하지 않았다. (JSON데이터는 잘 받아왔기 때문에 URL문제라고 판단)  
 찾아보니 URL은 운영체제마다 일부 문자를 인식하는 방식이 다르기 때문에 특정한 값들은 규칙에 맞게 변환되어야 하고,  
-한글은 인코딩을 통해 ASCII코드를 16진수화한 결과를 두자리의 대문자로 변환시켜야 한다는 것을 알게 되었다.  
+한글은 인코딩을 통해 규칙에 맞게(ASCII코드를 16진수화한 결과를 두자리의 대문자로) 변환시켜야 한다는 것을 알게 되었다.  
 ```
 String encodeSubwayName = URLEncoder.encode(subwayName, "UTF-8");
 ```
@@ -239,7 +241,7 @@ String encodeSubwayName = URLEncoder.encode(subwayName, "UTF-8");
 
   ##### `2. API는 그냥 갖다쓰기만 하면 된다면서요?`
 개발을 처음 접했을 때 부터 들었던 'API는 그냥 가져다 쓰기만 하면 된다.'라는 이야기...  
-정말 코드만 복붙하면 끝나는 건줄 알았다. 그게 아니라면, 사용법이 자세하게 나와있는 줄 알았다.  
+정말 제공해주는 코드만 복붙하면 끝나는 건줄 알았다. 그게 아니라면, 사용법이 자세하게 나와있는 줄 알았다.  
 그러나 실제로 내가 할 수 있는 것은 key발급과 샘플코드를 브라우저에 입력해보는 것 뿐이었다.  
 
 `이걸로 뭘 어쩌라고??`  
