@@ -31,7 +31,6 @@ public class PlaceRecmndServiceImpl implements PlaceRecmndService {
             //readLine :  한 줄 전체를(공백 포함) 읽어 String으로 return
             BufferedReader bf = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
             String result = bf.readLine();
-//            System.out.println(result);
 
             JSONObject jObject = new JSONObject(result); //json 객체
             JSONObject sibsns = jObject.getJSONObject("SearchInfoBySubwayNameService"); //최상위 object
@@ -41,7 +40,6 @@ public class PlaceRecmndServiceImpl implements PlaceRecmndService {
             for (int i = 0; i < row.length(); i++) {
                 JSONObject obj = row.getJSONObject(i);
                 lineNum += "#" + obj.getString("LINE_NUM");
-//                System.out.println("LINE_NUM(" + i + "): " + lineNum);
             }
         } catch (Exception e) {
             e.printStackTrace();
