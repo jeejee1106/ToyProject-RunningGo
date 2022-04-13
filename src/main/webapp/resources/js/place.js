@@ -37,37 +37,10 @@ $(function () {
                                 aa[i] = aa[i].replace("공항철도", "014호선");
                             }
 
-
-                            if(aa[i] == "01호선") {
-                                $("#lineNum-list").append("<img class='lineNum-img' src=/img/line1.png/>");
-                            } else if(aa[i] == "02호선") {
-                                $("#lineNum-list").append("<img class='lineNum-img' src=/img/line2.png/>");
-                            } else if(aa[i] == "03호선") {
-                                $("#lineNum-list").append("<img class='lineNum-img' src=/img/line3.png/>");
-                            } else if(aa[i] == "04호선") {
-                                $("#lineNum-list").append("<img class='lineNum-img' src=/img/line4.png/>");
-                            } else if(aa[i] == "05호선") {
-                                $("#lineNum-list").append("<img class='lineNum-img' src=/img/line5.png/>");
-                            } else if(aa[i] == "06호선") {
-                                $("#lineNum-list").append("<img class='lineNum-img' src=/img/line6.png/>");
-                            } else if(aa[i] == "07호선") {
-                                $("#lineNum-list").append("<img class='lineNum-img' src=/img/line7.png/>");
-                            } else if(aa[i] == "08호선") {
-                                $("#lineNum-list").append("<img class='lineNum-img' src=/img/line8.png/>");
-                            } else if(aa[i] == "09호선") {
-                                $("#lineNum-list").append("<img class='lineNum-img' src=/img/line9.png/>");
-                            } else if(aa[i] == "010호선") {
-                                $("#lineNum-list").append("<img class='lineNum-img' src=/img/line10.png/>");
-                            } else if(aa[i] == "011호선") {
-                                $("#lineNum-list").append("<img class='lineNum-img' src=/img/line11.png/>");
-                            } else if(aa[i] == "012호선") {
-                                $("#lineNum-list").append("<img class='lineNum-img' src=/img/line12.png/>");
-                            } else if(aa[i] == "013호선") {
-                                $("#lineNum-list").append("<img class='lineNum-img' src=/img/line13.png/>");
-                            } else if(aa[i] == "014호선") {
-                                $("#lineNum-list").append("<img class='lineNum-img' src=/img/line14.png/>");
-                            } else{
-                                $("#lineNum-list").empty().html("서울시를 통과하는 지하철 노선만 검색 가능합니다.").attr("class", "write-msg");
+                            for (let j = 1; j < 15; j++) {
+                                if(aa[i] == "0" + j + "호선") {
+                                    $("#lineNum-list").append("<img class='lineNum-img' src=/img/line" + j + ".png/>");
+                                }
                             }
                         }
                     }
