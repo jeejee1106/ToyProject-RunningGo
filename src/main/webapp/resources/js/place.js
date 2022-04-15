@@ -67,9 +67,9 @@ $(function () {
     $(".storage-place").hide();
 
     //짐 보관 가능할 시 input태그 show
-    $("input:radio[name=storage]").click(function(){
+    $("input:radio[name=storage-YN]").click(function(){
 
-        if($("input[name=storage]:checked").val() == "Y"){
+        if($("input[name=storage-YN]:checked").val() == "Y"){
             $(".storage-place").show();
         }else {
             $(".storage-place").hide();

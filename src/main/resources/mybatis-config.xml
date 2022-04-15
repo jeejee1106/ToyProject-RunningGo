@@ -5,5 +5,6 @@
 <configuration>
     <typeAliases>
         <typeAlias alias="MemberDto" type="com.runninggo.toy.domain.MemberDto"/>
+        <typeAlias alias="PlaceDto" type="com.runninggo.toy.domain.PlaceDto"/>
     </typeAliases>
 </configuration>
