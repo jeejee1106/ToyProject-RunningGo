@@ -3,15 +3,21 @@ package com.runninggo.toy.controller;
 import com.runninggo.toy.domain.PlaceDto;
 import com.runninggo.toy.service.PlaceService;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Null;
+
 @Controller
 @RequestMapping("/place")
+@Slf4j
 public class PlaceController {
 
     @Autowired
@@ -28,7 +34,12 @@ public class PlaceController {
     }
 
     @PostMapping("/recmnd")
-    public String postsInsert(PlaceDto placeDto) throws Exception{
+    public String postsInsert(@Valid PlaceDto placeDto, Errors errors) throws Exception{
+
+        if (errors.hasErrors()) {
+            log.error("PlaceDto 유효성 검증 에러 = " + errors);
+            return "/place/writeForm";
+        }
         placeService.postsInsert(placeDto);
         return "/place/recmndForm";
     }

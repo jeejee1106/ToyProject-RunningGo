@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <div class="container">
     <div class="container-margin">
@@ -11,7 +12,8 @@
                 <h4 class="write-sub-title">스팟 프로필</h4>
                 <span class="important imp-tit">*필수입력 사항</span>
                 <div class="write-table-box">
-                    <form action="/place/recmnd" method="post">
+<%--                    <form action="/place/recmnd" method="post">--%>
+                    <form:form modelAttribute="placeDto" action="/place/recmnd" method="post">
                         <input type="hidden" name="id" value="${sessionScope.id}">
                         <table>
                             <colgroup>
@@ -52,6 +54,7 @@
                                             <option value="중랑구">중랑구</option>
                                         </select>
                                         <input type="text" name="local2" placeholder="ex)보라매 공원, 삼청동 카페 거리, 잠수교">
+                                        <div class="valid-msg"><form:errors path="local2" /></div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -61,7 +64,7 @@
                                     <td>
                                         <input type="text" id="subway" name="subway" placeholder="ex) 보라매, 종합운동장, 동작">
                                         <button type="button" id="subway-search-btn">검색</button>
-                                        <div id="lineNum-list"></div>
+                                        <div id="lineNum-list" class="valid-msg"><form:errors path="subway" /></div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -75,6 +78,7 @@
                                         <button type="button" class="btn-level" value="중">중</button>
                                         <button type="button" class="btn-level" value="하">하</button>
                                         <button type="button" class="btn-level" value="최하">최하</button>
+                                        <div class="valid-msg"><form:errors path="level" /></div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -97,6 +101,7 @@
                                     </th>
                                     <td>
                                         <input type="text" name="distance" id="distance">km
+                                        <div class="valid-msg" value="N"><form:errors path="distance" /></div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -105,6 +110,7 @@
                                     </th>
                                     <td>
                                         <textarea class="recmnd-content" name="description" placeholder="최대한 구체적으로 적어주세요!&#13;&#10;ex) 보라매공원에 도착하면 공원 여기저기를 달릴 수 있어요! 공원 안에 있는 트랙 한 바퀴가 ○○m 정도 되기 때문에 거리를 정해놓고 러닝하기에 딱입니다!"></textarea>
+                                        <div class="valid-msg" value="N"><form:errors path="description" /></div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -113,6 +119,7 @@
                                     </th>
                                     <td>
                                         <textarea class="recmnd-content" name="reason" placeholder="이 스팟을 추천하는 이유?! 나만의 꿀팁도 공유하는 센스!&#13;&#10;ex) 보라매역 3번출구나 신대방역 4번출구로 나오시면 쉽게 찾을 수 있어요! 장, 단거리 트랙도 나누어져 있고, 초보자도 뛰기에 무리 없는 평지 코스입니다. 러닝 후에 트랙 옆 편의점에서 공원라면을 즐길 수 있습니다!"></textarea>
+                                        <div class="valid-msg" value="N"><form:errors path="reason" /></div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -129,7 +136,8 @@
                             <button type="button">취소</button>
                             <button type="submit" class="btn-recmnd">등록</button>
                         </div>
-                    </form>
+<%--                    </form>--%>
+                    </form:form>
                 </div>
             </div>
         </div>
