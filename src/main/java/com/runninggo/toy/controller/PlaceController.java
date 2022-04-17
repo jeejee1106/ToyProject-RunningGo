@@ -36,8 +36,12 @@ public class PlaceController {
     @PostMapping("/recmnd")
     public String postsInsert(@Valid PlaceDto placeDto, Errors errors) throws Exception{
 
+        if(placeDto.getDistance() == null){
+            placeDto.setDistance(0.0);
+        }
+        System.out.println("placeDto = " + placeDto.getDistance());
         if (errors.hasErrors()) {
-            log.error("PlaceDto 유효성 검증 에러 = " + errors);
+//            log.error("PlaceDto 유효성 검증 에러 = " + errors);
             return "/place/writeForm";
         }
         placeService.postsInsert(placeDto);

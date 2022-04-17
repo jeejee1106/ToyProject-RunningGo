@@ -17,11 +17,11 @@ public abstract class AbstractValidator<T> implements Validator {
     @SneakyThrows
     @Override
     public void validate(Object target, Errors errors) {
-//        try {
+        try {
             doValidate((T) target, errors);
-//        } catch (Exception e) {
-//            log.error("유효성 검증 에러", e);
-//        }
+        } catch (Exception e) {
+            log.error("유효성 검증 에러", e);
+        }
     }
 
     protected abstract void doValidate(final T dto, final Errors errors) throws Exception;

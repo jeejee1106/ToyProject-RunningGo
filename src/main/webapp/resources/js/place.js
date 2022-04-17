@@ -4,7 +4,7 @@ $(function () {
     $("#subway-search-btn").click(function (){
         let subwayName = $("#subway").val().trim();
         if (subwayName.length == 0) {
-            $("#lineNum-list").html("지하철역 명을 입력하세요.").attr("class", "write-msg");
+            $("#lineNum-list").html("지하철역 명을 입력하세요.").attr("class", "write-msg").attr("value", "N");
             return;
         }
             $.ajax({
@@ -17,28 +17,29 @@ $(function () {
                 success:function(data){
                     if (data == "error") {
                         $("#subway").val("").focus();
-                        $("#lineNum-list").empty().html("역 명을 올바르게 입력하세요.").attr("class", "write-msg");
+                        $("#lineNum-list").empty().html("역 명을 올바르게 입력하세요.").attr("class", "write-msg").attr("value", "N");
                     } else{
-                        let aa = data.split("#");
+                        // $("lineNum-list").attr("value", "Y");
+                        let subwayName2 = data.split("#");
 
-                        $("#lineNum-list").empty();
+                        $("#lineNum-list").empty().attr("value", "Y");
 
-                        for (let i = 1; i <= aa[i].length; i++) {
+                        for (let i = 1; i <= subwayName2[i].length; i++) {
 
-                            if (aa[i] == "경의선") {
-                                aa[i] = aa[i].replace("경의선", "010호선");
-                            } else if(aa[i] == "수인분당선"){
-                                aa[i] = aa[i].replace("수인분당선", "011호선");
-                            } else if (aa[i] == "우이신설경전철") {
-                                aa[i] = aa[i].replace("우이신설경전철", "012호선");
-                            } else if (aa[i] == "신분당선") {
-                                aa[i] = aa[i].replace("신분당선", "013호선");
-                            } else if (aa[i] == "공항철도") {
-                                aa[i] = aa[i].replace("공항철도", "014호선");
+                            if (subwayName2[i] == "경의선") {
+                                subwayName2[i] = subwayName2[i].replace("경의선", "010호선");
+                            } else if(subwayName2[i] == "수인분당선"){
+                                subwayName2[i] = subwayName2[i].replace("수인분당선", "011호선");
+                            } else if (subwayName2[i] == "우이신설경전철") {
+                                subwayName2[i] = subwayName2[i].replace("우이신설경전철", "012호선");
+                            } else if (subwayName2[i] == "신분당선") {
+                                subwayName2[i] = subwayName2[i].replace("신분당선", "013호선");
+                            } else if (subwayName2[i] == "공항철도") {
+                                subwayName2[i] = subwayName2[i].replace("공항철도", "014호선");
                             }
 
                             for (let j = 1; j < 15; j++) {
-                                if(aa[i] == "0" + j + "호선") {
+                                if(subwayName2[i] == "0" + j + "호선") {
                                     $("#lineNum-list").append("<img class='lineNum-img' src=/img/line" + j + ".png/>");
                                 }
                             }
@@ -50,6 +51,14 @@ $(function () {
                     alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                 }
             });
+    });
+
+    //지하철 검색 통과 후 value=Y 상태에서 문자열을 지웠을 때 value=N 이 나오도록
+    $("#subway").on("keyup",function(){
+        let subway = $("#subway").val().trim();
+        if (subway.length == 0) {
+            $("#lineNum-list").attr("value", "N");
+        }
     });
 
     //난이도 클릭 이벤트
@@ -71,9 +80,27 @@ $(function () {
 
         if($("input[name=storage-YN]:checked").val() == "Y"){
             $(".storage-place").show();
+            $("#storage-place").attr("required", "required");
         }else {
             $(".storage-place").hide();
+            $("#storage-place").attr("required" , false);
+
         }
     });
-
 });
+
+// 게시글 업로드 시 유효성 최종 체크
+function place_lastCheck(){
+    let check1 = $("#lineNum-list").attr("value");
+    let check2 = $("#level-val").attr("value");
+
+    if(check1 == "N"){
+        alert("지하철 역을 검색해주세요.");
+        return false;
+    } else if (check2 == "N") {
+        alert("코스 난이도를 선택해주세요.");
+        return false;
+    }
+
+    return true;
+}
