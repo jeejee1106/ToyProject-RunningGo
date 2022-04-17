@@ -85,6 +85,11 @@
     font-size: 11pt;
 }
 
+#distance-msg{
+    margin-top: 3px;
+    font-size: 8pt;
+}
+
 .recmnd-table{
     width: 1000px;
     text-align: left;

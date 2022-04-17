@@ -72,9 +72,6 @@ $(function () {
 
     });
 
-    //짐 보관 장소 input 숨김
-    $(".storage-place").hide();
-
     //짐 보관 가능할 시 input태그 show
     $("input:radio[name=storage-YN]").click(function(){
 
@@ -87,6 +84,24 @@ $(function () {
 
         }
     });
+
+    //
+    $("#distance").on("keyup",function(){
+        // $(this).val($(this).val().replace(/[^0-9.]/g, ""));
+        let distanceRegExp = /(^\d+$)|(^\d{1,}.\d{0,1}$)/; ;
+        let distance = $("#distance").val().trim();
+
+        if(!distanceRegExp.test(distance) && distance.length > 0){
+            $("#distanceCheck-msg").html("자연수 또는 소수점 한자리까지 표현 가능합니다.").css("color", "red").attr("value", "N");
+        } else if (distance.length == 0) {
+            $("#distanceCheck-msg").html("").attr("value", "N");
+        } else if (distance < 1 || distance > 99) {
+            $("#distanceCheck-msg").html("1 이상 99 이하의 숫자만 입력해주세요.").css("color", "red").attr("value", "N");
+        } else {
+            $("#distanceCheck-msg").html("").attr("value", "Y");
+        }
+    });
+
 });
 
 // 게시글 업로드 시 유효성 최종 체크

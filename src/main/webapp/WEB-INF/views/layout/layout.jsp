@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="/css/templatemo.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/member.css">
-    <link rel="stylesheet" href="/css/posts.css">
+    <link rel="stylesheet" href="/css/place.css">
     <link rel="stylesheet" href="/css/error.css">
 
     <!-- Load fonts style after rendering the layout styles -->

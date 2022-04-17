@@ -86,11 +86,11 @@
                                     </th>
                                     <td>
                                         <div>
-                                            <label id="write-label1"><input id="write-radio1" type="radio" name="storage-YN" value="Y">가능</label>
-                                            <label id="write-label2"><input id="write-radio2" type="radio" name="storage-YN" value="N" checked>불가능</label>
+                                            <label id="write-label1"><input id="write-radio1" type="radio" name="storage-YN" value="Y" checked>가능</label>
+                                            <label id="write-label2"><input id="write-radio2" type="radio" name="storage-YN" value="N">불가능</label>
                                         </div>
                                         <div class="storage-place">
-                                            짐 보관 장소 : <input type="text" id="storage-place" name="storage" placeholder="ex) ○○역 물품보관함, ○○스토어 무료 짐 보관">
+                                            짐 보관 장소 : <input type="text" id="storage-place" name="storage" placeholder="ex) ○○역 물품보관함, ○○스토어 무료 짐 보관" required>
                                         </div>
                                     </td>
                                 </tr>
@@ -100,7 +100,8 @@
                                     </th>
                                     <td>
                                         <input type="text" name="distance" id="distance" required>km
-                                        <div class="valid-msg" value="N"><form:errors path="distance" /></div>
+                                        <div id = "distance-msg">*1부터 99까지 입력 가능하며 소수점은 한 자리까지 입력 가능합니다.</div>
+                                        <div class="valid-msg" id="distanceCheck-msg" value="N"><form:errors path="distance" /></div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -109,7 +110,7 @@
                                     </th>
                                     <td>
                                         <textarea class="recmnd-content" name="description" required placeholder="최대한 구체적으로 적어주세요!&#13;&#10;ex) 보라매공원에 도착하면 공원 여기저기를 달릴 수 있어요! 공원 안에 있는 트랙 한 바퀴가 ○○m 정도 되기 때문에 거리를 정해놓고 러닝하기에 딱입니다!"></textarea>
-                                        <div class="valid-msg" value="N"><form:errors path="description" /></div>
+                                        <div class="valid-msg"><form:errors path="description" /></div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -118,7 +119,7 @@
                                     </th>
                                     <td>
                                         <textarea class="recmnd-content" name="reason" required placeholder="이 스팟을 추천하는 이유?! 나만의 꿀팁도 공유하는 센스!&#13;&#10;ex) 보라매역 3번출구나 신대방역 4번출구로 나오시면 쉽게 찾을 수 있어요! 장, 단거리 트랙도 나누어져 있고, 초보자도 뛰기에 무리 없는 평지 코스입니다. 러닝 후에 트랙 옆 편의점에서 공원라면을 즐길 수 있습니다!"></textarea>
-                                        <div class="valid-msg" value="N"><form:errors path="reason" /></div>
+                                        <div class="valid-msg""><form:errors path="reason" /></div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -132,7 +133,7 @@
                             </tbody>
                         </table>
                         <div class="write-btn-box">
-                            <button type="button">취소</button>
+                            <button type="button" onclick=fn_cancel()>취소</button>
                             <button type="submit" class="btn-recmnd">등록</button>
                         </div>
                     </form:form>
