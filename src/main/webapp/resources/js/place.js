@@ -87,7 +87,6 @@ $(function () {
 
     //
     $("#distance").on("keyup",function(){
-        // $(this).val($(this).val().replace(/[^0-9.]/g, ""));
         let distanceRegExp = /(^\d+$)|(^\d{1,}.\d{0,1}$)/; ;
         let distance = $("#distance").val().trim();
 

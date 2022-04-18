@@ -1,3 +1,8 @@
+/* -----------------------------------------------------------------------------
+
+# custom404 Styles
+
+----------------------------------------------------------------------------- */
 .error404-wrap{
     height: 477px;
     margin-top: 120px;
@@ -5,7 +10,7 @@
 }
 
 .error404-title{
-    margin-top: 30px;
+    margin-top: 60px;
 }
 
 .error404-btn{
@@ -14,7 +19,7 @@
     background: #ffffff;
     font-size: 12pt;
     border: solid 1px #d0d0d0;
-    margin-top: 30px;
+    margin-top: 50px;
 }
 
 .error404-btn:hover{
@@ -23,4 +28,14 @@
     color: #ffffff;
     font-size: 14px;
     font-weight: bold;
+}
+
+/* -----------------------------------------------------------------------------
+
+# custom500 Styles
+
+----------------------------------------------------------------------------- */
+#error500-icon{
+    width: 200px;
+    height: 200px;
 }

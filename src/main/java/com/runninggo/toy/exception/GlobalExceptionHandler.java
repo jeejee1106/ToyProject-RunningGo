@@ -23,6 +23,6 @@ public class GlobalExceptionHandler {
     public String defaultExceptionHandler(Exception exception, Model model) {
         log.error("Exception 발생 : ", exception);
         model.addAttribute("exception", exception);
-        return "/error/error_test";
+        return "/error/custom500";
     }
 }
