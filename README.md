@@ -85,7 +85,7 @@
 	
   ##### `1. 회원가입 시 유효성 검사 미작동`
   * 첫 번째 시도 : 아이디 중복 검사 클래스, 비밀번호 일치 검사 클래스를 addValidators() 메서드를 사용해 각각 바인딩 -> ⭕정상작동!  
-  * 두 번째 시도 : 두 클래스를 하나의 클래스로 구현해도 될 것 같다는 생각에 JoinCkValidator클래스를 만들어 코드를 합친 후 <br> 바인딩할 객체가 하나이기 때문에 setValidator() 메서드로 변경 -> ❌비정상작동
+  * 두 번째 시도 : 두 클래스를 하나의 클래스로 구현해도 될 것 같다는 생각에 JoinCkValidator클래스를 만들어 코드를 합친 후 바인딩할 객체가 하나이기 때문에 setValidator() 메서드로 변경 -> ❌비정상작동
     * 하고자 했던 바인딩을 통한 유효성 검사는 잘 되었지만, 잘 되던 데이터 형식 유효성 검사가 작동하지 않았다.
   * 세 번째 시도 : 객체가 하나이지만 혹시나 하는 마음에 addValidators() 메서드로 다시 변경 -> ⭕정상작동!
 <details>
@@ -121,8 +121,7 @@
 	
   ##### `2. 로그인 시 유효성 검사 미작동`
   * 첫 번째 시도 : validator가 아닌 Model을 사용해서 아이디, 비밀번호가 존재하지 않으면 메시지를 전송하는 방식을 적용 -> ⭕정상작동!
-  * 두 번째 시도 : 로그인도 validator를 적용해보고 싶다는 생각에 아이디, 비밀번호 존재 여부를 검사하는 클래스를 만든 후 <br>
-	회원가입과 똑같이 addValidators() 메서드 사용 -> ❌비정상작동
+  * 두 번째 시도 : 로그인도 validator를 적용해보고 싶다는 생각에 아이디, 비밀번호 존재 여부를 검사하는 클래스를 만든 후 회원가입과 똑같이 addValidators() 메서드 사용 -> ❌비정상작동
     * 회원가입 시에 필요한 MemberDto객체의 데이터 형식 검사를 진행하며 에러 발생
   * 세 번째 시도 : setValidator() 메서드로 변경 -> ⭕정상작동!
 <details>
@@ -154,7 +153,7 @@
 
 <br>
 	
-로그인할 때에는 데이터 형식을 검사하길 원하지 않았는데 두 번째 시도에선 데이터 형식을 검사하며 에러가 발생했다.  
+로그인 시에는 데이터 형식을 검사하길 원하지 않았는데 두 번째 시도에선 데이터 형식을 검사하며 에러가 발생했다.  
 문득 setValidator() 메서드가 아닌 addValidators() 메서드를 사용하고 있었다는 사실을 깨닫고, setValidator() 메서드로 수정해주었다.  
 이 과정에서 회원가입 두 번째 시도와 같이 데이터 형식 검사를 하지 않는다는 것을 알아냈고,  힌트를 얻을 수 있었다.
 
@@ -184,8 +183,7 @@
   
   ##### `2. 로그인 시 비밀번호 비교`
   * 로그인 시 입력받은 비밀번호와 DB에 저장된 암호화된 비밀번호를 비교하여 일치하면 로그인에 성공하도록 로직을 짰다.
-  * 두 값의 비교는 BCryptPasswordEncoder객체의 matches() 메서드를 사용했고, 입력받은 비밀번호와 DB에 저장된 비밀번호가 
-  * 일치할 경우 입력받은 비밀번호의 값을 암호화된 비밀번호로 바꾸어 주며 로그인에 성공할 수 있었다.
+  * 두 값의 비교는 BCryptPasswordEncoder객체의 matches() 메서드를 사용했고, 입력받은 비밀번호와 DB에 저장된 비밀번호가 일치할 경우 입력받은 비밀번호의 값을 암호화된 비밀번호로 바꾸어 주며 로그인에 성공할 수 있었다.
   * [👉이미지로 전체 흐름 확인하기](https://user-images.githubusercontent.com/84839167/161939367-2daf8776-9865-45d0-94bf-3eb7ba5bf886.png)
 
   ##### `새로 알게된 점`
@@ -215,8 +213,7 @@ matches()는 보안을 위해 복호화 할 수 없는 비밀번호를 다룰 �
   
   #### `2. JSON 파싱하기`
   * 위에서 result변수에 저장된 값을 JSON객체로 변환하고 저장하기 위해 JSONObject클래스를 사용했다.
-  * 그렇게 변환된 JSON객체에서 원하는 value 값을 얻어오기 위해 getJSONObject(), getJSONArray()메서드를 사용하였고,
-  * for문을 사용해 배열로 된 value값을 얻어와 String 타입의 lineNum변수에 구분자 #을 넣어 담아주었다.
+  * 그렇게 변환된 JSON객체에서 원하는 value 값을 얻어오기 위해 getJSONObject(), getJSONArray()메서드를 사용하였고, for문을 사용해 배열로 된 value값을 얻어와 String 타입의 lineNum변수에 구분자 #을 넣어 담아주었다.
   * 최종적으로 lineNum변수에 담긴 String객체를 return하여 지하철역 명을 검색하면 해당하는 노선을 반환하는 기능을 구현할 수 있었다.
   * [👉이미지로 전체 흐름 확인하기](https://user-images.githubusercontent.com/84839167/163132706-c953acb4-d510-494f-b4ba-ee7800bd46e9.png) [👉코드로 확인하기](https://github.com/jeejee1106/ToyProject-RunningGo/blob/0d1a247ff1ba952406353856e31afe61b39c8ceb/src/main/java/com/runninggo/toy/service/PlaceRecmndServiceImpl.java#L19)
 
@@ -231,7 +228,7 @@ matches()는 보안을 위해 복호화 할 수 없는 비밀번호를 다룰 �
 
 서울 열린데이터광장에서 제공한 샘플 URL을 통해 브라우저에서 호출했을 땐 올바른 데이터가 반환되었지만,  
 매개변수로 받은 지하철역 명을 URL에 넣어 호출하니 원하는 대로 동작하지 않았다. (JSON데이터는 잘 받아왔기 때문에 URL문제라고 판단)  
-찾아보니 URL은 운영체제마다 일부 문자를 인식하는 방식이 다르기 때문에 특정한 값들은 규칙에 맞게 변환되어야 하고,  
+찾아보니 URL은 운영체제마다 일부 문자를 인식하는 방식이 다르기 때문에 일부 문자는 규칙에 맞게 변환되어야 하고,  
 한글은 인코딩을 통해 규칙에 맞게(ASCII코드를 16진수화한 결과를 두자리의 대문자로) 변환시켜야 한다는 것을 알게 되었다.  
 ```
 String encodeSubwayName = URLEncoder.encode(subwayName, "UTF-8");
@@ -245,8 +242,7 @@ String encodeSubwayName = URLEncoder.encode(subwayName, "UTF-8");
 
 `이걸로 뭘 어쩌라고??`  
 이틀간의 구글링을 통해 Open API 사용법을 익혔고, 여러 시행착오 끝에 기능을 구현할 수 있었다.  
-덕분에 연결된 URL로부터 데이터 읽는 방법, 자바의 여러가지 입력 객체들, JSON을 파싱하는 방법 등에 대해서 공부할 수 있었고,  
-조금 헤매긴 했지만 부족한 점을 깨닫고 더욱 보완할 수 있는 계기가 되었다.
+덕분에 연결된 URL로부터 데이터 읽는 방법, 자바의 여러가지 입력 객체들, JSON을 파싱하는 방법 등에 대해서 공부할 수 있었고, 조금 헤매긴 했지만 부족한 점을 깨닫고 더욱 보완할 수 있는 계기가 되었다.
 	
 </details>
 
@@ -280,13 +276,12 @@ String encodeSubwayName = URLEncoder.encode(subwayName, "UTF-8");
 * 두 번째 시도 : 404에러 처리를 위해 설정 추가, 메서드 추가 생성 -> ⭕정상작동!
 
 예외처리 클래스에서 모든 에러를 처리하기 위해 Exception.class를 받았지만 404에러는 WAS의 기본 오류 페이지로 연결되었다.  
-공부해보니 요청은 받았으나 연결할 컨트롤러가 없기 때문에 컨트롤러 자체가 동작하지 않아 Exception이 발생하지 않았고,  
-이는 DispacherServlet이 처리해주어야 한다는 것을 알게되었다.  
+공부해보니 요청은 받았으나 연결할 컨트롤러가 없기 때문에 컨트롤러 자체가 동작하지 않아 Exception이 발생하지 않았고, 이는 DispacherServlet이 처리해주어야 한다는 것을 알게되었다.  
 
-throwExceptionIfNoHandlerFound라는 매개변수를 web.xml에 추가함으로써 DispatcherServlet을 커스터마이징 해주었다.  
+해결방법로는 throwExceptionIfNoHandlerFound라는 매개변수를 web.xml에 추가함으로써 DispatcherServlet을 커스터마이징 해주었다.  
 이는 요청에 대응되는 Handler를 찾지 못할 경우 예외를 발생시킨다는 의미라고 한다.  
-이 떄 발생하는 예외가 NoHandlerFoundException이기 때문에 @ExceptionHandler(NoHandlerFoundException.class)를  
-적용한 메서드를 새로 만들어서 404에러 처리를 할 수 있었다.
+이 때 발생하는 예외가 NoHandlerFoundException이기 때문에 @ExceptionHandler(NoHandlerFoundException.class)  
+어노테이션과 속성을 적용한 메서드를 새로 만들어서 404에러 처리를 할 수 있었다.
 
 [//]: # (##### `2. Exception의 분류`)
 
