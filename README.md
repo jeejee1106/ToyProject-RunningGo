@@ -1,9 +1,8 @@
 # [개인프로젝트] RunningGo - 러닝고🏃‍♀️🏃‍♂️ (진행 중)
 #### 💡 러닝고는 서울의 러닝 코스를 추천하는 커뮤니티 사이트입니다.
-* "나도 러닝을 시작하고 싶은데 **어디서** 뛰어야하지?"
-* "**최적의 러닝 장소**를 찾고 싶은데, 정보가 뒤섞여있어서 찾아보기도 쉽지 않네... **짐보관**도 할 수 있으면 좋은데"
-* 이런 고민을 해결하고, **러닝 장소의 자세한 정보**까지 알려주는 커뮤니티 러닝고!
-* **거리, 짐 보관 여부, 난이도, 포토스팟 등 코스 정보와 꿀팁까지 한방에! 나만의 러닝 맛집을 알려주세요!**
+* 아무생각 없이 프로젝트를 만들고 기능 구현에만 목적을 두는 개발을 멈추고 싶었습니다.
+* 그래서 하나의 기능을 구현하더라도 불필요한 부분을 걷어내고, 효과적인 코드를 작성하는 것에 집중했습니다.
+* 팀프로젝트에서 맡아보지 못한 기능들과, 처음 사용해보는 라이브러리 위주로 프로젝트를 진행하였습니다.
 
 <br>
 
@@ -254,4 +253,42 @@ String encodeSubwayName = URLEncoder.encode(subwayName, "UTF-8");
 <br>
 
 #### 4. 예외 처리 ExceptionHandler (진행 중)
+<details>
+  <summary>📌핵심 기능 설명</summary>
 
+##### `1. 500 Internal Server Error 처리`
+* 각 컨트롤러마다 예외처리 메서드를 만들어 예외를 처리할 수도 있지만 나는 클래스를 생성해서 전역으로 처리해주었다.
+* 예외처리 클래스에는 @ControllerAdvice를, 예외를 받아 줄 메서드에는 @ExceptionHandler를 적용했다.
+* @ExceptionHandler의 속성으로는 Exception.class를 지정해주어 모든 Exception을 처리할 수 있게 했다.
+* 반환값으로 500 에러를 받아줄 view를 return시켰다.
+* 이렇게 하면 예외 처리는 잘 되지만 HTTP 상태코드에서 200이 나오게 된다.
+* 상태코드를 500으로 바꿔주기 위해 @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)를 적용해주었다.
+
+##### `2. 404 Not Found  처리`
+* 404에러는 서버에러가 아닌 클라이언트 에러이기 때문에 따로 처리를 해주었다.
+* web.xml파일에 404 에러를 받기 위한 설정을 해주었고, 예외처리 클래스에도 따로 메서드를 만들어 @ExceptionHandler의 속성으로 NoHandlerFoundException.class를 지정해주었다.
+* 반환값으로는 404 에러를 받아줄 view를 return시켰다.
+* 마찬가지로 상태코드 200을 404로 바꿔주기 위해 @ResponseStatus(value = HttpStatus.NOT_FOUND)를 적용해주었다.
+
+</details>
+<details>
+  <summary>⚽트러블 슈팅</summary>
+
+##### `1. @ExceptionHandler(Exception.class)로 처리되지 않는 404 Not Found`
+* 첫 번째 시도 : 하나의 @ExceptionHandler로 모든 에러를 처리하고자 함 -> ❌비정상작동
+    * 500에러는 잘 처리가 되었지만, 404에러는 WAS의 기본 오류 페이지로 연결됨.
+* 두 번째 시도 : 404에러 처리를 위해 설정 추가, 메서드 추가 생성 -> ⭕정상작동!
+
+예외처리 클래스에서 모든 에러를 처리하기 위해 Exception.class를 받았지만 404에러는 WAS의 기본 오류 페이지로 연결되었다.  
+공부해보니 요청은 받았으나 연결할 컨트롤러가 없기 때문에 컨트롤러가 동작하지 않아 Exception 자체가 발생하지 않았고,  
+이는 DispacherServlet이 처리해주어야 한다는 것을 알게되었다.  
+
+DispatcherServlet에는 throwExceptionIfNoHandlerFound라는 매개변수를 받을 수 있는데,  
+이는 Handler를 찾지 못할 경우 예외를 발생시킨다는 의미라고 한다.  
+이 떄 발생하는 예외가 NoHandlerFoundException이기 때문에 @ExceptionHandler(NoHandlerFoundException.class)를  
+적용한 메서드를 새로 만들어서 404에러 처리를 할 수 있었다.
+
+[//]: # (##### `2. Exception의 분류`)
+
+
+</details>
