@@ -1,6 +1,6 @@
 # [개인프로젝트] RunningGo - 러닝고🏃‍♀️🏃‍♂️ (진행 중)
 #### 💡 러닝고는 서울의 러닝 코스를 추천하는 커뮤니티 사이트입니다.
-* 아무생각 없이 프로젝트를 만들고 기능 구현에만 목적을 두는 개발을 멈추고 싶었습니다.
+* 아무생각 없이 프로젝트를 만들고 기능 구현에만 목적을 두는 개발을 멈추고자 했습니다.
 * 그래서 하나의 기능을 구현하더라도 불필요한 부분을 걷어내고, 효과적인 코드를 작성하는 것에 집중했습니다.
 * 팀프로젝트에서 맡아보지 못한 기능들과, 처음 사용해보는 라이브러리 위주로 프로젝트를 진행하였습니다.
 
@@ -257,7 +257,7 @@ String encodeSubwayName = URLEncoder.encode(subwayName, "UTF-8");
   <summary>📌핵심 기능 설명</summary>
 
 ##### `1. 500 Internal Server Error 처리`
-* 각 컨트롤러마다 예외처리 메서드를 만들어 예외를 처리할 수도 있지만 나는 클래스를 생성해서 전역으로 처리해주었다.
+* 각 컨트롤러마다 예외처리 메서드를 만들어 처리할 수도 있지만 나는 클래스를 생성해서 전역으로 처리해주었다.
 * 예외처리 클래스에는 @ControllerAdvice를, 예외를 받아 줄 메서드에는 @ExceptionHandler를 적용했다.
 * @ExceptionHandler의 속성으로는 Exception.class를 지정해주어 모든 Exception을 처리할 수 있게 했다.
 * 반환값으로 500 에러를 받아줄 view를 return시켰다.
@@ -276,15 +276,15 @@ String encodeSubwayName = URLEncoder.encode(subwayName, "UTF-8");
 
 ##### `1. @ExceptionHandler(Exception.class)로 처리되지 않는 404 Not Found`
 * 첫 번째 시도 : 하나의 @ExceptionHandler로 모든 에러를 처리하고자 함 -> ❌비정상작동
-    * 500에러는 잘 처리가 되었지만, 404에러는 WAS의 기본 오류 페이지로 연결됨.
+    * 500에러는 return해준 jsp로 연결 되었지만, 404에러는 WAS의 기본 오류 페이지로 연결됨.
 * 두 번째 시도 : 404에러 처리를 위해 설정 추가, 메서드 추가 생성 -> ⭕정상작동!
 
 예외처리 클래스에서 모든 에러를 처리하기 위해 Exception.class를 받았지만 404에러는 WAS의 기본 오류 페이지로 연결되었다.  
-공부해보니 요청은 받았으나 연결할 컨트롤러가 없기 때문에 컨트롤러가 동작하지 않아 Exception 자체가 발생하지 않았고,  
+공부해보니 요청은 받았으나 연결할 컨트롤러가 없기 때문에 컨트롤러 자체가 동작하지 않아 Exception이 발생하지 않았고,  
 이는 DispacherServlet이 처리해주어야 한다는 것을 알게되었다.  
 
-DispatcherServlet에는 throwExceptionIfNoHandlerFound라는 매개변수를 받을 수 있는데,  
-이는 Handler를 찾지 못할 경우 예외를 발생시킨다는 의미라고 한다.  
+throwExceptionIfNoHandlerFound라는 매개변수를 web.xml에 추가함으로써 DispatcherServlet을 커스터마이징 해주었다.  
+이는 요청에 대응되는 Handler를 찾지 못할 경우 예외를 발생시킨다는 의미라고 한다.  
 이 떄 발생하는 예외가 NoHandlerFoundException이기 때문에 @ExceptionHandler(NoHandlerFoundException.class)를  
 적용한 메서드를 새로 만들어서 404에러 처리를 할 수 있었다.
 
