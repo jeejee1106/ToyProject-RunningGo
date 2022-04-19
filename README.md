@@ -259,12 +259,14 @@ String encodeSubwayName = URLEncoder.encode(subwayName, "UTF-8");
 * 반환값으로 500 에러를 받아줄 view를 return시켰다.
 * 이렇게 하면 예외 처리는 잘 되지만 HTTP 상태코드에서 200이 나오게 된다.
 * 상태코드를 500으로 바꿔주기 위해 @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)를 적용해주었다.
+* [👉이미지로 전체 흐름 확인하기](https://user-images.githubusercontent.com/84839167/163983221-646c2a95-e28e-48d1-a468-036ff3ee6cde.png)
 
 ##### `2. 404 Not Found  처리`
 * 404에러는 서버에러가 아닌 클라이언트 에러이기 때문에 따로 처리를 해주었다.
 * web.xml파일에 404 에러를 받기 위한 설정을 해주었고, 예외처리 클래스에도 따로 메서드를 만들어 @ExceptionHandler의 속성으로 NoHandlerFoundException.class를 지정해주었다.
 * 반환값으로는 404 에러를 받아줄 view를 return시켰다.
 * 마찬가지로 상태코드 200을 404로 바꿔주기 위해 @ResponseStatus(value = HttpStatus.NOT_FOUND)를 적용해주었다.
+* [👉이미지로 전체 흐름 확인하기](https://user-images.githubusercontent.com/84839167/163983392-b969adfa-c5a8-438b-9ed5-5e088966f084.png)
 
 </details>
 <details>
