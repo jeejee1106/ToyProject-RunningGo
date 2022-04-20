@@ -3,7 +3,6 @@ package com.runninggo.toy.controller;
 import com.runninggo.toy.domain.MemberDto;
 import com.runninggo.toy.service.MemberService;
 import com.runninggo.toy.validator.LoginCheckValidator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -20,11 +19,13 @@ import java.util.List;
 @RequestMapping("/login")
 public class LoginController {
 
-    @Autowired
     MemberService memberService;
-
-    @Autowired
     LoginCheckValidator loginCheckValidator;
+
+    public LoginController(MemberService memberService, LoginCheckValidator loginCheckValidator) {
+        this.memberService = memberService;
+        this.loginCheckValidator = loginCheckValidator;
+    }
 
     @InitBinder
     public void validator(WebDataBinder binder) {

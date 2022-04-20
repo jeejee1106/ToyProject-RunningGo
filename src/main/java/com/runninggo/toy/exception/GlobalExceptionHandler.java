@@ -20,9 +20,9 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public String defaultExceptionHandler(Exception exception, Model model) {
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    public String defaultExceptionHandler(Exception exception) {
         log.error("Exception 발생 : ", exception);
-        model.addAttribute("exception", exception);
         return "/error/custom500";
     }
 }

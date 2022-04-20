@@ -5,7 +5,6 @@ import com.runninggo.toy.domain.MemberDto;
 import com.runninggo.toy.mail.MailHandler;
 import com.runninggo.toy.mail.TempKey;
 import com.runninggo.toy.myinfo.MyInfo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,15 +15,17 @@ import java.util.List;
 @Service
 public class MemberServiceImpl implements MemberService{
 
-    MyInfo myInfo = new MyInfo();
-    final String RUNNINGGO_ID = myInfo.runningGoId;
-
-    @Autowired
     MemberDao memberDao;
-    @Autowired
     JavaMailSender mailSender;
-    @Autowired
     BCryptPasswordEncoder passwordEncoder;
+    MyInfo myInfo;
+
+    public MemberServiceImpl(MemberDao memberDao, JavaMailSender mailSender, BCryptPasswordEncoder passwordEncoder, MyInfo myInfo) {
+        this.memberDao = memberDao;
+        this.mailSender = mailSender;
+        this.passwordEncoder = passwordEncoder;
+        this.myInfo = myInfo;
+    }
 
     @Override
 //    @Transactional(readOnly = true, rollbackFor=Exception.class)
@@ -52,7 +53,7 @@ public class MemberServiceImpl implements MemberService{
                 "<br><a href='http://localhost:8080/join/registerEmail?email=" + memberDto.getEmail() +
                 "&mail_key=" + mail_key +
                 "' target='_blank'>이메일 인증 확인</a>");
-        sendMail.setFrom(RUNNINGGO_ID, "러닝고");
+        sendMail.setFrom(myInfo.runningGoId, "러닝고");
         sendMail.setTo(memberDto.getEmail());
         sendMail.send();
     }
@@ -119,7 +120,7 @@ public class MemberServiceImpl implements MemberService{
                             "<br>회원님의 임시비밀번호입니다."+
                             "<br><b>" + pass + "</b>"+
                             "<br>로그인 후 반드시 비밀번호를 변경해주세요!!");
-            sendMail.setFrom(RUNNINGGO_ID, "러닝고");
+            sendMail.setFrom(myInfo.runningGoId, "러닝고");
             sendMail.setTo(memberDto.getEmail());
             sendMail.send();
         }

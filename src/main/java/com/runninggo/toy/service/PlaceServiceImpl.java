@@ -16,11 +16,13 @@ import java.net.URLEncoder;
 @Service
 public class PlaceServiceImpl implements PlaceService {
 
-    MyInfo myInfo = new MyInfo();
-    final String KEY = myInfo.seoulApiKey;
-
-    @Autowired
     PlaceDao placeDao;
+    MyInfo myInfo;
+
+    public PlaceServiceImpl(MyInfo myInfo, PlaceDao placeDao) {
+        this.myInfo = myInfo;
+        this.placeDao = placeDao;
+    }
 
     @Override
     public String getSubwayInfo(String subwayName) throws Exception {
@@ -30,7 +32,7 @@ public class PlaceServiceImpl implements PlaceService {
             String encodeSubwayName = URLEncoder.encode(subwayName, "UTF-8");
 
             URL url = new URL("http://openapi.seoul.go.kr:8088/" +
-                    KEY + "/json/SearchInfoBySubwayNameService/1/5/" + encodeSubwayName + "/");
+                    myInfo.seoulApiKey + "/json/SearchInfoBySubwayNameService/1/5/" + encodeSubwayName + "/");
 
             //InputStreamReader : 바이트 단위 데이터를 문자(character) 단위 데이터로 처리할 수 있도록 변환해준다.
             //BufferedReader : Buffer(버퍼)를 통해 입력받은 문자를 쌓아둔 뒤 한 번에 문자열처럼 보내버리는 것.

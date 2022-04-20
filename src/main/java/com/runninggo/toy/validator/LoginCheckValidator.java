@@ -10,11 +10,11 @@ import org.springframework.validation.Errors;
 @Component
 public class LoginCheckValidator extends AbstractValidator<MemberDto>{
 
-    @Autowired
     private MemberService memberService;
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
+    public LoginCheckValidator(MemberService memberService) {
+        this.memberService = memberService;
+    }
 
     @Override
     protected void doValidate(MemberDto memberDto, Errors errors) throws Exception {

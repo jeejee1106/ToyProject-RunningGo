@@ -8,9 +8,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class PlaceDaoImpl implements PlaceDao {
 
-    @Autowired
     private SqlSession session;
     private static String namespace = "com.runninggo.toy.dao.PlaceMapper.";
+
+    public PlaceDaoImpl(SqlSession session) {
+        this.session = session;
+    }
 
     @Override
     public int postsInsert(PlaceDto placeDto) throws Exception{

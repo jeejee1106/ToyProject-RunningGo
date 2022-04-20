@@ -2,7 +2,6 @@ package com.runninggo.toy.dao;
 
 import com.runninggo.toy.domain.MemberDto;
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,9 +9,12 @@ import java.util.List;
 @Repository
 public class MemberDaoImpl implements MemberDao{
 
-    @Autowired
     private SqlSession session;
     private static String namespace = "com.runninggo.toy.dao.MemberMapper.";
+
+    public MemberDaoImpl(SqlSession session) {
+        this.session = session;
+    }
 
     @Override
     public int insertMember(MemberDto memberDto) {

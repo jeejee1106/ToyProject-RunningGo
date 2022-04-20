@@ -3,7 +3,6 @@ package com.runninggo.toy.controller;
 import com.runninggo.toy.domain.MemberDto;
 import com.runninggo.toy.service.MemberService;
 import com.runninggo.toy.validator.JoinCkValidator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -16,11 +15,13 @@ import javax.validation.Valid;
 @RequestMapping("/join")
 public class JoinController {
 
-    @Autowired
     MemberService memberService;
-
-    @Autowired
     JoinCkValidator joinCkValidator;
+
+    public JoinController(MemberService memberService, JoinCkValidator joinCkValidator) {
+        this.memberService = memberService;
+        this.joinCkValidator = joinCkValidator;
+    }
 
     @InitBinder
     public void validator(WebDataBinder binder) {

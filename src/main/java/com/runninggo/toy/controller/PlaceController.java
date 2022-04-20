@@ -20,8 +20,11 @@ import javax.validation.constraints.Null;
 @Slf4j
 public class PlaceController {
 
-    @Autowired
     PlaceService placeService;
+
+    public PlaceController(PlaceService placeService) {
+        this.placeService = placeService;
+    }
 
     @GetMapping("/recmndForm")
     public String placeRcmndForm() {

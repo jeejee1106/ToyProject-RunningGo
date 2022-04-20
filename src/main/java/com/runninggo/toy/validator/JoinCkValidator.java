@@ -9,8 +9,11 @@ import org.springframework.validation.Errors;
 @Component
 public class JoinCkValidator extends AbstractValidator<MemberDto>{
 
-    @Autowired
     private MemberService memberService;
+
+    public JoinCkValidator(MemberService memberService) {
+        this.memberService = memberService;
+    }
 
     @Override
     protected void doValidate(MemberDto dto, Errors errors) {
