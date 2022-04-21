@@ -119,7 +119,7 @@
                                     </th>
                                     <td>
                                         <textarea class="recmnd-content" name="reason" required placeholder="이 스팟을 추천하는 이유?! 나만의 꿀팁도 공유하는 센스!&#13;&#10;ex) 보라매역 3번출구나 신대방역 4번출구로 나오시면 쉽게 찾을 수 있어요! 장, 단거리 트랙도 나누어져 있고, 초보자도 뛰기에 무리 없는 평지 코스입니다. 러닝 후에 트랙 옆 편의점에서 공원라면을 즐길 수 있습니다!"></textarea>
-                                        <div class="valid-msg""><form:errors path="reason" /></div>
+                                        <div class="valid-msg"><form:errors path="reason" /></div>
                                     </td>
                                 </tr>
                                 <tr>
