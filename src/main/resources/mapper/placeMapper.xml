@@ -5,8 +5,8 @@
 
     <!-- 게시글 insert -->
     <insert id="postsInsert" parameterType="PlaceDto">
-        insert into place (id, local1, local2, subway, level, storage, distance, description, reason, posting_date)
-            values (#{id}, #{local1}, #{local2}, #{subway}, #{level}, #{storage}, #{distance}, #{description}, #{reason}, now());
+        insert into place (id, local1, local2, subway, level, storage, distance, description, reason, posting_date, img)
+            values (#{id}, #{local1}, #{local2}, #{subway}, #{level}, #{storage}, #{distance}, #{description}, #{reason}, now(), #{img});
     </insert>
 
 

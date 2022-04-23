@@ -127,7 +127,7 @@
                                         <span class="important">*</span>이미지
                                     </th>
                                     <td>
-                                        <input type="file">
+                                        <input type="file" name="img">
                                     </td>
                                 </tr>
                             </tbody>
