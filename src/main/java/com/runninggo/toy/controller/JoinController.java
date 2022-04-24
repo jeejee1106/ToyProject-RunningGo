@@ -46,8 +46,11 @@ public class JoinController {
         }
 
         //유효성 검사를 통과하면 insert 후 페이지 이동
-        memberService.insertMember(memberDto);
-        return "/member/joinSuccessForm";
+        int result = memberService.insertMember(memberDto);
+        if(result == 1){
+            return "/member/joinSuccessForm";
+        }
+        return "/member/joinForm";
     }
 
     @GetMapping("/registerEmail")

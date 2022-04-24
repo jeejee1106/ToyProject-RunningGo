@@ -29,7 +29,7 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
 //    @Transactional(readOnly = true, rollbackFor=Exception.class)
-    public void insertMember(MemberDto memberDto) throws Exception {
+    public int insertMember(MemberDto memberDto) throws Exception {
 
         //랜덤 문자열을 생성해서 mail_key 컬럼에 넣어주기
         String mail_key = new TempKey().getKey(30,false);
@@ -40,7 +40,7 @@ public class MemberServiceImpl implements MemberService{
         memberDto.setPass(encPassword);
 
         //회원가입
-        memberDao.insertMember(memberDto);
+        int result = memberDao.insertMember(memberDto);
         memberDao.updateMailKey(memberDto);
 
         //회원가입 완료하면 인증을 위한 이메일 발송
@@ -56,6 +56,8 @@ public class MemberServiceImpl implements MemberService{
         sendMail.setFrom(myInfo.runningGoId, "러닝고");
         sendMail.setTo(memberDto.getEmail());
         sendMail.send();
+
+        return result;
     }
 
     @Override

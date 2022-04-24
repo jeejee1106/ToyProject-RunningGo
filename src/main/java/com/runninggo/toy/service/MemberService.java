@@ -5,7 +5,7 @@ import com.runninggo.toy.domain.MemberDto;
 import java.util.List;
 
 public interface MemberService {
-    void insertMember(MemberDto memberDto) throws Exception;
+    int insertMember(MemberDto memberDto) throws Exception;
     int idCheck(String id);
     int login(MemberDto memberDto) throws Exception;
     int updateMailKey(MemberDto memberDto) throws Exception;
