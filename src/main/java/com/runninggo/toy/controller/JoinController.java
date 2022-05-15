@@ -67,4 +67,6 @@ public class JoinController {
     public int idCheck(String id) {
         return memberService.idCheck(id);
     }
+
+    //git push check
 }
