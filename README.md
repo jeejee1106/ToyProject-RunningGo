@@ -1,4 +1,4 @@
-# [개인프로젝트] RunningGo - 러닝고🏃‍♀️🏃‍♂️ (진행 중)
+# [개인프로젝트] RunningGo - 러닝고🏃‍♀️🏃‍♂️
 #### 💡 러닝고는 서울의 러닝 코스를 추천하는 커뮤니티 사이트입니다.
 * 아무생각 없이 프로젝트를 만들고 기능 구현에만 목적을 두는 개발을 멈추고자 했습니다.
 * 그래서 하나의 기능을 구현하더라도 불필요한 부분을 걷어내고, 효과적인 코드를 작성하는 것에 집중했습니다.
@@ -7,7 +7,7 @@
 <br>
 
 ## 1. 제작 기간
-#### `2022년 3월 16일 ~ 진행 중`
+#### `2022년 3월 16일 ~ 4월 20일 (1개월)`
 
 <br>
 
@@ -47,7 +47,7 @@
   * Open API(서울 열린데이터광장)를 활용한 지하철역 검색 기능 구현
 
 * #### `예외 처리`
-  * ExceptionHandler를 이용한 예외 처리 (진행 중)
+  * ExceptionHandler를 이용한 예외 처리
 
 <br>
 
@@ -248,7 +248,7 @@ String encodeSubwayName = URLEncoder.encode(subwayName, "UTF-8");
 
 <br>
 
-#### 4. 예외 처리 ExceptionHandler (진행 중)
+#### 4. 예외 처리 ExceptionHandler
 <details>
   <summary>📌핵심 기능 설명</summary>
 
@@ -280,7 +280,7 @@ String encodeSubwayName = URLEncoder.encode(subwayName, "UTF-8");
 예외처리 클래스에서 모든 에러를 처리하기 위해 Exception.class를 받았지만 404에러는 WAS의 기본 오류 페이지로 연결되었다.  
 공부해보니 요청은 받았으나 연결할 컨트롤러가 없기 때문에 컨트롤러 자체가 동작하지 않아 Exception이 발생하지 않았고, 이는 DispacherServlet이 처리해주어야 한다는 것을 알게되었다.  
 
-해결방법로는 throwExceptionIfNoHandlerFound라는 매개변수를 web.xml에 추가함으로써 DispatcherServlet을 커스터마이징 해주었다.  
+해결방법으로는 throwExceptionIfNoHandlerFound라는 매개변수를 web.xml에 추가함으로써 DispatcherServlet을 커스터마이징 해주는 것이다.  
 이는 요청에 대응되는 Handler를 찾지 못할 경우 예외를 발생시킨다는 의미라고 한다.  
 이 때 발생하는 예외가 NoHandlerFoundException이기 때문에 @ExceptionHandler(NoHandlerFoundException.class)  
 어노테이션과 속성을 적용한 메서드를 새로 만들어서 404에러 처리를 할 수 있었다.
