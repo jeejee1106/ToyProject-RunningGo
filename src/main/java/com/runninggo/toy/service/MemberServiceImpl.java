@@ -5,6 +5,7 @@ import com.runninggo.toy.domain.MemberDto;
 import com.runninggo.toy.mail.MailHandler;
 import com.runninggo.toy.mail.TempKey;
 import com.runninggo.toy.myinfo.MyInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,17 +13,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class MemberServiceImpl implements MemberService{
 
     MemberDao memberDao;
-    JavaMailSender mailSender;
+    JavaMailSender javaMailSender;
     BCryptPasswordEncoder passwordEncoder;
     MyInfo myInfo;
 
-    public MemberServiceImpl(MemberDao memberDao, JavaMailSender mailSender, BCryptPasswordEncoder passwordEncoder, MyInfo myInfo) {
+    public MemberServiceImpl(MemberDao memberDao, JavaMailSender javaMailSender, BCryptPasswordEncoder passwordEncoder, MyInfo myInfo) {
         this.memberDao = memberDao;
-        this.mailSender = mailSender;
+        this.javaMailSender = javaMailSender;
         this.passwordEncoder = passwordEncoder;
         this.myInfo = myInfo;
     }
@@ -44,7 +46,7 @@ public class MemberServiceImpl implements MemberService{
         memberDao.updateMailKey(memberDto);
 
         //회원가입 완료하면 인증을 위한 이메일 발송
-        MailHandler sendMail = new MailHandler(mailSender);
+        MailHandler sendMail = new MailHandler(javaMailSender);
         sendMail.setSubject("[RunninGo 이메일 인증메일 입니다.]"); //메일제목
         sendMail.setText(
                 "<h1>RunninGo 메일인증</h1>" +
@@ -56,6 +58,8 @@ public class MemberServiceImpl implements MemberService{
         sendMail.setFrom(myInfo.runningGoId, "러닝고");
         sendMail.setTo(memberDto.getEmail());
         sendMail.send();
+
+        log.info("회원가입 인증 메일 발송 성공");
 
         return result;
     }
@@ -102,8 +106,11 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
+    @Transactional
     public int findPass(MemberDto memberDto) throws Exception {
         int result = memberDao.findPass(memberDto);
+
+        log.info("MemberServiceImpl.findPass >>>>>>>>>>");
 
         if (result == 1) {
             //랜덤문자열 생성
@@ -115,7 +122,7 @@ public class MemberServiceImpl implements MemberService{
             memberDto.setPass(encPassword);
             memberDao.updateRandomPass(memberDto);
 
-            MailHandler sendMail = new MailHandler(mailSender);
+            MailHandler sendMail = new MailHandler(javaMailSender);
             sendMail.setSubject("[RunninGo 임시비밀번호 입니다.]"); //메일제목
             sendMail.setText(
                     "<h1>RunninGo 임시비밀번호</h1>" +
@@ -126,6 +133,9 @@ public class MemberServiceImpl implements MemberService{
             sendMail.setTo(memberDto.getEmail());
             sendMail.send();
         }
+
+        log.info("비밀번호 찾기 메일 발송 성공");
+
         return result;
     }
 
