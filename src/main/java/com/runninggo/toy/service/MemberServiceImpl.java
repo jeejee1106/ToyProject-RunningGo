@@ -7,6 +7,7 @@ import com.runninggo.toy.mail.TempKey;
 import com.runninggo.toy.myinfo.MyInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -105,14 +106,13 @@ public class MemberServiceImpl implements MemberService{
         return memberDao.findId(memberDto);
     }
 
-    @Override
+    @Async
     @Transactional
-    public int findPass(MemberDto memberDto) throws Exception {
-        int result = memberDao.findPass(memberDto);
-
+    @Override
+    public void findPass(MemberDto memberDto) throws Exception {
         log.info("MemberServiceImpl.findPass >>>>>>>>>>");
 
-        if (result == 1) {
+        if (getFindUserResult(memberDto) == 1) {
             //랜덤문자열 생성
             String pass = new TempKey().getKey(15,false);
 
@@ -132,11 +132,13 @@ public class MemberServiceImpl implements MemberService{
             sendMail.setFrom(myInfo.runningGoId, "러닝고");
             sendMail.setTo(memberDto.getEmail());
             sendMail.send();
+            log.info("비밀번호 찾기 메일 발송 성공");
         }
+    }
 
-        log.info("비밀번호 찾기 메일 발송 성공");
-
-        return result;
+    @Override
+    public int getFindUserResult(MemberDto memberDto) throws Exception {
+        return memberDao.getFindUserResult(memberDto);
     }
 
     @Override

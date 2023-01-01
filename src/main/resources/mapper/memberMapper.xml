@@ -40,7 +40,7 @@
     </select>
 
     <!-- 비밀번호 찾기 -->
-    <select id="findPass" parameterType="MemberDto" resultType="int">
+    <select id="getFindUserResult" parameterType="MemberDto" resultType="int">
         select count(*) from member where id=#{id} and email=#{email}
     </select>
 

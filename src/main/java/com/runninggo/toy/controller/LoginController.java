@@ -3,6 +3,7 @@ package com.runninggo.toy.controller;
 import com.runninggo.toy.domain.MemberDto;
 import com.runninggo.toy.service.MemberService;
 import com.runninggo.toy.validator.LoginCheckValidator;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequestMapping("/login")
 public class LoginController {
@@ -89,8 +91,11 @@ public class LoginController {
 
     @PostMapping("/findPass")
     public String findPass(MemberDto memberDto, Model model) throws Exception {
-        int count = memberService.findPass(memberDto);
+        int count = memberService.getFindUserResult(memberDto);
+        log.info("LoginController.findPass : count={}", count);
         model.addAttribute("count", count);
+
+        memberService.findPass(memberDto);
         return "/member/findPassResult";
     }
 }

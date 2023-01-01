@@ -52,8 +52,8 @@ public class MemberDaoImpl implements MemberDao{
     }
 
     @Override
-    public int findPass(MemberDto memberDto) throws Exception {
-        return session.selectOne(namespace + "findPass", memberDto);
+    public int getFindUserResult(MemberDto memberDto) throws Exception {
+        return session.selectOne(namespace + "getFindUserResult", memberDto);
     }
 
     @Override

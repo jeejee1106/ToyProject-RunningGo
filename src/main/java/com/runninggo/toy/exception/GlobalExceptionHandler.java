@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     public String defaultExceptionHandler(Exception exception) {
-        log.error("Exception 발생 : ", exception);
+        log.error("Server Exception 발생 : ", exception);
         return "/error/custom500";
     }
 }
