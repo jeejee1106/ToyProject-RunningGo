@@ -40,7 +40,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login(@Valid MemberDto memberDto, Errors errors, String id,  boolean saveId,
+    public String login(@Valid MemberDto memberDto, Errors errors, boolean saveId,
                         HttpServletResponse response, HttpSession session) throws Exception {
 
         if (errors.hasErrors()) {
@@ -48,15 +48,15 @@ public class LoginController {
         }
 
         //이메일 인증 했는지 확인
-        if (memberService.emailAuthFail(id) != 1) {
+        if (memberService.emailAuthFail(memberDto.getId()) != 1) {
             return "/member/emailAuthFail";
         }
 
         //id, pass가 일치하고, 이메일 인증 했으면 세션을 생성하고, saveId 값을 체크해서 쿠키를 만들거나 삭제한다.
-        session.setAttribute("id", id);
+        session.setAttribute("id", memberDto.getId());
         session.setAttribute("loginOK", "yes");
 
-        Cookie cookie = new Cookie("id", id); //1. 쿠키생성
+        Cookie cookie = new Cookie("id", memberDto.getId()); //1. 쿠키생성
         if (saveId){
             response.addCookie(cookie); //2. 응답에 저장
         } else {

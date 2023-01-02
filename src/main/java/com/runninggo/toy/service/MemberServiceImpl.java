@@ -92,11 +92,6 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public int updateMailKey(MemberDto memberDto) throws Exception {
-        return memberDao.updateMailKey(memberDto);
-    }
-
-    @Override
     public int updateMailAuth(MemberDto memberDto) throws Exception {
         return memberDao.updateMailAuth(memberDto);
     }
@@ -144,16 +139,6 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public int getFindUserResult(MemberDto memberDto) throws Exception {
         return memberDao.getFindUserResult(memberDto);
-    }
-
-    @Override
-    public int updateRandomPass(MemberDto memberDto) throws Exception {
-        return memberDao.updateRandomPass(memberDto);
-    }
-
-    @Override
-    public String getEncPass(String id) throws Exception {
-        return memberDao.getEncPass(id);
     }
 
 }
