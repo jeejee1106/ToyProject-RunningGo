@@ -12,6 +12,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @Slf4j
@@ -30,10 +32,9 @@ public class MemberServiceImpl implements MemberService{
         this.myInfo = myInfo;
     }
 
+    @Transactional
     @Override
-//    @Transactional(readOnly = true, rollbackFor=Exception.class)
     public int insertMember(MemberDto memberDto) throws Exception {
-
         //랜덤 문자열을 생성해서 mail_key 컬럼에 넣어주기
         String mail_key = new TempKey().getKey(30,false);
         memberDto.setMail_key(mail_key);
@@ -46,23 +47,27 @@ public class MemberServiceImpl implements MemberService{
         int result = memberDao.insertMember(memberDto);
         memberDao.updateMailKey(memberDto);
 
-        //회원가입 완료하면 인증을 위한 이메일 발송
-        MailHandler sendMail = new MailHandler(javaMailSender);
-        sendMail.setSubject("[RunninGo 이메일 인증메일 입니다.]"); //메일제목
-        sendMail.setText(
-                "<h1>RunninGo 메일인증</h1>" +
-                "<br>RunninGo에 오신것을 환영합니다!" +
-                "<br>아래 [이메일 인증 확인]을 눌러주세요." +
-                "<br><a href='http://localhost:8080/join/registerEmail?email=" + memberDto.getEmail() +
-                "&mail_key=" + mail_key +
-                "' target='_blank'>이메일 인증 확인</a>");
-        sendMail.setFrom(myInfo.runningGoId, "러닝고");
-        sendMail.setTo(memberDto.getEmail());
-        sendMail.send();
-
-        log.info("회원가입 인증 메일 발송 성공");
-
         return result;
+    }
+
+    @Async
+    @Override
+    public void sendJoinCertificationMail(MemberDto memberDto) throws MessagingException, UnsupportedEncodingException {
+            //회원가입 완료하면 인증을 위한 이메일 발송
+            MailHandler sendMail = new MailHandler(javaMailSender);
+            sendMail.setSubject("[RunninGo 이메일 인증메일 입니다.]"); //메일제목
+            sendMail.setText(
+                    "<h1>RunninGo 메일인증</h1>" +
+                    "<br>RunninGo에 오신것을 환영합니다!" +
+                    "<br>아래 [이메일 인증 확인]을 눌러주세요." +
+                    "<br><a href='http://localhost:8080/join/registerEmail?email=" + memberDto.getEmail() +
+                    "&mail_key=" + memberDto.getMail_key() +
+                    "' target='_blank'>이메일 인증 확인</a>");
+            sendMail.setFrom(myInfo.runningGoId, "러닝고");
+            sendMail.setTo(memberDto.getEmail());
+            sendMail.send();
+
+            log.info("회원가입 인증 메일 발송 성공");
     }
 
     @Override

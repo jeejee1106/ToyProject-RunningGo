@@ -48,6 +48,7 @@ public class JoinController {
         //유효성 검사를 통과하면 insert 후 페이지 이동
         int result = memberService.insertMember(memberDto);
         if(result == 1){
+            memberService.sendJoinCertificationMail(memberDto); //인증메일 보내기
             return "/member/joinSuccessForm";
         }
         return "/member/joinForm";
