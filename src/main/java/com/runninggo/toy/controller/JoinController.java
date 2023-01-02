@@ -3,6 +3,8 @@ package com.runninggo.toy.controller;
 import com.runninggo.toy.domain.MemberDto;
 import com.runninggo.toy.service.MemberService;
 import com.runninggo.toy.validator.JoinCkValidator;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.task.TaskRejectedException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+@Slf4j
 @Controller
 @RequestMapping("/join")
 public class JoinController {
@@ -48,7 +51,11 @@ public class JoinController {
         //유효성 검사를 통과하면 insert 후 페이지 이동
         int result = memberService.insertMember(memberDto);
         if(result == 1){
-            memberService.sendJoinCertificationMail(memberDto); //인증메일 보내기
+//            try { //예외처리 더 고민해보기.
+                memberService.sendJoinCertificationMail(memberDto); //인증메일 보내기
+//            } catch (TaskRejectedException e) {
+//                log.info("TaskRejectedException 발생={}", e.getStackTrace());
+//            }
             return "/member/joinSuccessForm";
         }
         return "/member/joinForm";
