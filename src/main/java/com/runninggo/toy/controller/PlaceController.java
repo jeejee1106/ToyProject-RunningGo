@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/place")
@@ -51,7 +52,7 @@ public class PlaceController {
 
     @ResponseBody
     @GetMapping(value = "/subway_search", produces = "application/json; charset=utf8")
-    public String getSubwayInfo(String subwayName) throws Exception{
+    public List<String> getSubwayInfo(String subwayName) throws Exception{
         return placeService.getSubwayInfo(subwayName);
     }
 }

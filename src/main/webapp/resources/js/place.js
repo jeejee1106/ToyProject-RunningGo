@@ -7,50 +7,54 @@ $(function () {
             $("#lineNum-list").html("지하철역 명을 입력하세요.").attr("class", "write-msg").attr("value", "N");
             return;
         }
-            $.ajax({
-                url: "/place/subway_search",
-                type: "get",
-                dataType: "text",
-                data : {"subwayName" : subwayName},
-                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+        $.ajax({
+            url: "/place/subway_search",
+            type: "get",
+            dataType: "text",
+            data : {"subwayName" : subwayName},
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 
-                success:function(data){
-                    if (data == "error") {
-                        $("#subway").val("").focus();
-                        $("#lineNum-list").empty().html("역 명을 올바르게 입력하세요.").attr("class", "write-msg").attr("value", "N");
-                    } else{
-                        // $("lineNum-list").attr("value", "Y");
-                        let subwayName2 = data.split("#");
+            success:function(data){
+                $(data).each(function(){
+                    alert(this);
+                });
+                console.log("data = ", data)
+                if (data == "error") {
+                    $("#subway").val("").focus();
+                    $("#lineNum-list").empty().html("역 명을 올바르게 입력하세요.").attr("class", "write-msg").attr("value", "N");
+                } else{
+                    // $("lineNum-list").attr("value", "Y");
+                    let subwayName2 = data.split("#");
 
-                        $("#lineNum-list").empty().attr("value", "Y");
+                    $("#lineNum-list").empty().attr("value", "Y");
 
-                        for (let i = 1; i <= subwayName2[i].length; i++) {
+                    for (let i = 1; i <= subwayName2[i].length; i++) {
 
-                            if (subwayName2[i] == "경의선") {
-                                subwayName2[i] = subwayName2[i].replace("경의선", "010호선");
-                            } else if(subwayName2[i] == "수인분당선"){
-                                subwayName2[i] = subwayName2[i].replace("수인분당선", "011호선");
-                            } else if (subwayName2[i] == "우이신설경전철") {
-                                subwayName2[i] = subwayName2[i].replace("우이신설경전철", "012호선");
-                            } else if (subwayName2[i] == "신분당선") {
-                                subwayName2[i] = subwayName2[i].replace("신분당선", "013호선");
-                            } else if (subwayName2[i] == "공항철도") {
-                                subwayName2[i] = subwayName2[i].replace("공항철도", "014호선");
-                            }
+                        if (subwayName2[i] == "경의선") {
+                            subwayName2[i] = subwayName2[i].replace("경의선", "010호선");
+                        } else if(subwayName2[i] == "수인분당선"){
+                            subwayName2[i] = subwayName2[i].replace("수인분당선", "011호선");
+                        } else if (subwayName2[i] == "우이신설경전철") {
+                            subwayName2[i] = subwayName2[i].replace("우이신설경전철", "012호선");
+                        } else if (subwayName2[i] == "신분당선") {
+                            subwayName2[i] = subwayName2[i].replace("신분당선", "013호선");
+                        } else if (subwayName2[i] == "공항철도") {
+                            subwayName2[i] = subwayName2[i].replace("공항철도", "014호선");
+                        }
 
-                            for (let j = 1; j < 15; j++) {
-                                if(subwayName2[i] == "0" + j + "호선") {
-                                    $("#lineNum-list").append("<img class='lineNum-img' src=/img/line" + j + ".png/>");
-                                }
+                        for (let j = 1; j < 15; j++) {
+                            if(subwayName2[i] == "0" + j + "호선") {
+                                $("#lineNum-list").append("<img class='lineNum-img' src=/img/line" + j + ".png/>");
                             }
                         }
                     }
-
-                },
-                error:function(request,status,error){
-                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                 }
-            });
+
+            },
+            error:function(request,status,error){
+                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            }
+        });
     });
 
     //지하철 검색 통과 후 value=Y 상태에서 문자열을 지웠을 때 value=N 이 나오도록
