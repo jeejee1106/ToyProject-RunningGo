@@ -102,13 +102,13 @@
 	  //두 번째 코드 - 비정상작동
 	  @InitBinder
 	  public void validator(WebDataBinder binder) {
-		  binder.addValidators(joinCkValidator);
+		  binder.setValidator(joinCkValidator);
 	  }
 
 	  //세 번째 코드 - 정상작동
 	  @InitBinder
 	  public void validator(WebDataBinder binder) {
-		  binder.setValidator(joinCkValidator);
+		  binder.addValidators(joinCkValidator);
 	  }
   ```
   </div>
